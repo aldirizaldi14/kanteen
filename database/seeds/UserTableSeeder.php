@@ -21,13 +21,13 @@ class UserTableSeeder extends Seeder
         User::create([
             'name' => 'Manager Sistem',
             'username' => 'manager',
-            'password' => bcrypt('manager'),
+            'password' => bcrypt('manager123'),
             'role' => 'manager'
         ]);
         User::create([
             'name' => 'Admin Sistem',
             'username' => 'admin',
-            'password' => bcrypt('admin'),
+            'password' => bcrypt('admin123'),
             'role' => 'admin'
         ]);
     }

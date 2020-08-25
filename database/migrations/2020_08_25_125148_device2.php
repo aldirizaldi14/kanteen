@@ -13,7 +13,13 @@ class Device2 extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('device2', function (Blueprint $table) {
+            $table->id();
+            $table->string('jadwalmenu');
+            $table->string('karyawan');
+            $table->string('makanan');
+            $table->string('status');
+        });
     }
 
     /**

@@ -21,8 +21,24 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function dashboard()
     {
-        return view('home');
+        return view('dashboard');
+    }
+    public function karyawan()
+    {
+        return view('karyawan');
+    }
+    public function jadwal()
+    {
+        return view('jadwal');
+    }
+    public function makanan()
+    {
+        return view('makanan');
+    }
+    public function data()
+    {
+        return view('data');
     }
 }

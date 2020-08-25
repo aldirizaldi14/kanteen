@@ -27,4 +27,8 @@ Auth::routes([
     'verify' => false, //
 ]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'HomeController@dashboard');
+Route::get('/karyawan', 'HomeController@karyawan');
+Route::get('/jadwal', 'HomeController@jadwal');
+Route::get('/makanan', 'HomeController@makanan');
+Route::get('/data', 'HomeController@data');
