@@ -9,31 +9,39 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}" defer></script>
-    <script src="{{ asset('js/jquery.dataTables.min.js') }}" defer></script>
+    <script src="{{ asset('/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('/js/app.js') }}"></script>
+    <script src="{{ asset('/js/bootstrap.min.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bootsrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/bootsrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.dataTables.min.css') }}">
+    <script type="text/javascript" charset="utf8" src="{{ asset('/js/jquery.dataTables.min.js') }}"></script>
     <style>
         body {
-            background-image: url('images/bg.png');
+            background-image: url('/images/bg.png');
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: 100% 100%;
         }
+
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
     </style>
-        <script>
-        $(document).ready( function () {
-    $('#table_id').DataTable();
-} );
-    </script>
 </head>
 
 <body>
@@ -92,49 +100,58 @@
             </div>
         </nav>
         <main class="py-4">
-        <div class="container">
-    <div class="row h-100">
-        <div class="col-sm-2">
-            <div class="card h-100">
-                <div class="card-header">{{ __('Menu') }}</div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm">
-                        <a class="btn btn-outline-primary w-100" href="/dashboard" role="button">Dashboard</a>
+            <div class="container">
+                <div class="row h-100">
+                    <div class="col-sm-2">
+                        <div class="card h-100">
+                            <div class="card-header">{{ __('Menu') }}</div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <a class="btn btn-outline-primary w-100" href="/dashboard" role="button">Dashboard</a>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <a class="btn btn-outline-secondary w-100" href="/karyawan" role="button">Karyawan</a>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <a class="btn btn-outline-success w-100" href="/jadwal" role="button">Jadwal Menu</a>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <a class="btn btn-outline-danger w-100" href="/makanan" role="button">Makanan</a>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <a class="btn btn-outline-dark w-100" href="/data" role="button">Data</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-sm">
-                        <a class="btn btn-outline-secondary w-100" href="/karyawan" role="button">Karyawan</a>
-                        </div>
+                    <div class="col-md-10">
+                        @yield('content')
                     </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-sm">
-                        <a class="btn btn-outline-success w-100" href="/jadwal" role="button">Jadwal Menu</a>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-sm">
-                        <a class="btn btn-outline-danger w-100" href="/makanan" role="button">Makanan</a>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-sm">
-                        <a class="btn btn-outline-dark w-100" href="/data" role="button">Data</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-10">
-        @yield('content')
-</div>
         </main>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                "scrollY": "200px",
+                "scrollCollapse": true,
+                "paging": false
+            });
+        });
+    </script>
 </body>
 
 </html>
