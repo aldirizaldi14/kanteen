@@ -3,7 +3,7 @@
 @section('content')
 <div class="card h-100">
     <div class="card-header">
-        {{ __('Tambah Karyawan') }}
+        {{ __('Tambah Jadwal Menu') }}
     </div>
     <div class="card-body">
         <form action="simpan" method="post">
@@ -11,10 +11,10 @@
             <!-- Nama -->
             <div class="row">
                 <div class="col-sm-2">
-                    Nama
+                    Tanggal
                 </div>
                 <div class="col-sm-4">
-                    <input id="nama" type="text" class="form-control" name="nama" value="{{ old('nama') }}" required autofocus>
+                    <input id="tanggal" type="date" class="form-control" name="tanggal" value="{{ old('tanggal') }}" required autofocus>
                 </div>
                 <div class="col-sm-2">
 
@@ -24,20 +24,24 @@
                 </div>
             </div>
             <br>
-            <!-- NIK -->
+            <!-- Shift -->
             <div class="row">
                 <div class="col-sm-2">
-                    NIK
+                    Shift
                 </div>
                 <div class="col-sm-4">
-                    <input id="nik" type="number" class="form-control" name="nik" value="{{ old('nik') }}" required autofocus>
+                <select name="waktu" class="custom-select">
+                        <option value="Shift 1">Shift 1</option>
+                        <option value="Shift 2">Shift 2</option>
+                        <option value="Shift 3">Shift 3</option>
+                    </select>
                 </div>
             </div>
             <br>
             <!-- Dept -->
             <div class="row">
                 <div class="col-sm-2">
-                    Departement
+                    Snack 
                 </div>
                 <div class="col-sm-4">
                     <select name="departemen" class="custom-select">

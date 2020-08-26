@@ -55,7 +55,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-item nav-link active" href="/">Monitor 1 <span class="sr-only">(current)</span></a>
-                        <a class="nav-item nav-link" href="monitor2">Monitor 2</a>
+                        <a class="nav-item nav-link active" href="monitor2">Monitor 2</a>
                     </div>
                 </div>
 
@@ -84,6 +84,9 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/dashboard">
+                                    Dashboard
+                                </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -148,7 +151,8 @@
             $('#example').DataTable({
                 "scrollY": "200px",
                 "scrollCollapse": true,
-                "paging": false
+                "paging": false,
+                "info": false
             });
         });
     </script>

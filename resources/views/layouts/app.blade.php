@@ -2,29 +2,44 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="utf-8">
+<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}" defer></script>
+    <script src="{{ asset('/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('/js/app.js') }}"></script>
+    <script src="{{ asset('/js/bootstrap.min.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bootsrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/bootsrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.dataTables.min.css') }}">
+    <script type="text/javascript" charset="utf8" src="{{ asset('/js/jquery.dataTables.min.js') }}"></script>
     <style>
         body {
-            background-image: url('images/bg.png');
+            background-image: url('/images/bg.png');
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: 100% 100%;
+        }
+
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
         }
     </style>
 </head>
@@ -40,7 +55,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-item nav-link active" href="/">Monitor 1 <span class="sr-only">(current)</span></a>
-                        <a class="nav-item nav-link" href="monitor2">Monitor 2</a>
+                        <a class="nav-item nav-link active" href="monitor2">Monitor 2</a>
                     </div>
                 </div>
 
@@ -69,6 +84,9 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/dashboard">
+                                    Dashboard
+                                </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -88,6 +106,31 @@
             @yield('content')
         </main>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#example1').DataTable({
+                "scrollY": "200px",
+                "searching" : false,
+                "scrollCollapse": true,
+                "paging": false,
+                "info": false
+            });
+            $('#example2').DataTable({
+                "scrollY": "200px",
+                "searching" : false,
+                "scrollCollapse": true,
+                "paging": false,
+                "info": false
+            });
+            $('#example3').DataTable({
+                "scrollY": "200px",
+                "searching" : false,
+                "scrollCollapse": true,
+                "paging": false,
+                "info": false
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -23,6 +23,12 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+    public function monitor2()
+    {
+        return view('monitor2');
+    }
+
     public function dashboard()
     {
         return view('dashboard');

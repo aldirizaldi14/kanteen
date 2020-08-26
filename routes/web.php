@@ -17,9 +17,8 @@ Route::get('/', function () {
     return view('monitor1');
 });
 
-Route::get('/monitor2', function () {
-    return view('monitor2');
-});
+Route::get('/monitor2', 'HomeController@monitor2');
+
 
 Auth::routes([
     'register' => false, // Registration Routes...
