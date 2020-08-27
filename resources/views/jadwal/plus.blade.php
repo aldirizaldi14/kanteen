@@ -7,8 +7,8 @@
     </div>
     <div class="card-body">
         <form action="simpan" method="post">
-        @csrf
-            <!-- Nama -->
+            @csrf
+            <!-- Tanggal -->
             <div class="row">
                 <div class="col-sm-2">
                     Tanggal
@@ -17,76 +17,102 @@
                     <input id="tanggal" type="date" class="form-control" name="tanggal" value="{{ old('tanggal') }}" required autofocus>
                 </div>
                 <div class="col-sm-2">
-
+                    <select name="waktu" class="custom-select">
+                        <option value="Shift 1">Shift 1</option>
+                        <option value="Shift 2">Shift 2</option>
+                        <option value="Shift 3">Shift 3</option>
+                    </select>
                 </div>
                 <div class="col-sm-2">
                     <input type="submit" class="form-control btn btn-success" value="Simpan" required autofocus>
                 </div>
             </div>
             <br>
-            <!-- Shift -->
+            <!-- Sarapan -->
             <div class="row">
                 <div class="col-sm-2">
-                    Shift
+                    Snack
                 </div>
-                <div class="col-sm-4">
-                <select name="waktu" class="custom-select">
-                        <option value="Shift 1">Shift 1</option>
-                        <option value="Shift 2">Shift 2</option>
-                        <option value="Shift 3">Shift 3</option>
+                <div class="col-sm-3">
+                    <select name="snack1" class="custom-select">
+                        @foreach ($snack as $sn)
+                        <option value="{{$sn->nama}}">{{$sn->nama}}</option>
+                        @endforeach
                     </select>
+                </div>
+                <div class="col-sm-2">
+                <input type="number" class="form-control" name="jsnack1" value="{{ old('jsnack1') }}" required autofocus>
+                </div>
+                <div class="col-sm-3">
+                    <select name="snack2" class="custom-select">
+                        @foreach ($snack as $sn)
+                        <option value="{{$sn->nama}}">{{$sn->nama}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                <input type="number" class="form-control" name="jsnack2" value="{{ old('jsnack2') }}" required autofocus>
                 </div>
             </div>
             <br>
-            <!-- Dept -->
+            <!-- Main Course -->
             <div class="row">
-                <div class="col-sm-2">
-                    Snack 
+                <div class="col-sm-4" align="center">
+                    Ikan
                 </div>
-                <div class="col-sm-4">
-                    <select name="departemen" class="custom-select">
-                        <option value="Production">Production</option>
-                        <option value="QC">QC</option>
-                        <option value="Engineering">Engineering</option>
-                        <option value="PC">PC</option>
-                        <option value="Finance">Finance</option>
-                        <option value="Logistic">Logistic</option>
-                        <option value="HR">HR</option>
-                        <option value="FE">FE</option>
-                        <option value="EDP">EDP</option>
-                        <option value="Sales">Sales</option>
-                    </select>
+                <div class="col-sm-4" align="center">
+                    Ayam
+                </div>
+                <div class="col-sm-4" align="center">
+                    Daging
                 </div>
             </div>
             <br>
-            <!-- NIK -->
+            <!-- Option Main Course -->
             <div class="row">
-                <div class="col-sm-2">
-                    Golongan
-                </div>
                 <div class="col-sm-4">
-                    <select name="golongan" class="custom-select">
-                        <option value="Kontrak">Kontrak</option>
-                        <option value="Staff">Staff</option>
-                        <option value="Supervisor">Supervisor</option>
-                        <option value="Manager">Manager</option>
-                        <option value="General Manager">General Manager</option>
+                    <select name="shift" class="custom-select">
+                        @foreach ($ikan as $ik)
+                        <option value="{{$ik->nama}}">{{$ik->nama}}</option>
+                        @endforeach
                     </select>
-                </div>
-            </div>
-            <br>
-            <!-- Shift -->
-            <div class="row">
-                <div class="col-sm-2">
-                    Shift
                 </div>
                 <div class="col-sm-4">
                     <select name="shift" class="custom-select">
-                        <option value="Shift 1">Shift 1</option>
-                        <option value="Shift 2">Shift 2</option>
-                        <option value="Shift 3">Shift 3</option>
+                        @foreach ($ayam as $ay)
+                        <option value="{{$ay->nama}}">{{$ay->nama}}</option>
+                        @endforeach
                     </select>
                 </div>
+                <div class="col-sm-4">
+                        <select name="shift" class="custom-select">
+                            @foreach ($daging as $dg)
+                            <option value="{{$dg->nama}}">{{$dg->nama}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+            </div>
+            <br>
+            <!-- Jumlah Main Course -->
+            <div class="row">
+            <div class="col-sm-2">
+                <input type="number" class="form-control" name="banyaknya1" value="{{ old('banyaknya1') }}" required autofocus>
+            </div>
+            <div class="col-sm-2">
+
+            </div>
+            <div class="col-sm-2">
+                <input type="number" class="form-control" name="banyaknya2" value="{{ old('banyaknya2') }}" required autofocus>
+            </div>
+            <div class="col-sm-2">
+
+            </div>
+            <div class="col-sm-2">
+                <input type="number" class="form-control" name="banyaknya3" value="{{ old('banyaknya3') }}" required autofocus>
+            </div>
+            <div class="col-sm-2">
+
+            </div>
             </div>
         </form>
     </div>

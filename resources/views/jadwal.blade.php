@@ -1,7 +1,7 @@
 @extends('layouts.home')
 
 @section('content')
-            <div class="card">
+            <div class="card h-100">
                 <div class="card-header">
                 <div class="row">
                     <div class="col-sm-3">
@@ -16,7 +16,8 @@
             <tr>
                 <th>Tanggal</th>
                 <th>Shift</th>
-                <th>Snack</th>
+                <th>Snack 1</th>
+                <th>Snack 2</th>
                 <th>Menu 1</th>
                 <th>Menu 2</th>
                 <th>Menu 3</th>
@@ -27,7 +28,8 @@
             <tr>
                 <td>{{$dt->tanggal}}</td>
                 <td>{{$dt->waktu}}</td>
-                <td>{{$dt->makanan0}}</td>
+                <td>{{$dt->snack1}}</td>
+                <td>{{$dt->snack2}}</td>
                 <td>{{$dt->makanan1}}</td>
                 <td>{{$dt->makanan2}}</td>
                 <td>{{$dt->makanan3}}</td>

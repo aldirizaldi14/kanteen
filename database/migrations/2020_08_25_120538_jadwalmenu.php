@@ -17,8 +17,10 @@ class Jadwalmenu extends Migration
             $table->string('id')->unique();
             $table->date('tanggal');
             $table->string('waktu');
-            $table->string('makanan0');
-            $table->integer('banyaknya0');
+            $table->string('snack1');
+            $table->integer('jsnack1');
+            $table->string('snack2');
+            $table->integer('jsnack2');
             $table->string('makanan1');
             $table->integer('banyaknya1');
             $table->string('makanan2');

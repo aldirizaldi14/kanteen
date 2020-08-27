@@ -13,11 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('monitor1');
-});
+Route::get('/', 'MonitroController@monitor1');
 
-Route::get('/monitor2', 'HomeController@monitor2');
+
+Route::get('/monitor2', 'MonitroController@monitor2');
 
 
 Auth::routes([
@@ -37,11 +36,13 @@ Route::get('/karyawan/alter', 'HomeController@karyawanalter');
 Route::get('/jadwal', 'HomeController@jadwal');
 Route::get('/jadwal/plus', 'HomeController@jadwalplus');
 Route::get('/jadwal/minus', 'HomeController@jadwalminus');
+Route::post('/jadwal/simpan', 'HomeController@jadwalsimpan');
 
 Route::get('/makanan', 'HomeController@makanan');
 Route::get('/makanan/plus', 'HomeController@makananplus');
-Route::get('/makanan/minus', 'HomeController@makananminus');
-Route::get('/makanan/alter', 'HomeController@makananalter');
+Route::get('/makanan/minus/{id}', 'HomeController@makananminus');
+Route::get('/makanan/alter/{id}', 'HomeController@makananalter');
+Route::post('/makanan/alter/simpan', 'HomeController@makananalters');
 Route::post('/makanan/simpan', 'HomeController@makanansimpan');
 
 Route::get('/data', 'HomeController@data');
