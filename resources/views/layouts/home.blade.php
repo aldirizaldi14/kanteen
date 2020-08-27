@@ -150,6 +150,7 @@
         $(document).ready(function() {
             $('#example').DataTable({
                 "scrollY": "200px",
+                "scrollX": true,
                 "scrollCollapse": true,
                 "paging": false,
                 "info": false

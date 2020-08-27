@@ -21,6 +21,7 @@
                 <th>Deptartemen</th>
                 <th>Golongan</th>
                 <th>Shift</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -31,6 +32,8 @@
                 <td>{{$dt->departemen}}</td>
                 <td>{{$dt->golongan}}</td>
                 <td>{{$dt->shift}}</td>
+                <td><a class="btn btn-sm btn-outline-success" href="/karyawan/alter/{{$dt->nik}}" role="button">Edit</a> 
+                    <a class="btn btn-sm btn-outline-danger" href="/karyawan/minus/{{$dt->nik}}" role="button">Hapus</a></td>
             </tr>
             @endforeach
         </tbody>

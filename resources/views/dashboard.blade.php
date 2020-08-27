@@ -13,84 +13,97 @@
             </div>
         </div>
         <br>
-        <div class="row">
-            <div class="col-sm-3" align="center">
-            </div>
-            <div class="col-sm-3" align="center">
-                Shift 1
-            </div>
-            <div class="col-sm-3" align="center">
-                Shift 2
-            </div>
-            <div class="col-sm-3" align="center">
-                Shift 3
-            </div>
+        <table class="w-100">
+<tr>
+    <td style="width:10%"></td>
+    <td style="width:30%" align="center">Shift 1</td>
+    <td style="width:30%" align="center">Shift 2</td>
+    <td style="width:30%" align="center">Shift 3</td>
+</tr>
+<tr>
+    <td>        <table class="w-100">
+    <tr>
+        <td>Snack 1</td>
+    </tr>
+    <tr>
+    <td>Snack 2</td>
+    </tr>
+    <tr>
+    <td>Ikan</td>
+    </tr>
+    <tr>
+    <td>Ayam</td>
+    </tr>
+    <tr>
+    <td>Daging</td>
+    </tr>
+    </table></td>
+    <td>
+        <table class="w-100">
+    @foreach ($data1 as $dt1)
+    <tr>
+        <td>{{$dt1->snack1}}</td>
+    </tr>
+    <tr>
+        <td>{{$dt1->snack2}}</td>
+    </tr>
+    <tr>
+        <td>{{$dt1->makanan1}}</td>
+    </tr>
+    <tr>
+        <td>{{$dt1->makanan2}}</td>
+    </tr>
+    <tr>
+        <td>{{$dt1->makanan3}}</td>
+    </tr>
+    @endforeach
+    </table>
+</td>
+    <td>
+    <table class="w-100">
+    @foreach ($data2 as $dt2)
+    <tr>
+        <td>{{$dt2->snack1}}</td>
+    </tr>
+    <tr>
+        <td>{{$dt2->snack2}}</td>
+    </tr>
+    <tr>
+        <td>{{$dt2->makanan1}}</td>
+    </tr>
+    <tr>
+        <td>{{$dt2->makanan2}}</td>
+    </tr>
+    <tr>
+        <td>{{$dt2->makanan3}}</td>
+    </tr>
+    @endforeach
+    </table>
+    </td>
+    <td>
+    <table class="w-100">
+    @foreach ($data3 as $dt3)
+    <tr>
+        <td>{{$dt3->snack1}}</td>
+    </tr>
+    <tr>
+        <td>{{$dt3->snack2}}</td>
+    </tr>
+    <tr>
+        <td>{{$dt3->makanan1}}</td>
+    </tr>
+    <tr>
+        <td>{{$dt3->makanan2}}</td>
+    </tr>
+    <tr>
+        <td>{{$dt3->makanan3}}</td>
+    </tr>
+    @endforeach
+    </table>
+    </td>
+</tr>
+        </table>
         </div>
-        <br>
-        <!-- Snack -->
-        <div class="row">
-            <div class="col-sm-3" align="center">
-                Snack
-            </div>
-            <div class="col-sm-3" align="center">
-            $SNS1
-            </div>
-            <div class="col-sm-3" align="center">
-            $SNS2
-            </div>
-            <div class="col-sm-3" align="center">
-            $SNS3
-            </div>
-        </div>
-        <br>
-        <!-- Menu 1 -->
-        <div class="row">
-            <div class="col-sm-3" align="center">
-                Menu 1
-            </div>
-            <div class="col-sm-3" align="center">
-                $M1S1
-            </div>
-            <div class="col-sm-3" align="center">
-            $M1S2
-            </div>
-            <div class="col-sm-3" align="center">
-            $M1S3
-            </div>
-        </div>
-        <br>
-        <!-- Menu 2 -->
-        <div class="row">
-            <div class="col-sm-3" align="center">
-                Menu 2
-            </div>
-            <div class="col-sm-3" align="center">
-                $M2S1
-            </div>
-            <div class="col-sm-3" align="center">
-            $M2S2
-            </div>
-            <div class="col-sm-3" align="center">
-            $M2S3
-            </div>
-        </div>
-        <br>
-        <!-- Menu 3 -->
-        <div class="row">
-            <div class="col-sm-3" align="center">
-                Menu 3
-            </div>
-            <div class="col-sm-3" align="center">
-                $M3S1
-            </div>
-            <div class="col-sm-3" align="center">
-            $M3S2
-            </div>
-            <div class="col-sm-3" align="center">
-            $M3S3
-            </div>
-        </div>
-
     </div>
 </div>
 </div>

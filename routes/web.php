@@ -29,13 +29,16 @@ Route::get('/dashboard', 'HomeController@dashboard');
 
 Route::get('/karyawan', 'HomeController@karyawan');
 Route::get('/karyawan/plus', 'HomeController@karyawanplus');
+Route::get('/karyawan/minus/{id}', 'HomeController@karyawanminus');
+Route::get('/karyawan/alter/{id}', 'HomeController@karyawanalter');
+Route::post('/karyawan/alter/simpan', 'HomeController@karyawanalters');
 Route::post('/karyawan/simpan', 'HomeController@karyawansimpan');
-Route::get('/karyawan/minus', 'HomeController@karyawanminus');
-Route::get('/karyawan/alter', 'HomeController@karyawanalter');
 
 Route::get('/jadwal', 'HomeController@jadwal');
+Route::get('/jadwal/alter/{id}', 'HomeController@jadwalalter');
 Route::get('/jadwal/plus', 'HomeController@jadwalplus');
-Route::get('/jadwal/minus', 'HomeController@jadwalminus');
+Route::get('/jadwal/minus/{id}', 'HomeController@jadwalminus');
+Route::post('/jadwal/alter/simpan', 'HomeController@jadwalalters');
 Route::post('/jadwal/simpan', 'HomeController@jadwalsimpan');
 
 Route::get('/makanan', 'HomeController@makanan');
