@@ -52,7 +52,7 @@
                     </table>
                 </div>
                 <div class="card-footer" align="left">
-                    Sisa Makanan = 0 Piring
+                    Sisa Makanan = 11 Piring
                 </div>
             </div>
         </div>
@@ -105,7 +105,7 @@
                     </table>
                 </div>
                 <div class="card-footer" align="left">
-                    Sisa Makanan = 0 Piring
+                    Sisa Makanan = 13 Piring
                 </div>
             </div>
         </div>
@@ -158,7 +158,7 @@
                     </table>
                 </div>
                 <div class="card-footer" align="left">
-                    Sisa Makanan = 0 Piring
+                    Sisa Makanan = 5 Piring
                 </div>
             </div>
         </div>
