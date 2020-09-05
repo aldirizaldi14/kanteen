@@ -20,8 +20,10 @@
     <!-- Styles -->
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/bootsrap.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.dataTables.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/jquery.dataTables.min.css') }}">
     <script type="text/javascript" charset="utf8" src="{{ asset('/js/jquery.dataTables.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap-select.min.css') }}">
+    <script type="text/javascript" charset="utf8" src="{{ asset('/js/bootstrap-select.min.js') }}"></script>
     <style>
         body {
             background-image: url('/images/bg.png');
@@ -56,6 +58,7 @@
                     <div class="navbar-nav">
                         <a class="nav-item nav-link active" href="/">Monitor 1 <span class="sr-only">(current)</span></a>
                         <a class="nav-item nav-link active" href="monitor2">Monitor 2</a>
+                        <a class="nav-item nav-link active" href="settingshift">Setting Shift</a>
                     </div>
                 </div>
 
@@ -138,6 +141,24 @@
                                         <a class="btn btn-outline-dark w-100" href="/data" role="button">Data</a>
                                     </div>
                                 </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <a class="btn btn-outline-dark w-100" href="" role="button">-</a>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <a class="btn btn-outline-dark w-100" href="" role="button">-</a>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <a class="btn btn-outline-dark w-100" href="" role="button">-</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -149,7 +170,7 @@
     <script>
         $(document).ready(function() {
             $('#example').DataTable({
-                "scrollY": "200px",
+                scrollY:        '50vh',
                 "scrollX": true,
                 "scrollCollapse": true,
                 "paging": false,

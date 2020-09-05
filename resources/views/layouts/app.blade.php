@@ -56,6 +56,7 @@
                     <div class="navbar-nav">
                         <a class="nav-item nav-link active" href="/">Monitor 1 <span class="sr-only">(current)</span></a>
                         <a class="nav-item nav-link active" href="monitor2">Monitor 2</a>
+                        <a class="nav-item nav-link active" href="settingshift">Setting Shift</a>
                     </div>
                 </div>
 

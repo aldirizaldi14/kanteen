@@ -17,9 +17,6 @@
                     <input id="nama" type="text" class="form-control" name="nama" value="{{ old('nama') }}" required autofocus>
                 </div>
                 <div class="col-sm-2">
-
-                </div>
-                <div class="col-sm-2">
                     <input type="submit" class="form-control btn btn-success" value="Simpan" required autofocus>
                 </div>
             </div>
@@ -32,6 +29,9 @@
                 <div class="col-sm-4">
                     <input id="nik" type="number" class="form-control" name="nik" value="{{ old('nik') }}" required autofocus>
                 </div>
+                <div class="col-sm-2">
+Remark
+</div>
             </div>
             <br>
             <!-- Dept -->
@@ -40,7 +40,7 @@
                     Departement
                 </div>
                 <div class="col-sm-4">
-                    <select name="departemen" class="custom-select">
+                    <select id="departemen" name="departemen" class="custom-select" onchange="test()">
                         <option value="Production">Production</option>
                         <option value="QC">QC</option>
                         <option value="Engineering">Engineering</option>
@@ -51,7 +51,11 @@
                         <option value="FE">FE</option>
                         <option value="EDP">EDP</option>
                         <option value="Sales">Sales</option>
+                        <option value="Other">Other</option>
                     </select>
+                </div>
+                <div class="col-sm-4">
+                    <input id="remark" type="text" class="form-control" hidden name="remark" value="{{ old('remark') }}">
                 </div>
             </div>
             <br>
@@ -89,5 +93,20 @@
 </div>
 </div>
 </div>
+
+<script>
+function test() {
+    var x = document.getElementById("departemen").value;
+ if (x == "Other"){
+    document.getElementById("remark").removeAttribute("hidden");
+    document.getElementById("remark").setAttribute("required", true); 
+ }
+ else {
+    document.getElementById("remark").setAttribute("hidden", true); 
+    document.getElementById("remark").removeAttribute("required");
+    
+ }
+}
+</script>
 
 @endsection

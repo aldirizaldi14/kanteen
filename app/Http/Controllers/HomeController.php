@@ -53,6 +53,7 @@ class HomeController extends Controller
             'name' => $request->nama,
             'departemen' => $request->departemen,
             'golongan' => $request->golongan,
+            'remark' => $request->remark,
             'shift' => $request->shift,
         ]);
         return redirect('/karyawan');
@@ -76,6 +77,7 @@ class HomeController extends Controller
             'name' => $request->nama,
             'golongan' => $request->golongan,
             'departemen' => $request->departemen,
+            'remark' => $request->remark,
             'shift' => $request->shift,
         ]);
         return redirect('/karyawan');
@@ -231,5 +233,16 @@ class HomeController extends Controller
     public function data()
     {
         return view('data');
+    }
+
+    public function dataid($id)
+    {
+        return view('dataid');
+    }
+
+    public function datamakan()
+    {
+
+        return view('datamakan');
     }
 }

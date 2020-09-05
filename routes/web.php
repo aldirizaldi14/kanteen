@@ -17,7 +17,8 @@ Route::get('/', 'MonitroController@monitor1');
 
 
 Route::get('/monitor2', 'MonitroController@monitor2');
-
+Route::get('/settingshift', 'UserController@settingshift');
+Route::post('/settingshift/simpan', 'UserController@settingsimpan');
 
 Auth::routes([
     'register' => false, // Registration Routes...
@@ -49,3 +50,5 @@ Route::post('/makanan/alter/simpan', 'HomeController@makananalters');
 Route::post('/makanan/simpan', 'HomeController@makanansimpan');
 
 Route::get('/data', 'HomeController@data');
+Route::get('/data/{id}', 'HomeController@dataid');
+Route::get('/data/makan', 'HomeController@datamakan');

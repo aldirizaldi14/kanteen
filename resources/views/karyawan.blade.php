@@ -29,7 +29,7 @@
             <tr>
                 <td>{{$dt->nik}}</td>
                 <td>{{$dt->name}}</td>
-                <td>{{$dt->departemen}}</td>
+                <td>@if ($dt->departemen == 'Other') {{$dt->departemen}} ({{$dt->remark}}) @else {{$dt->departemen}} @endif</td>
                 <td>{{$dt->golongan}}</td>
                 <td>{{$dt->shift}}</td>
                 <td><a class="btn btn-sm btn-outline-success" href="/karyawan/alter/{{$dt->nik}}" role="button">Edit</a> 

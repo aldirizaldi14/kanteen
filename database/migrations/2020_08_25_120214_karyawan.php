@@ -18,6 +18,7 @@ class Karyawan extends Migration
             $table->string('nik')->unique();
             $table->string('name');
             $table->string('departemen');
+            $table->string('remark')->nullable();
             $table->string('golongan');
             $table->string('shift');
         });
