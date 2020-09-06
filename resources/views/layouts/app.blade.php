@@ -56,7 +56,6 @@
                     <div class="navbar-nav">
                         <a class="nav-item nav-link active" href="/">Monitor 1 <span class="sr-only">(current)</span></a>
                         <a class="nav-item nav-link active" href="monitor2">Monitor 2</a>
-                        <a class="nav-item nav-link active" href="settingshift">Setting Shift</a>
                     </div>
                 </div>
 
@@ -107,31 +106,7 @@
             @yield('content')
         </main>
     </div>
-    <script>
-        $(document).ready(function() {
-            $('#example1').DataTable({
-                "scrollY": "200px",
-                "searching" : false,
-                "scrollCollapse": true,
-                "paging": false,
-                "info": false
-            });
-            $('#example2').DataTable({
-                "scrollY": "200px",
-                "searching" : false,
-                "scrollCollapse": true,
-                "paging": false,
-                "info": false
-            });
-            $('#example3').DataTable({
-                "scrollY": "200px",
-                "searching" : false,
-                "scrollCollapse": true,
-                "paging": false,
-                "info": false
-            });
-        });
-    </script>
+    @stack('scripts')
 </body>
 
 </html>

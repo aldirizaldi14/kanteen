@@ -17,6 +17,7 @@ class Device1 extends Migration
             $table->id();
             $table->string('jadwalmenu');
             $table->string('karyawan');
+            $table->string('shift');
             $table->string('makanan');
             $table->string('status');
         });

@@ -23,10 +23,10 @@
 <tr>
     <td>        <table class="w-100">
     <tr>
-        <td>Snack 1</td>
+        <td>Sarapan 1</td>
     </tr>
     <tr>
-    <td>Snack 2</td>
+    <td>Sarapan 2</td>
     </tr>
     <tr>
     <td>Ikan</td>

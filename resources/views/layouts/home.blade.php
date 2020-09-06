@@ -22,6 +22,10 @@
     <link href="{{ asset('/css/bootsrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/jquery.dataTables.min.css') }}">
     <script type="text/javascript" charset="utf8" src="{{ asset('/js/jquery.dataTables.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/buttons.dataTables.min.css') }}">
+    <script type="text/javascript" charset="utf8" src="{{ asset('/js/dataTables.buttons.min.js') }}"></script>
+    <script type="text/javascript" charset="utf8" src="{{ asset('/js/jszip.min.js') }}"></script>
+    <script type="text/javascript" charset="utf8" src="{{ asset('/js/buttons.html5.min.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap-select.min.css') }}">
     <script type="text/javascript" charset="utf8" src="{{ asset('/js/bootstrap-select.min.js') }}"></script>
     <style>
@@ -56,113 +60,75 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link active" href="/">Monitor 1 <span class="sr-only">(current)</span></a>
-                        <a class="nav-item nav-link active" href="monitor2">Monitor 2</a>
-                        <a class="nav-item nav-link active" href="settingshift">Setting Shift</a>
+                        <a class="nav-item nav-link active" href="/settingshift">Setting Shift</a>
+                        <a class="nav-item nav-link active" href="/dashboard">Dashboard</a>
+                        <div class="dropdown show">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Admin Setting
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/karyawan">Karyawan</a>
+                                <a class="dropdown-item" href="/jadwal">Jadwal Menu</a>
+                                <a class="dropdown-item" href="/makanan">Makanan</a>
+                                <a class="dropdown-item" href="/data">Data</a>
+                                <a class="dropdown-item" href="/data">Departement</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <!-- Left Side Of Navbar -->
+                        <ul class="navbar-nav mr-auto">
+
+                        </ul>
+
+                        <!-- Right Side Of Navbar -->
+                        <ul class="navbar-nav ml-auto">
+                            <!-- Authentication Links -->
+                            @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                            @endif
+                            @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/dashboard">
+                                        Dashboard
+                                    </a>
+                                    <a class="dropdown-item" href="/">
+                                        Monitor 1
+                                    </a>
+                                    <a class="dropdown-item" href="/monitor2">
+                                        Monitor 2
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                            @endguest
+                        </ul>
                     </div>
                 </div>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                        @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                        @endif
-                        @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/dashboard">
-                                    Dashboard
-                                </a>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
         </nav>
         <main class="py-4">
             <div class="container">
                 <div class="row h-100">
-                    <div class="col-sm-2">
-                        <div class="card h-100">
-                            <div class="card-header">{{ __('Menu') }}</div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <a class="btn btn-outline-primary w-100" href="/dashboard" role="button">Dashboard</a>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <a class="btn btn-outline-secondary w-100" href="/karyawan" role="button">Karyawan</a>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <a class="btn btn-outline-success w-100" href="/jadwal" role="button">Jadwal Menu</a>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <a class="btn btn-outline-danger w-100" href="/makanan" role="button">Makanan</a>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <a class="btn btn-outline-dark w-100" href="/data" role="button">Data</a>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <a class="btn btn-outline-dark w-100" href="" role="button">-</a>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <a class="btn btn-outline-dark w-100" href="" role="button">-</a>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <a class="btn btn-outline-dark w-100" href="" role="button">-</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-10">
+                    <div class="col-md-12">
                         @yield('content')
                     </div>
         </main>
@@ -170,11 +136,17 @@
     <script>
         $(document).ready(function() {
             $('#example').DataTable({
-                scrollY:        '50vh',
-                "scrollX": true,
-                "scrollCollapse": true,
-                "paging": false,
-                "info": false
+                scrollY: '50vh',
+                scrollX: true,
+                scrollCollapse: true,
+                paging: false,
+                info: false,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                ]
             });
         });
     </script>

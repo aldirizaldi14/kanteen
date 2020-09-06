@@ -26,6 +26,9 @@ Auth::routes([
     'verify' => false, //
 ]);
 
+// Route AJAX
+Route::get('/server_side/scripts/{id}', 'MonitroController@ajax');
+
 Route::get('/dashboard', 'HomeController@dashboard');
 
 Route::get('/karyawan', 'HomeController@karyawan');

@@ -3,11 +3,11 @@
 @section('content')
 <div class="card h-100">
     <div class="card-header">
-        {{ __('Tambah Karyawan') }}
+        {{ __('Rubah Karyawan') }}
     </div>
     <div class="card-body">
         @foreach ($data as $dt)
-        <form action="simpan" method="post">
+        <form action="simpan" method="post" enctype="multipart/form-data">
         @csrf
         <input type="text" class="form-control" hidden name="id" value="{{$dt->id}}" required autofocus>
             <!-- Nama -->
@@ -29,7 +29,7 @@
                     NIK
                 </div>
                 <div class="col-sm-4">
-                    <input id="nik" type="number" class="form-control" name="nik" value="{{$dt->nik}}" required autofocus>
+                    <input id="nik" type="number" min="0" class="form-control" name="nik" value="{{$dt->nik}}" required autofocus>
                 </div>
                 <div class="col-sm-2">
 Remark
@@ -88,6 +88,14 @@ Remark
                         <option @if ($dt->shift == 'Shift 2') selected @else @endif value="Shift 2">Shift 2</option>
                         <option @if ($dt->shift == 'Shift 3') selected @else @endif value="Shift 3">Shift 3</option>
                     </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2">
+                    Gambar
+                </div>
+                <div class="col-sm-4">
+                <input type="file" class="form-control" accept="image/*" id="file" name="file">
                 </div>
             </div>
         </form>

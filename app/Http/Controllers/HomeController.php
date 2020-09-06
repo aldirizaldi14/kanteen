@@ -72,6 +72,10 @@ class HomeController extends Controller
 
     public function karyawansimpan(Request $request)
     {
+        $file = $request->file('file');
+        $nama_file = $file->getClientOriginalName();
+        $tujuan_upload = 'fimages';
+        $file->move($tujuan_upload, $nama_file);
         DB::table('karyawan')->insert([
             'nik' => $request->nik,
             'name' => $request->nama,
@@ -79,6 +83,7 @@ class HomeController extends Controller
             'departemen' => $request->departemen,
             'remark' => $request->remark,
             'shift' => $request->shift,
+            'gambar' => $nama_file,
         ]);
         return redirect('/karyawan');
     }
@@ -95,7 +100,7 @@ class HomeController extends Controller
     public function jadwalalter($id)
     {
         $data = DB::table('jadwalmenu')->where('id', $id)->get();
-        $data1 = DB::table('makanan')->where('jenis', 'Snack')->get();
+        $data1 = DB::table('makanan')->where('jenis', 'Sarapan')->get();
         $data2 = DB::table('makanan')->where('jenis', 'Ikan')->get();
         $data3 = DB::table('makanan')->where('jenis', 'Ayam')->get();
         $data4 = DB::table('makanan')->where('jenis', 'Daging')->get();
@@ -111,7 +116,7 @@ class HomeController extends Controller
 
     public function jadwalplus()
     {
-        $data1 = DB::table('makanan')->where('jenis', 'Snack')->get();
+        $data1 = DB::table('makanan')->where('jenis', 'Sarapan')->get();
         $data2 = DB::table('makanan')->where('jenis', 'Ikan')->get();
         $data3 = DB::table('makanan')->where('jenis', 'Ayam')->get();
         $data4 = DB::table('makanan')->where('jenis', 'Daging')->get();

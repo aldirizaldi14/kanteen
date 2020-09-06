@@ -21,6 +21,7 @@ class Karyawan extends Migration
             $table->string('remark')->nullable();
             $table->string('golongan');
             $table->string('shift');
+            $table->string('gambar');
         });
     }
 

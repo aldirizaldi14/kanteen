@@ -6,7 +6,7 @@
         {{ __('Tambah Karyawan') }}
     </div>
     <div class="card-body">
-        <form action="simpan" method="post">
+        <form action="simpan" method="post" enctype="multipart/form-data">
         @csrf
             <!-- Nama -->
             <div class="row">
@@ -27,7 +27,7 @@
                     NIK
                 </div>
                 <div class="col-sm-4">
-                    <input id="nik" type="number" class="form-control" name="nik" value="{{ old('nik') }}" required autofocus>
+                    <input id="nik" type="number" min="0" class="form-control" name="nik" value="{{ old('nik') }}" required autofocus>
                 </div>
                 <div class="col-sm-2">
 Remark
@@ -86,6 +86,16 @@ Remark
                         <option value="Shift 2">Shift 2</option>
                         <option value="Shift 3">Shift 3</option>
                     </select>
+                </div>
+            </div>
+            <br>
+            <!-- Images -->
+            <div class="row">
+                <div class="col-sm-2">
+                    Gambar
+                </div>
+                <div class="col-sm-4">
+                <input type="file" required class="form-control" accept="image/*" id="file" name="file">
                 </div>
             </div>
         </form>

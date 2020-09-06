@@ -3,7 +3,7 @@
 @section('content')
 <div class="card h-100">
     <div class="card-header">
-        {{ __('Tambah Jadwal Menu') }}
+        {{ __('Rubah Jadwal Menu') }}
     </div>
     <div class="card-body">
         @foreach ($data as $dt)
