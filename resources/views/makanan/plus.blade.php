@@ -14,7 +14,7 @@
                     Nama Makanan
                 </div>
                 <div class="col-sm-4">
-                    <input id="nama" type="text" class="form-control" name="nama" value="{{ old('nama') }}" required autofocus>
+                    <input id="nama" autocomplete="off" type="text" class="form-control" name="nama" value="{{ old('nama') }}" required autofocus>
                 </div>
                 <div class="col-sm-2">
                 </div>

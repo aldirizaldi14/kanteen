@@ -5,48 +5,75 @@
     <div class="row">
         <!-- colom 1 -->
         <div class="col-sm-4">
-            <div class="card">
-                <div class="card-header" align="center">
-                    Ikan
+            <div class="card h-100" align="center">
+                <div class="card-header">
+                    <h4>{{$data1}}</h4>
                 </div>
                 <div class="card-body">
-                <img src="{{ asset('images/ikanasammanis.jpg') }}" class="img-fluid" alt="Responsive image" >
+                <img src="/fimages/{{$ikang}}" class="img-fluid" alt="Responsive image" >
                 </div>
                 <div class="card-footer">
-    Sisa 47 Piring
+                
   </div>
             </div>
         </div>
         <!-- colom 2 -->
         <div class="col-sm-4">
-            <div class="card">
-                <div class="card-header" align="center">
-                    Ayam
+            <div class="card h-100"  align="center">
+                <div class="card-header">
+                    <h4>{{$data2}}</h4>
                 </div>
                 <div class="card-body">
-                    <img src="{{ asset('images/ayambakar.jpg') }}" class="img-fluid" alt="Responsive image" >
+                    <img src="/fimages/{{$ayamg}}" class="img-fluid" alt="Responsive image" >
                 </div>
                 <div class="card-footer">
-    Sisa 18 Piring
+                
   </div>
             </div>
         </div>
         <!-- colom 3 -->
         <div class="col-sm-4">
-            <div class="card">
-                <div class="card-header" align="center">
-                    Daging
+            <div class="card h-100"  align="center">
+                <div class="card-header">
+                    <h4>{{$data3}}</h4>
                 </div>
                 <div class="card-body">
-                <img src="{{ asset('images/wagyu.jpg') }}" class="img-fluid" alt="Responsive image" >
+                <img src="/fimages/{{$gdaging}}" class="img-fluid" alt="Responsive image" >
                 </div>
                 <div class="card-footer">
-    Sisa 3 Piring
+
   </div>
             </div>
         </div>
     </div>
 
 </div>
+@stop
 
-@endsection
+@push('scripts')
+<script>
+$(document).ready(function() {
+    refreshAt(07,30,05);
+    refreshAt(13,20,05);
+    refreshAt(17,00,05);
+    refreshAt(02,00,05);
+});
+
+function refreshAt(hours, minutes, seconds) {
+    var now = new Date();
+    var then = new Date();
+
+    if(now.getHours() > hours ||
+       (now.getHours() == hours && now.getMinutes() > minutes) ||
+        now.getHours() == hours && now.getMinutes() == minutes && now.getSeconds() >= seconds) {
+        then.setDate(now.getDate() + 1);
+    }
+    then.setHours(hours);
+    then.setMinutes(minutes);
+    then.setSeconds(seconds);
+
+    var timeout = (then.getTime() - now.getTime());
+    setTimeout(function() { window.location.reload(true); }, timeout);
+}
+</script>
+@endpush

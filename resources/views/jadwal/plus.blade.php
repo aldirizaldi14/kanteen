@@ -17,7 +17,7 @@
                     <input type="date" class="form-control" name="tanggal" value="{{ old('tanggal') }}" required autofocus>
                 </div>
                 <div class="col-sm-2">
-                    <select name="waktu" class="custom-select">
+                    <select onchange="test()" id="waktu" name="waktu" class="custom-select">
                         <option value="Shift1">Shift1</option>
                         <option value="Shift2">Shift2</option>
                         <option value="Shift3">Shift3</option>
@@ -29,9 +29,9 @@
             </div>
             <br>
             <!-- Sarapan -->
-            <div class="row">
+            <div class="row" id="sarapan">
                 <div class="col-sm-2">
-                    Snack
+                    Sarapan
                 </div>
                 <div class="col-sm-3">
                     <select name="snack1" class="custom-select">
@@ -41,7 +41,7 @@
                     </select>
                 </div>
                 <div class="col-sm-2">
-                <input type="number" class="form-control" name="jsnack1" value="{{ old('jsnack1') }}" required autofocus>
+                <input type="number" class="form-control" name="jsnack1" id="jsnack1" value="{{ old('jsnack1') }}" required autofocus>
                 </div>
                 <div class="col-sm-3">
                     <select name="snack2" class="custom-select">
@@ -51,7 +51,7 @@
                     </select>
                 </div>
                 <div class="col-sm-2">
-                <input type="number" class="form-control" name="jsnack2" value="{{ old('jsnack2') }}" required autofocus>
+                <input type="number" class="form-control" name="jsnack2" id="jsnack2" value="{{ old('jsnack2') }}" required autofocus>
                 </div>
             </div>
             <br>
@@ -119,5 +119,21 @@
 </div>
 </div>
 </div>
+
+<script>
+function test() {
+    var x = document.getElementById("waktu").value;
+ if (x == "Shift1"){
+    document.getElementById("sarapan").removeAttribute("hidden");
+    document.getElementById("jsnack1").setAttribute("required", true); 
+    document.getElementById("jsnack2").setAttribute("required", true); 
+ }
+ else {
+    document.getElementById("sarapan").setAttribute("hidden", true); 
+    document.getElementById("jsnack1").removeAttribute("required");
+    document.getElementById("jsnack2").removeAttribute("required");
+ }
+}
+</script>
 
 @endsection

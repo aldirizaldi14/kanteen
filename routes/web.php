@@ -28,30 +28,38 @@ Auth::routes([
 
 // Route AJAX
 Route::get('/server_side/scripts/{id}', 'MonitroController@ajax');
+Route::get('/server_side/count/{id}/{param}', 'MonitroController@count');
 
 Route::get('/dashboard', 'HomeController@dashboard');
 
-Route::get('/karyawan', 'HomeController@karyawan');
-Route::get('/karyawan/plus', 'HomeController@karyawanplus');
-Route::get('/karyawan/minus/{id}', 'HomeController@karyawanminus');
-Route::get('/karyawan/alter/{id}', 'HomeController@karyawanalter');
-Route::post('/karyawan/alter/simpan', 'HomeController@karyawanalters');
-Route::post('/karyawan/simpan', 'HomeController@karyawansimpan');
+Route::get('/karyawan', 'HomeController@karyawan')->middleware('can:isUser');
+Route::get('/karyawan/plus', 'HomeController@karyawanplus')->middleware('can:isUser');
+Route::get('/karyawan/minus/{id}', 'HomeController@karyawanminus')->middleware('can:isUser');
+Route::get('/karyawan/alter/{id}', 'HomeController@karyawanalter')->middleware('can:isUser');
+Route::post('/karyawan/alter/simpan', 'HomeController@karyawanalters')->middleware('can:isUser');
+Route::post('/karyawan/simpan', 'HomeController@karyawansimpan')->middleware('can:isUser');
 
-Route::get('/jadwal', 'HomeController@jadwal');
-Route::get('/jadwal/alter/{id}', 'HomeController@jadwalalter');
-Route::get('/jadwal/plus', 'HomeController@jadwalplus');
-Route::get('/jadwal/minus/{id}', 'HomeController@jadwalminus');
-Route::post('/jadwal/alter/simpan', 'HomeController@jadwalalters');
-Route::post('/jadwal/simpan', 'HomeController@jadwalsimpan');
+Route::get('/jadwal', 'HomeController@jadwal')->middleware('can:isAdmin');
+Route::get('/jadwal/alter/{id}', 'HomeController@jadwalalter')->middleware('can:isAdmin');
+Route::get('/jadwal/plus', 'HomeController@jadwalplus')->middleware('can:isAdmin');
+Route::get('/jadwal/minus/{id}', 'HomeController@jadwalminus')->middleware('can:isAdmin');
+Route::post('/jadwal/alter/simpan', 'HomeController@jadwalalters')->middleware('can:isAdmin');
+Route::post('/jadwal/simpan', 'HomeController@jadwalsimpan')->middleware('can:isAdmin');
 
-Route::get('/makanan', 'HomeController@makanan');
-Route::get('/makanan/plus', 'HomeController@makananplus');
-Route::get('/makanan/minus/{id}', 'HomeController@makananminus');
-Route::get('/makanan/alter/{id}', 'HomeController@makananalter');
-Route::post('/makanan/alter/simpan', 'HomeController@makananalters');
-Route::post('/makanan/simpan', 'HomeController@makanansimpan');
+Route::get('/departement', 'HomeController@departement')->middleware('can:isAdmin');
+Route::get('/departement/alter/{id}', 'HomeController@deptalter')->middleware('can:isAdmin');
+Route::get('/departement/plus', 'HomeController@deptplus')->middleware('can:isAdmin');
+Route::get('/departement/minus/{id}', 'HomeController@deptminus')->middleware('can:isAdmin');
+Route::post('/departement/alter/simpan', 'HomeController@deptalters')->middleware('can:isAdmin');
+Route::post('/departement/simpan', 'HomeController@deptsave')->middleware('can:isAdmin');
 
-Route::get('/data', 'HomeController@data');
-Route::get('/data/{id}', 'HomeController@dataid');
-Route::get('/data/makan', 'HomeController@datamakan');
+Route::get('/makanan', 'HomeController@makanan')->middleware('can:isAdmin');
+Route::get('/makanan/plus', 'HomeController@makananplus')->middleware('can:isAdmin');
+Route::get('/makanan/minus/{id}', 'HomeController@makananminus')->middleware('can:isAdmin');
+Route::get('/makanan/alter/{id}', 'HomeController@makananalter')->middleware('can:isAdmin');
+Route::post('/makanan/alter/simpan', 'HomeController@makananalters')->middleware('can:isAdmin');
+Route::post('/makanan/simpan', 'HomeController@makanansimpan')->middleware('can:isAdmin');
+
+Route::get('/data', 'HomeController@data')->middleware('can:isAdmin');
+Route::get('/data/{id}', 'HomeController@dataid')->middleware('can:isAdmin');
+Route::get('/data/makan', 'HomeController@datamakan')->middleware('can:isAdmin');

@@ -62,8 +62,9 @@
                     <div class="navbar-nav">
                         <a class="nav-item nav-link active" href="/settingshift">Setting Shift</a>
                         <a class="nav-item nav-link active" href="/dashboard">Dashboard</a>
+                        @can('isAdmin')
                         <div class="dropdown show">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Admin Setting
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -71,9 +72,11 @@
                                 <a class="dropdown-item" href="/jadwal">Jadwal Menu</a>
                                 <a class="dropdown-item" href="/makanan">Makanan</a>
                                 <a class="dropdown-item" href="/data">Data</a>
-                                <a class="dropdown-item" href="/data">Departement</a>
+                                <a class="dropdown-item" href="/departement">Departement</a>
                             </div>
+
                         </div>
+                        @endcan
                     </div>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -143,9 +146,7 @@
                 info: false,
                 dom: 'Bfrtip',
                 buttons: [
-                    'copyHtml5',
                     'excelHtml5',
-                    'csvHtml5',
                 ]
             });
         });

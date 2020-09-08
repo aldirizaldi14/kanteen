@@ -33,6 +33,53 @@ class HomeController extends Controller
         return view('dashboard', ['data1' => $today1, 'data2' => $today2, 'data3' => $today3]);
     }
 
+    // Urusan Departemen dilakukan disini
+    // Disini batasnya ya.
+
+    public function departement() {
+        $data = DB::table('departement')->get();
+        return view('departement', ['data' => $data]);
+    }
+
+    public function deptplus() {
+        $data1 = DB::table('departement')->select('main')->distinct()->get();
+        $data2 = DB::table('departement')->select('departement')->distinct()->get();
+        return view('departement.plus', ['list1' => $data1, 'list2' => $data2]);
+    }
+
+    public function deptminus($id)
+    {
+        DB::table('departement')->where('id', $id)->delete();
+        return redirect('/departement');
+    }
+
+    public function deptsave(Request $request) {
+        DB::table('departement')->insert([
+            'main' => $request->main,
+            'departement' => $request->nama,
+            'costcenter' => $request->costcenter,
+        ]);
+        return redirect('/departement');
+    }
+
+    public function deptalter() {
+        $data0 = DB::table('departement')->get();
+        $data1 = DB::table('departement')->select('main')->distinct()->get();
+        $data2 = DB::table('departement')->select('departement')->distinct()->get();
+        return view('departement.alter', ['data' => $data0, 'list1' => $data1, 'list2' => $data2]);
+    }
+
+    public function deptalters(Request $request) {
+        DB::table('departement')->where('id', $request->id)->update([
+            'main' => $request->main,
+            'departemen' => $request->nama,
+            'costcenter' => $request->costcenter,
+        ]);
+        return redirect('/departement');
+    }
+
+    // Untuk Karyawan
+    // Semua Urusan Karyawan bagian yang ini menangangi 
 
     public function karyawan()
     {
@@ -48,14 +95,33 @@ class HomeController extends Controller
 
     public function karyawanalters(Request $request)
     {
-        DB::table('karyawan')->where('id', $request->id)->update([
-            'nik' => $request->nik,
-            'name' => $request->nama,
-            'departemen' => $request->departemen,
-            'golongan' => $request->golongan,
-            'remark' => $request->remark,
-            'shift' => $request->shift,
-        ]);
+        $iname = DB::table('karyawan')->select('gambar')->where('id', $request->id)->value('gambar');
+        if ($request->hasFile('file')) {
+            File::delete('kimages/' . $iname);
+            $file = $request->file('file');
+            $nama_file = $file->getClientOriginalName();
+            $tujuan_upload = 'kimages';
+            $file->move($tujuan_upload, $nama_file);
+
+            DB::table('karyawan')->where('id', $request->id)->update([
+                'nik' => $request->nik,
+                'name' => $request->nama,
+                'departemen' => $request->departemen,
+                'golongan' => $request->golongan,
+                'remark' => $request->remark,
+                'shift' => $request->shift,
+                'gambar' => $nama_file,
+            ]);
+        } else {
+            DB::table('karyawan')->where('id', $request->id)->update([
+                'nik' => $request->nik,
+                'name' => $request->nama,
+                'departemen' => $request->departemen,
+                'golongan' => $request->golongan,
+                'remark' => $request->remark,
+                'shift' => $request->shift,
+            ]);
+        }
         return redirect('/karyawan');
     }
 
@@ -74,7 +140,7 @@ class HomeController extends Controller
     {
         $file = $request->file('file');
         $nama_file = $file->getClientOriginalName();
-        $tujuan_upload = 'fimages';
+        $tujuan_upload = 'kimages';
         $file->move($tujuan_upload, $nama_file);
         DB::table('karyawan')->insert([
             'nik' => $request->nik,
@@ -89,7 +155,7 @@ class HomeController extends Controller
     }
 
     // Untuk Pengaturan Jadwal
-    // Tebelin Dikit buar keren
+    // Tebelin Dikit biar keren
     // Segala sesuatu yang mengurus penjadwalan ada disini
     public function jadwal()
     {

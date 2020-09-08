@@ -10,7 +10,65 @@ class MonitroController extends Controller
 {
     public function monitor1()
     {
-        return view('monitor1');
+        // $now = date('H:i');
+        $now = date('H:i', strtotime("06:30"));
+        $s1  = date('H:i', strtotime("06:00"));
+        $as1 = date('H:i', strtotime("07:30"));
+        $a1  = date('H:i', strtotime("11:00"));
+        $ak1 = date('H:i', strtotime("13:20"));
+        $a2  = date('H:i', strtotime("17:00"));
+        $ak2 = date('H:i', strtotime("19:15"));
+        $a3  = date('H:i', strtotime("02:00"));
+        $ak3 = date('H:i', strtotime("03:15"));
+
+        if (($now >= $a1) && ($now <= $ak1))
+        {
+            $date = date('Y-m-d').'Shift1';
+            $sel1 = DB::table('jadwalmenu')->select('makanan1')->where('id', $date)->value('makanan1');
+            $sel2 = DB::table('jadwalmenu')->select('makanan2')->where('id', $date)->value('makanan2');
+            $sel3 = DB::table('jadwalmenu')->select('makanan3')->where('id', $date)->value('makanan3');
+            $ikan = DB::table('makanan')->select('gambar')->where('jenis', 'ikan')->where('nama', $sel1)->value('gambar');
+            $ayam = DB::table('makanan')->select('gambar')->where('jenis', 'ayam')->where('nama', $sel2)->value('gambar');
+            $daging = DB::table('makanan')->select('gambar')->where('jenis', 'daging')->where('nama', $sel3)->value('gambar');
+            return view('monitor1', ['data1' => $sel1, 'data2' => $sel2, 'data3' => $sel3, 
+            'ikang' => $ikan, 'ayamg' => $ayam, 'gdaging' => $daging, 
+            
+            ]);
+        }
+        elseif (($now >= $a2) && ($now <= $ak2)) 
+        {
+            $date = date('Y-m-d').'Shift2';
+            $sel1 = DB::table('jadwalmenu')->select('makanan1')->where('id', $date)->value('makanan1');
+            $sel2 = DB::table('jadwalmenu')->select('makanan2')->where('id', $date)->value('makanan2');
+            $sel3 = DB::table('jadwalmenu')->select('makanan3')->where('id', $date)->value('makanan3');
+            $ikan = DB::table('makanan')->select('gambar')->where('jenis', 'ikan')->where('nama', $sel1)->value('gambar');
+            $ayam = DB::table('makanan')->select('gambar')->where('jenis', 'ayam')->where('nama', $sel2)->value('gambar');
+            $daging = DB::table('makanan')->select('gambar')->where('jenis', 'daging')->where('nama', $sel3)->value('gambar');
+            return view('monitor1', ['data1' => $sel1, 'data2' => $sel2, 'data3' => $sel3, 'ikang' => $ikan, 'ayamg' => $ayam, 'gdaging' => $daging, ]);
+        }
+        elseif (($now >= $a3) && ($now <= $ak3)) 
+        {
+            $date = date('Y-m-d').'Shift3';
+            $sel1 = DB::table('jadwalmenu')->select('makanan1')->where('id', $date)->value('makanan1');
+            $sel2 = DB::table('jadwalmenu')->select('makanan2')->where('id', $date)->value('makanan2');
+            $sel3 = DB::table('jadwalmenu')->select('makanan3')->where('id', $date)->value('makanan3');
+            $ikan = DB::table('makanan')->select('gambar')->where('jenis', 'ikan')->where('nama', $sel1)->value('gambar');
+            $ayam = DB::table('makanan')->select('gambar')->where('jenis', 'ayam')->where('nama', $sel2)->value('gambar');
+            $daging = DB::table('makanan')->select('gambar')->where('jenis', 'daging')->where('nama', $sel3)->value('gambar');
+            return view('monitor1', ['data1' => $sel1, 'data2' => $sel2, 'data3' => $sel3, 'ikang' => $ikan, 'ayamg' => $ayam, 'gdaging' => $daging, ]);
+        }
+        elseif (($now >= $s1) && ($now <= $as1)) 
+        {
+            $date = date('Y-m-d').'Shift1';
+            $sel1 = DB::table('jadwalmenu')->select('snack1')->where('id', $date)->value('snack1');
+            $sel2 = DB::table('jadwalmenu')->select('snack2')->where('id', $date)->value('snack2');
+            $ikan = DB::table('makanan')->select('gambar')->where('jenis', 'sarapan')->where('nama', $sel1)->value('gambar');
+            $ayam = DB::table('makanan')->select('gambar')->where('jenis', 'sarapan')->where('nama', $sel2)->value('gambar');
+            return view('monitor1', ['data1' => $sel1, 'data2' => $sel2, 'data3' => '', 'ikang' => $ikan, 'ayamg' => $ayam, 'gdaging' => '']);
+        }
+        else {
+            return view('monitor0');
+        }
     }
 
     public function monitor2()
@@ -24,6 +82,47 @@ class MonitroController extends Controller
         return Datatables::of($data)->make(true);
     }
 
+        // AJAX Data
+    public function count($id, $param1) {
+        $now = date('H:i');
+        $s1  = date('H:i', strtotime("06:00"));
+        $as1 = date('H:i', strtotime("07:30"));
+        $a1  = date('H:i', strtotime("11:00"));
+        $ak1 = date('H:i', strtotime("13:20"));
+        $a2  = date('H:i', strtotime("17:00"));
+        $ak2 = date('H:i', strtotime("19:15"));
+        $a3  = date('H:i', strtotime("02:00"));
+        $ak3 = date('H:i', strtotime("03:15"));
+
+            if (($now >= $a1) && ($now <= $ak1))
+        {
+           $jadwal = date('Y-m-d').'Shift1';
+           $shift = 'Shift 1';
+        }
+        elseif (($now >= $a2) && ($now <= $ak2)) 
+        {
+            $jadwal = date('Y-m-d').'Shift2';
+            $shift = 'Shift 2';
+        }
+        elseif (($now >= $a3) && ($now <= $ak3)) 
+        {
+            $jadwal = date('Y-m-d').'Shift3';
+            $shift = 'Shift 3';
+        }
+        elseif (($now >= $s1) && ($now <= $as1)) 
+        {
+            $jadwal = date('Y-m-d').'Shift1';
+            $shift = 'Shift 0';
+        }
+        else {
+            $jadwal = "";
+            $shift = "";
+        }
+            $data = DB::table($id)->where('id', $jadwal)->where('shift', $shift)->count();
+            return $data;
+    }
+
+
     public function ikan($id) {
 
         $hex = substr(hexdec($id),0, -6);
@@ -35,7 +134,7 @@ class MonitroController extends Controller
         $s1  = date('H:i', strtotime("06:00"));
         $as1 = date('H:i', strtotime("07:30"));
         $a1  = date('H:i', strtotime("11:00"));
-        $ak1 = date('H:i', strtotime("13:15"));
+        $ak1 = date('H:i', strtotime("13:20"));
         $a2  = date('H:i', strtotime("17:00"));
         $ak2 = date('H:i', strtotime("19:15"));
         $a3  = date('H:i', strtotime("02:00"));
@@ -107,9 +206,9 @@ class MonitroController extends Controller
             $s1  = date('H:i', strtotime("06:00"));
             $as1 = date('H:i', strtotime("07:30"));
             $a1  = date('H:i', strtotime("11:00"));
-            $ak1 = date('H:i', strtotime("13:15"));
+            $ak1 = date('H:i', strtotime("13:20"));
             $a2  = date('H:i', strtotime("17:00"));
-            $ak2 = date('H:i', strtotime("22:15"));
+            $ak2 = date('H:i', strtotime("19:15"));
             $a3  = date('H:i', strtotime("02:00"));
             $ak3 = date('H:i', strtotime("03:15"));
     
@@ -175,7 +274,7 @@ class MonitroController extends Controller
         $s1  = date('H:i', strtotime("06:00"));
         $as1 = date('H:i', strtotime("07:30"));
         $a1  = date('H:i', strtotime("11:00"));
-        $ak1 = date('H:i', strtotime("13:15"));
+        $ak1 = date('H:i', strtotime("13:20"));
         $a2  = date('H:i', strtotime("17:00"));
         $ak2 = date('H:i', strtotime("19:15"));
         $a3  = date('H:i', strtotime("02:00"));
