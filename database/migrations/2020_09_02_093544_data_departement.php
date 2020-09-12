@@ -14,7 +14,7 @@ class DataDepartement extends Migration
     public function up()
     {
         Schema::create('DataDepartement', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->primary();
             $table->date('tanggal');
             $table->string('departement');
             $table->string('remark');
@@ -23,6 +23,7 @@ class DataDepartement extends Migration
             $table->string('shift2');
             $table->string('longshift2');
             $table->string('shift3');
+            $table->integer('status');
         });
     }
 

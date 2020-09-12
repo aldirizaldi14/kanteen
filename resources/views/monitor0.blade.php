@@ -1,14 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" align="center">
     <div class="row">
         <div class="col-sm-12 mx-auto">
-            <div class="card">
-                <div class="card-body" align="center">
                 <img src="{{ asset('images/loading.jpg') }}" class="img-fluid" alt="Responsive image" >
-                </div>
-            </div>
         </div>
     </div>
 

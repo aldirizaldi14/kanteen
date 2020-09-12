@@ -89,8 +89,9 @@ class HomeController extends Controller
 
     public function karyawanalter($id)
     {
-        $data = DB::table('karyawan')->where('nik', $id)->get();
-        return view('karyawan.alter', ['data' => $data]);
+        $data0 = DB::table('karyawan')->where('nik', $id)->get();
+        $data1 = DB::table('departement')->select('departement')->orderBy('main', 'asc')->get();
+        return view('karyawan.alter', ['data' => $data0, 'dept' => $data1]);
     }
 
     public function karyawanalters(Request $request)
@@ -109,7 +110,6 @@ class HomeController extends Controller
                 'departemen' => $request->departemen,
                 'golongan' => $request->golongan,
                 'remark' => $request->remark,
-                'shift' => $request->shift,
                 'gambar' => $nama_file,
             ]);
         } else {
@@ -119,7 +119,6 @@ class HomeController extends Controller
                 'departemen' => $request->departemen,
                 'golongan' => $request->golongan,
                 'remark' => $request->remark,
-                'shift' => $request->shift,
             ]);
         }
         return redirect('/karyawan');
@@ -127,7 +126,8 @@ class HomeController extends Controller
 
     public function karyawanplus()
     {
-        return view('karyawan.plus');
+        $data = DB::table('departement')->select('departement')->orderBy('main', 'asc')->get();
+        return view('karyawan.plus', ['dept' => $data]);
     }
 
     public function karyawanminus($id)
@@ -148,7 +148,6 @@ class HomeController extends Controller
             'golongan' => $request->golongan,
             'departemen' => $request->departemen,
             'remark' => $request->remark,
-            'shift' => $request->shift,
             'gambar' => $nama_file,
         ]);
         return redirect('/karyawan');
@@ -191,15 +190,27 @@ class HomeController extends Controller
 
     public function jadwalalters(Request $request)
     {
+        if($request->waktu == 'Shift1') {
+            $jsnack1 = $request->jsnack1;
+            $jsnack2 = $request->jsnack2;
+            $snack1 = $request->snack1;
+            $snack2 = $request->snack2;
+        }
+        else {
+            $jsnack1 = 0;
+            $jsnack2 = 0;
+            $snack1 = '-';
+            $snack2 = '-';
+        }
         $id = $request->tanggal . $request->waktu;
         DB::table('jadwalmenu')->where('id', $request->id)->update([
             'id' => $id,
             'tanggal' => $request->tanggal,
             'waktu' => $request->waktu,
-            'snack1' => $request->snack1,
-            'jsnack1' => $request->jsnack1,
-            'snack2' => $request->snack2,
-            'jsnack2' => $request->jsnack2,
+            'snack1' => $snack1,
+            'jsnack1' => $jsnack1,
+            'snack2' => $snack2,
+            'jsnack2' => $jsnack2,
             'makanan1' => $request->makanan1,
             'banyaknya1' => $request->banyaknya1,
             'makanan2' => $request->makanan2,
@@ -212,15 +223,27 @@ class HomeController extends Controller
 
     public function jadwalsimpan(Request $request)
     {
+        if($request->waktu == 'Shift1') {
+            $jsnack1 = $request->jsnack1;
+            $jsnack2 = $request->jsnack2;
+            $snack1 = $request->snack1;
+            $snack2 = $request->snack2;
+        }
+        else {
+            $jsnack1 = 0;
+            $jsnack2 = 0;
+            $snack1 = '-';
+            $snack2 = '-';
+        }
         $id = $request->tanggal . $request->waktu;
         DB::table('jadwalmenu')->insert([
             'id' => $id,
             'tanggal' => $request->tanggal,
             'waktu' => $request->waktu,
-            'snack1' => $request->snack1,
-            'jsnack1' => $request->jsnack1,
-            'snack2' => $request->snack2,
-            'jsnack2' => $request->jsnack2,
+            'snack1' => $snack1,
+            'jsnack1' => $jsnack1,
+            'snack2' => $snack2,
+            'jsnack2' => $jsnack2,
             'makanan1' => $request->makanan1,
             'banyaknya1' => $request->banyaknya1,
             'makanan2' => $request->makanan2,

@@ -29,9 +29,6 @@
                 <div class="col-sm-4">
                     <input id="nik" type="number" min="0" class="form-control" name="nik" value="{{ old('nik') }}" required autofocus>
                 </div>
-                <div class="col-sm-2">
-Remark
-</div>
             </div>
             <br>
             <!-- Dept -->
@@ -41,17 +38,9 @@ Remark
                 </div>
                 <div class="col-sm-4">
                     <select id="departemen" name="departemen" class="custom-select" onchange="test()">
-                        <option value="Production">Production</option>
-                        <option value="QC">QC</option>
-                        <option value="Engineering">Engineering</option>
-                        <option value="PC">PC</option>
-                        <option value="Finance">Finance</option>
-                        <option value="Logistic">Logistic</option>
-                        <option value="HR">HR</option>
-                        <option value="FE">FE</option>
-                        <option value="EDP">EDP</option>
-                        <option value="Sales">Sales</option>
-                        <option value="Other">Other</option>
+                    @foreach ($dept as $dp)
+                        <option value="{{$dp->departement}}">{{$dp->departement}}</option>
+                    @endforeach
                     </select>
                 </div>
                 <div class="col-sm-4">
@@ -71,20 +60,6 @@ Remark
                         <option value="Supervisor">Supervisor</option>
                         <option value="Manager">Manager</option>
                         <option value="General Manager">General Manager</option>
-                    </select>
-                </div>
-            </div>
-            <br>
-            <!-- Shift -->
-            <div class="row">
-                <div class="col-sm-2">
-                    Shift
-                </div>
-                <div class="col-sm-4">
-                    <select name="shift" class="custom-select">
-                        <option value="Shift 1">Shift 1</option>
-                        <option value="Shift 2">Shift 2</option>
-                        <option value="Shift 3">Shift 3</option>
                     </select>
                 </div>
             </div>

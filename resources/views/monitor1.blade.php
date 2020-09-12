@@ -41,7 +41,6 @@
                 <img src="/fimages/{{$gdaging}}" class="img-fluid" alt="Responsive image" >
                 </div>
                 <div class="card-footer">
-
   </div>
             </div>
         </div>
@@ -75,5 +74,9 @@ function refreshAt(hours, minutes, seconds) {
     var timeout = (then.getTime() - now.getTime());
     setTimeout(function() { window.location.reload(true); }, timeout);
 }
+
+setInterval(function(){
+    $('#example1').DataTable().ajax.reload();
+}, 20000);
 </script>
 @endpush

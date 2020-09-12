@@ -17,8 +17,16 @@ Route::get('/', 'MonitroController@monitor1');
 
 
 Route::get('/monitor2', 'MonitroController@monitor2');
+Route::get('/datashift', 'UserController@datashift');
+Route::get('/datashift/{id}', 'UserController@detailshift');
+Route::get('/datashiftm/{id}', 'UserController@datashift');
 Route::get('/settingshift', 'UserController@settingshift');
+Route::get('/settingshift/go/{id}', 'UserController@settinggo');
+Route::post('/settingshift/goes', 'UserController@settinggoes');
 Route::post('/settingshift/simpan', 'UserController@settingsimpan');
+
+Route::get('/changepassword', 'UserController@password');
+Route::get('/changepassword/simpan', 'UserController@password');
 
 Auth::routes([
     'register' => false, // Registration Routes...

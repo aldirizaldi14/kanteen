@@ -7,16 +7,13 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
-
     <!-- Scripts -->
     <script src="{{ asset('/js/jquery.min.js') }}"></script>
     <script src="{{ asset('/js/app.js') }}"></script>
     <script src="{{ asset('/js/bootstrap.min.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
     <!-- Styles -->
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/bootsrap.min.css') }}" rel="stylesheet">
@@ -60,8 +57,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link active" href="/settingshift">Setting Shift</a>
-                        <a class="nav-item nav-link active" href="/dashboard">Dashboard</a>
+                        <a></a>
+                        <a class="nav-item nav-link active" href="/datashift">Data Shift</a>
                         @can('isAdmin')
                         <div class="dropdown show">
                             <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -72,19 +69,16 @@
                                 <a class="dropdown-item" href="/jadwal">Jadwal Menu</a>
                                 <a class="dropdown-item" href="/makanan">Makanan</a>
                                 <a class="dropdown-item" href="/data">Data</a>
+                                <a class="dropdown-item" href="/user">Daftar Pengguna</a>
                                 <a class="dropdown-item" href="/departement">Departement</a>
                             </div>
-
                         </div>
                         @endcan
                     </div>
-
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
-
                         </ul>
-
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
                             <!-- Authentication Links -->
@@ -102,22 +96,15 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
-
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/dashboard">
-                                        Dashboard
-                                    </a>
-                                    <a class="dropdown-item" href="/">
-                                        Monitor 1
-                                    </a>
-                                    <a class="dropdown-item" href="/monitor2">
-                                        Monitor 2
-                                    </a>
+                                    <a class="dropdown-item" href="/dashboard">Dashboard</a>
+                                    <a class="dropdown-item" href="/">Monitor 1</a>
+                                    <a class="dropdown-item" href="/monitor2">Monitor 2</a>
+                                    <a class="dropdown-item" href="/changepassword">Rubah Password</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
@@ -152,5 +139,4 @@
         });
     </script>
 </body>
-
 </html>

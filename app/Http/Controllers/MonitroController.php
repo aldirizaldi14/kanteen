@@ -11,7 +11,7 @@ class MonitroController extends Controller
     public function monitor1()
     {
         // $now = date('H:i');
-        $now = date('H:i', strtotime("06:30"));
+        $now = date('H:i');
         $s1  = date('H:i', strtotime("06:00"));
         $as1 = date('H:i', strtotime("07:30"));
         $a1  = date('H:i', strtotime("11:00"));
