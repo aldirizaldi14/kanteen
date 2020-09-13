@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 use Auth;
+Use Redirect;
 
 class UserController extends Controller
 {
@@ -143,12 +145,97 @@ class UserController extends Controller
         return redirect('/settingshift/go/' . $mark);
     }
 
+    // ++++++++++++++++++++++++++++++++++++++++++++++++
+    // +++++++++++ User Configuration +++++++++++++++++
+    // ++++++++++++++++++++++++++++++++++++++++++++++++
     public function password() {
         return view('auth.changepassword');
     }
 
     public function changepassword(Request $request) {
-       
+        $a1 = Auth::user();
+        if (Hash::check($request->oldpassword, $a1->password)) {
+            DB::table('users')->where('username', $a1->username)->update(
+                [
+                    'password' => bcrypt($request->password1),
+                ]
+                
+            );
+            $errors = ['oldpass' => ['Password Berhasil Dirubah']]; 
+            return Redirect::back()->withErrors($errors);
+        }
+        else {
+            $errors = ['oldpass' => ['Password Salah']]; 
+            return Redirect::back()->withErrors($errors);
+        }
+    }
+
+    public function userpass($id) {
+        $a1 = Auth::user();
+        if ($a1->role == 'admin' || $a1->role == 'developer') {
+            $data = DB::table('users')->where('role', '<>', 'developer')->where('role', '<>', 'admin')->where('username', $id)->get();
+            return view('auth.userpass', ['data' => $data]);
+        }
+        else {
+            return redirect('/dashboard');
+        }
+    }
+
+    public function userchangepass(Request $request) {
+        $a1 = Auth::user();
+        if ($a1->role == 'admin' || $a1->role == 'developer') {
+            DB::table('users')->where('username', $request->username)->update([
+                'password' => bcrypt($request->password1),
+            ]);
+            return redirect('/user');
+        }
+        else {
+            return redirect('/dashboard');
+        }
+    }
+
+    public function user() {
+        $a1 = Auth::user();
+        if ($a1->role == 'admin' || $a1->role == 'developer') {
+            $data = DB::table('users')->where('role', '<>', 'developer')->where('role', '<>', 'admin')->get();
+            $dept = DB::table('departement')->select('departement')->orderBy('main', 'asc')->get();
+            return view('user', ['data' => $data, 'dept' => $dept]);
+        }
+        else {
+            return redirect('/dashboard');
+        }
+    }
+
+    public function userhapus($id) {
+        $a1 = Auth::user();
+        if ($a1->role == 'admin' || $a1->role == 'developer') {
+            DB::table('users')->where('username', $id)->delete();
+            return redirect('/user');
+        }
+        else {
+            return redirect('/dashboard');
+        }
+    }
+
+    public function usersimpan(Request $request) {
+        $a1 = Auth::user();
+        $rules = [
+            'username' => ['required', 'string', 'max:150', 'unique:users'],
+        ];
+        $this->validate($request, $rules);
+        if ($a1->role == 'admin' || $a1->role == 'developer') {
+            DB::table('users')->insert([
+                'name' => $request->name,
+                'username' => $request->username,
+                'departement' => $request->departement,
+                'password' => bcrypt($request->password1),
+                'role' => 'user',
+            ]);
+            return redirect('/user');
+        }
+        else {
+            return redirect('/dashboard');
+        }
     }
 
 }

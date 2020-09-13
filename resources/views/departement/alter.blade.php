@@ -38,7 +38,7 @@
                     Cost Center
                 </div>
                 <div class="col-sm-4">
-                <input id="costcenter" type="text" min="0" class="form-control" name="costcenter" value="{{ old('costcenter') }}" required autofocus>
+                <input id="costcenter" type="text" min="0" class="form-control" name="costcenter" value="{{$dt->costcenter}}" required autofocus>
                 </div>
             </div>
             <br>

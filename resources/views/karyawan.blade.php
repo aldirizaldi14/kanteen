@@ -19,7 +19,6 @@
                 <th>NIK</th>
                 <th>Nama</th>
                 <th>Deptartemen</th>
-                <th>Golongan</th>
                 <th></th>
             </tr>
         </thead>
@@ -29,7 +28,6 @@
                 <td>{{$dt->nik}}</td>
                 <td>{{$dt->name}}</td>
                 <td>@if ($dt->departemen == 'Other') {{$dt->departemen}} ({{$dt->remark}}) @else {{$dt->departemen}} @endif</td>
-                <td>{{$dt->golongan}}</td>
                 <td><a class="btn btn-sm btn-outline-success" href="/karyawan/alter/{{$dt->nik}}" role="button">Edit</a> 
                     <a class="btn btn-sm btn-outline-danger" href="/karyawan/minus/{{$dt->nik}}" role="button">Hapus</a></td>
             </tr>

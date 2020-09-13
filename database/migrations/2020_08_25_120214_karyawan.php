@@ -19,7 +19,6 @@ class Karyawan extends Migration
             $table->string('name');
             $table->string('departemen');
             $table->string('remark')->nullable();
-            $table->string('golongan');
             $table->string('shift');
             $table->string('gambar');
         });

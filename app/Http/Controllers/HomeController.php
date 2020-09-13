@@ -33,8 +33,11 @@ class HomeController extends Controller
         return view('dashboard', ['data1' => $today1, 'data2' => $today2, 'data3' => $today3]);
     }
 
+    // ==================================
+    // Departement ======================
     // Urusan Departemen dilakukan disini
-    // Disini batasnya ya.
+    // Disini batasnya ya. ==============
+    // ==================================
 
     public function departement() {
         $data = DB::table('departement')->get();
@@ -62,8 +65,8 @@ class HomeController extends Controller
         return redirect('/departement');
     }
 
-    public function deptalter() {
-        $data0 = DB::table('departement')->get();
+    public function deptalter($id) {
+        $data0 = DB::table('departement')->where('id', $id)->get();
         $data1 = DB::table('departement')->select('main')->distinct()->get();
         $data2 = DB::table('departement')->select('departement')->distinct()->get();
         return view('departement.alter', ['data' => $data0, 'list1' => $data1, 'list2' => $data2]);
@@ -108,7 +111,6 @@ class HomeController extends Controller
                 'nik' => $request->nik,
                 'name' => $request->nama,
                 'departemen' => $request->departemen,
-                'golongan' => $request->golongan,
                 'remark' => $request->remark,
                 'gambar' => $nama_file,
             ]);
@@ -117,7 +119,6 @@ class HomeController extends Controller
                 'nik' => $request->nik,
                 'name' => $request->nama,
                 'departemen' => $request->departemen,
-                'golongan' => $request->golongan,
                 'remark' => $request->remark,
             ]);
         }
@@ -153,9 +154,11 @@ class HomeController extends Controller
         return redirect('/karyawan');
     }
 
-    // Untuk Pengaturan Jadwal
-    // Tebelin Dikit biar keren
+    // ===================================================
+    // Untuk Pengaturan Jadwal ===========================
+    // Tebelin Dikit biar keren ==========================
     // Segala sesuatu yang mengurus penjadwalan ada disini
+    // ===================================================
     public function jadwal()
     {
         $data = DB::table('jadwalmenu')->get();
@@ -254,9 +257,11 @@ class HomeController extends Controller
         return redirect('/jadwal');
     }
 
-    // Untuk Makanan
-    // Tebelin Sedikit Biar Keren
+    // ======================================================
+    // Untuk Makanan ========================================
+    // Tebelin Sedikit Biar Keren ===========================
     // Disini Tempat Mengurus semua keperluan backend makanan
+    // ======================================================
     public function makanan()
     {
         $data = DB::table('makanan')->get();
@@ -324,9 +329,17 @@ class HomeController extends Controller
         return redirect('/makanan');
     }
 
+    // ====================================
+    // +++++++++++++ D A T A ++++++++++++++
+    // + Segala Keperluan Data Ada Disini +
+    // ====================================
+
     public function data()
     {
-        return view('data');
+        $data1 = DB::table('device1')->get();
+        $data2 = DB::table('device2')->union($data1)->get();
+        $data3 = DB::table('device3')->union($data2)->get();
+        return view('data', ['data' => $data]);
     }
 
     public function dataid($id)

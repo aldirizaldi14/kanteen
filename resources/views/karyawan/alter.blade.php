@@ -46,22 +46,6 @@
                             </div>
                         </div>
                         <br>
-                        <!-- NIK -->
-                        <div class="row">
-                            <div class="col-sm-4">
-                                Golongan
-                            </div>
-                            <div class="col-sm-8">
-                                <select name="golongan" class="custom-select">
-                                    <option @if ($dt->golongan == 'Kontrak') selected @else @endif value="Kontrak">Kontrak</option>
-                                    <option @if ($dt->golongan == 'Staff') selected @else @endif value="Staff">Staff</option>
-                                    <option @if ($dt->golongan == 'Supervisor') selected @else @endif value="Supervisor">Supervisor</option>
-                                    <option @if ($dt->golongan == 'Manager') selected @else @endif value="Manager">Manager</option>
-                                    <option @if ($dt->golongan == 'General Manager') selected @else @endif value="General Manager">General Manager</option>
-                                </select>
-                            </div>
-                        </div>
-                        <br>
                         <div class="row">
                             <div class="col-sm-4">
                                 Gambar

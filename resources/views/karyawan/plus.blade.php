@@ -48,22 +48,6 @@
                 </div>
             </div>
             <br>
-            <!-- NIK -->
-            <div class="row">
-                <div class="col-sm-2">
-                    Golongan
-                </div>
-                <div class="col-sm-4">
-                    <select name="golongan" class="custom-select">
-                        <option value="Kontrak">Kontrak</option>
-                        <option value="Staff">Staff</option>
-                        <option value="Supervisor">Supervisor</option>
-                        <option value="Manager">Manager</option>
-                        <option value="General Manager">General Manager</option>
-                    </select>
-                </div>
-            </div>
-            <br>
             <!-- Images -->
             <div class="row">
                 <div class="col-sm-2">

@@ -26,7 +26,14 @@ Route::post('/settingshift/goes', 'UserController@settinggoes');
 Route::post('/settingshift/simpan', 'UserController@settingsimpan');
 
 Route::get('/changepassword', 'UserController@password');
-Route::get('/changepassword/simpan', 'UserController@password');
+Route::post('/passchange', 'UserController@changepassword');
+
+Route::get('/userpass/{id}', 'UserController@userpass');
+Route::post('/userchangepass', 'UserController@userchangepass');
+
+Route::get('/user', 'UserController@user');
+Route::get('/userminus/{id}', 'UserController@userhapus');
+Route::post('/usersimpan', 'UserController@usersimpan');
 
 Auth::routes([
     'register' => false, // Registration Routes...
