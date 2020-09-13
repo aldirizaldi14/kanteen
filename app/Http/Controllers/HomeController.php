@@ -336,6 +336,7 @@ class HomeController extends Controller
 
     public function data()
     {
+        $tanggal = date('Y-m-d');
         $data1 = DB::table('device1')->get();
         $data2 = DB::table('device2')->union($data1)->get();
         $data3 = DB::table('device3')->union($data2)->get();
