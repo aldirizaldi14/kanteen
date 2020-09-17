@@ -8,7 +8,7 @@
     <td align="left">{{ __('Data Pesanan') }}</td>
     <td align="right">
     <a href="/data" class="btn btn-sm btn-outline-primary">Data</a>
-    <a href="/data/makan" class="btn btn-sm btn-outline-dark">Makan</a>
+    <a href="/data/makan" class="btn btn-sm btn-outline-dark">Pesanan</a>
     </td>
     </tr>
     </table>
