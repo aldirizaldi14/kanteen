@@ -9,7 +9,7 @@
                 Menu Hari Ini
             </div>
             <div class="col-sm-3">
-                Tanggal {{date('d-M-Y H:i:s')}}
+                Tanggal {{date('d-M-Y')}}
             </div>
         </div>
         <br>
