@@ -48,7 +48,7 @@ class MonitroController extends Controller
         }
         elseif (($now >= $a3) && ($now <= $ak3)) 
         {
-            $date = date('Y-m-d').'Shift3';
+            $date = date('Y-m-d', (strtotime ( '-1 day' ))).'Shift3';
             $sel1 = DB::table('jadwalmenu')->select('makanan1')->where('id', $date)->value('makanan1');
             $sel2 = DB::table('jadwalmenu')->select('makanan2')->where('id', $date)->value('makanan2');
             $sel3 = DB::table('jadwalmenu')->select('makanan3')->where('id', $date)->value('makanan3');
@@ -73,7 +73,22 @@ class MonitroController extends Controller
 
     public function monitor2()
     {
-        return view('monitor2');
+        $now = date('H:i');
+        $s1  = date('H:i', strtotime("06:00"));
+        $as1 = date('H:i', strtotime("07:30"));
+        $a1  = date('H:i', strtotime("11:00"));
+        $ak1 = date('H:i', strtotime("13:20"));
+        $a2  = date('H:i', strtotime("17:00"));
+        $ak2 = date('H:i', strtotime("19:15"));
+        $a3  = date('H:i', strtotime("02:00"));
+        $ak3 = date('H:i', strtotime("03:15"));
+        if ((($now >= $a1) && ($now <= $ak1)) || (($now >= $a2) && ($now <= $ak2)) || (($now >= $a3) && ($now <= $ak3)) || (($now >= $s1) && ($now <= $as1)) )
+                {
+                    return view('monitor2');
+                }
+                else {
+                    return view('monitor0');
+                }
     }
 
     // AJAX Data
@@ -106,7 +121,7 @@ class MonitroController extends Controller
                 }
                 elseif (($now >= $a3) && ($now <= $ak3)) 
                 {
-                    $date = date('Y-m-d').'Shift3';
+                    $date = date('Y-m-d', (strtotime ( '-1 day' ))).'Shift3';
                 }
                 else {
                     $date = "";
@@ -205,7 +220,7 @@ class MonitroController extends Controller
         {
             $database = 'device1';
             $shift  = 'Shift 3';
-            $jadwal = date('Y-m-d').'Shift13';
+            $jadwal = date('Y-m-d', (strtotime ( '-1 day' ))).'Shift13';
             $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('makanan1');
         }
         elseif (($now >= $s1) && ($now <= $as1)) 
@@ -281,7 +296,7 @@ class MonitroController extends Controller
             {
                 $database = 'device2';
                 $shift  = 'Shift 3';
-                $jadwal = date('Y-m-d').'Shift13';
+                $jadwal = date('Y-m-d', (strtotime ( '-1 day' ))).'Shift13';
                 $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan2')->value('makanan2');
             }
             elseif (($now >= $s1) && ($now <= $as1)) 
@@ -350,7 +365,7 @@ class MonitroController extends Controller
         elseif (($now >= $a3) && ($now <= $ak3)) 
         {
             $shift  = 'Shift 3';
-            $jadwal = date('Y-m-d').'Shift3';
+            $jadwal = date('Y-m-d', (strtotime ( '-1 day' ))).'Shift3';
         }
 
         $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan2')->value('makanan2');

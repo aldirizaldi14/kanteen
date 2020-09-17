@@ -56,7 +56,6 @@
                 </tr>
             </thead>
             @if (date('Y-m-d') < date('Y-m-d',(strtotime ( '-2 day' , strtotime ($dt->tanggal) ) ))) 
-
             <tbody>
             @for ($i = 0; $i < count($union); $i++)
                 <tr>
