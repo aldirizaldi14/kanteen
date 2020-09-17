@@ -69,7 +69,7 @@
                     <tbody>
                         @foreach ($data2 as $dt2)
                         <tr>
-                            <td>{{$dt1->nik}} {{$dt2->name}}</td>
+                            <td>{{$dt2->nik}} {{$dt2->name}}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -86,7 +86,7 @@
                     <tbody>
                         @foreach ($data3 as $dt3)
                         <tr>
-                            <td>{{$dt1->nik}} {{$dt3->name}}</td>
+                            <td>{{$dt3->nik}} {{$dt3->name}}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -103,7 +103,7 @@
                     <tbody>
                         @foreach ($data4 as $dt4)
                         <tr>
-                            <td>{{$dt1->nik}} {{$dt4->name}}</td>
+                            <td>{{$dt4->nik}} {{$dt4->name}}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -120,7 +120,7 @@
                     <tbody>
                         @foreach ($data5 as $dt5)
                         <tr>
-                            <td>{{$dt1->nik}} {{$dt5->name}}</td>
+                            <td>{{$dt5->nik}} {{$dt5->name}}</td>
                         </tr>
                         @endforeach
                     </tbody>
