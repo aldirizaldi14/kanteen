@@ -35,7 +35,10 @@ class UserController extends Controller
 
     public function marahparam($param1, $param2, $param3){
         DB::table('shiftkary')->join('karyawan', 'shiftkary.nik', '=', 'karyawan.nik')->where('id_data', $param3)->where('shift', $param2)->where('karyawan.name', $param1)->delete();
-
+        $new = DB::table('datadepartement')->where('id', $param3)->select($param2)->value($param2) - 1;
+        DB::table('datadepartement')->where('id', $param3)->update([
+            $param2 => $new,
+        ]);
         return redirect('/datashift/'.$param3);
     }
 
