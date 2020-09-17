@@ -61,10 +61,10 @@
             @for ($i = 0; $i < count($union); $i++)
                 <tr>
                     <td>{{$union[$i][0]}} @if ($union[$i][0] != "") <a class="btn btn-sm btn-xs btn-outline-danger" href="/marah/{{$union[$i][0]}}/shift1/{{$dt->id}}" role="button">x</a>@endif</td>
-                    <td>{{$union[$i][1]}} @if ($union[$i][1] != "") <a class="btn btn-sm btn-xs btn-outline-danger" href="/marah/{{$union[$i][1]}}/shift1/{{$dt->id}}" role="button">x</a>@endif</td>
-                    <td>{{$union[$i][2]}} @if ($union[$i][2] != "") <a class="btn btn-sm btn-xs btn-outline-danger" href="/marah/{{$union[$i][2]}}/shift1/{{$dt->id}}" role="button">x</a>@endif</td>
-                    <td>{{$union[$i][3]}} @if ($union[$i][3] != "") <a class="btn btn-sm btn-xs btn-outline-danger" href="/marah/{{$union[$i][3]}}/shift1/{{$dt->id}}" role="button">x</a>@endif</td>
-                    <td>{{$union[$i][4]}} @if ($union[$i][4] != "") <a class="btn btn-sm btn-xs btn-outline-danger" href="/marah/{{$union[$i][4]}}/shift1/{{$dt->id}}" role="button">x</a>@endif</td>
+                    <td>{{$union[$i][1]}} @if ($union[$i][1] != "") <a class="btn btn-sm btn-xs btn-outline-danger" href="/marah/{{$union[$i][1]}}/longshift1/{{$dt->id}}" role="button">x</a>@endif</td>
+                    <td>{{$union[$i][2]}} @if ($union[$i][2] != "") <a class="btn btn-sm btn-xs btn-outline-danger" href="/marah/{{$union[$i][2]}}/shift2/{{$dt->id}}" role="button">x</a>@endif</td>
+                    <td>{{$union[$i][3]}} @if ($union[$i][3] != "") <a class="btn btn-sm btn-xs btn-outline-danger" href="/marah/{{$union[$i][3]}}/longshift2/{{$dt->id}}" role="button">x</a>@endif</td>
+                    <td>{{$union[$i][4]}} @if ($union[$i][4] != "") <a class="btn btn-sm btn-xs btn-outline-danger" href="/marah/{{$union[$i][4]}}/shift3/{{$dt->id}}" role="button">x</a>@endif</td>
                 </tr>
             @endfor
             </tbody>
