@@ -26,7 +26,7 @@
                 <th>Menu 2</th>
                 <th>Menu 3</th>
                 @can('isAdmin')
-                @if (date('Y-m-d') < date('Y-m-d', strtotime($dt->tanggal) ) ) 
+                @if (date('Y-m-d') < date('Y-m-d', (strtotime ( $dt->tanggal ) ) ) ) 
 <th></th>
                 @else
                 <th></th>
