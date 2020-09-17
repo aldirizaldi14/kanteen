@@ -26,7 +26,10 @@
                 <th>Menu 2</th>
                 <th>Menu 3</th>
                 @can('isAdmin')
-                <th></th>
+                @if (date('Y-m-d') < date('Y-m-d', strtotime($dt->tanggal) ) ) 
+<th></th>
+                @else
+                @endif
                 @endcan
             </tr>
         </thead>
@@ -47,6 +50,7 @@
                 <a class="btn btn-sm btn-outline-danger" href="/jadwal/minus/{{$dt->id}}" role="button">Hapus</a>
                 </td>
                 @else
+                <td></td>
                 @endif
                 @endcan
             </tr>

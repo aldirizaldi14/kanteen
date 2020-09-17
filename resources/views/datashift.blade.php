@@ -54,6 +54,7 @@ $(document).ready(function() {
                 <a class="btn btn-sm btn-outline-danger" href="/datashiftm/{{$dt->id}}" role="button">Hapus</a>
                 </td>
                 @else
+                <td></td>
                 @endif
                 @endcan
             </tr>
