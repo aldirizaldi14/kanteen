@@ -82,6 +82,11 @@ class MonitroController extends Controller
         return Datatables::of($data)->make(true);
     }
 
+    public function karyawanjson($id) {
+        $data = DB::table('karyawan')->where('departemen', $id)->orderBy('name', 'asc')->get();
+        return $data;
+    }
+
         // AJAX Data
     public function count($id, $param1) {
         $now = date('H:i');
@@ -122,12 +127,15 @@ class MonitroController extends Controller
             return $data;
     }
 
+    // =============================================
+    // ================= I K A N ===================
+    // =============================================
 
     public function ikan($id) {
 
         $hex = substr(hexdec($id),0, -6);
-        $part1 = "20".substr($hex,0, -4);
-        $part2 = "00".substr($hex,2);
+        $part1 = substr($hex,0, -4);
+        $part2 = substr($hex,2);
         $total = $part1.$part2;
 
         $now = date('H:i');
@@ -146,24 +154,28 @@ class MonitroController extends Controller
 
             if (($now >= $a1) && ($now <= $ak1))
         {
+           $database = 'device1';
            $shift  = 'Shift 1';
            $jadwal = date('Y-m-d').'Shift1';
            $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('makanan1');
         }
         elseif (($now >= $a2) && ($now <= $ak2)) 
         {
+            $database = 'device1';
             $shift  = 'Shift 2';
             $jadwal = date('Y-m-d').'Shift2';
             $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('makanan1');
         }
         elseif (($now >= $a3) && ($now <= $ak3)) 
         {
+            $database = 'device1';
             $shift  = 'Shift 3';
             $jadwal = date('Y-m-d').'Shift13';
             $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('makanan1');
         }
         elseif (($now >= $s1) && ($now <= $as1)) 
         {
+            $database = 'sarapan1';
             $shift  = 'Shift 0';
             $jadwal = date('Y-m-d').'Shift1';
             $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('snack1')->value('snack1');
@@ -176,7 +188,7 @@ class MonitroController extends Controller
             return 1;
         }
         else {
-            DB::table('device1')->insert([
+            DB::table($database)->insert([
                 'jadwalmenu' => $jadwal,
                 'karyawan' => $total,
                 'shift' => $shift,
@@ -192,6 +204,10 @@ class MonitroController extends Controller
         }
 
     }
+
+    // =============================================
+    // ================= A Y A M ===================
+    // =============================================
     public function ayam($id) { 
 
         $hex = substr(hexdec($id),0, -6);
@@ -214,24 +230,28 @@ class MonitroController extends Controller
     
             if (($now >= $a1) && ($now <= $ak1))
             {
+               $database = 'device2';
                $shift  = 'Shift 1';
                $jadwal = date('Y-m-d').'Shift1';
                $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan2')->value('makanan2');
             }
             elseif (($now >= $a2) && ($now <= $ak2)) 
             {
+                $database = 'device2';
                 $shift  = 'Shift 2';
                 $jadwal = date('Y-m-d').'Shift2';
                 $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan2')->value('makanan2');
             }
             elseif (($now >= $a3) && ($now <= $ak3)) 
             {
+                $database = 'device2';
                 $shift  = 'Shift 3';
                 $jadwal = date('Y-m-d').'Shift13';
                 $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan2')->value('makanan2');
             }
             elseif (($now >= $s1) && ($now <= $as1)) 
             {
+                $database = 'sarapan2';
                 $shift  = 'Shift 0';
                 $jadwal = date('Y-m-d').'Shift1';
                 $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('snack2')->value('snack2');
@@ -245,7 +265,7 @@ class MonitroController extends Controller
             }
             else {
                 $status = 1;
-                DB::table('device2')->insert([
+                DB::table($database)->insert([
                     'jadwalmenu' => $jadwal,
                     'karyawan' => $total,
                     'shift' => $shift,

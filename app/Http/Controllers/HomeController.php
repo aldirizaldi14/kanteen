@@ -146,7 +146,6 @@ class HomeController extends Controller
         DB::table('karyawan')->insert([
             'nik' => $request->nik,
             'name' => $request->nama,
-            'golongan' => $request->golongan,
             'departemen' => $request->departemen,
             'remark' => $request->remark,
             'gambar' => $nama_file,
@@ -264,8 +263,21 @@ class HomeController extends Controller
     // ======================================================
     public function makanan()
     {
-        $data = DB::table('makanan')->get();
+        $data = DB::table('makanan')
+        ->leftJoin('sarapan1', 'makanan.nama' , '=', 'sarapan1.makanan')
+        ->leftJoin('sarapan2', 'makanan.nama' , '=', 'sarapan2.makanan')
+        ->leftJoin('device1', 'makanan.nama' , '=', 'device1.makanan')
+        ->leftJoin('device2', 'makanan.nama' , '=', 'device2.makanan')
+        ->leftJoin('device3', 'makanan.nama' , '=', 'device3.makanan')
+        ->select( 'idm', 'nama', 'jenis', 'harga', 'gambar',
+            DB::raw("count(sarapan1.makanan) as aa"),
+            DB::raw("count(sarapan2.makanan) as bb"),
+            DB::raw('count(device1.makanan) as cc'),
+            DB::raw('count(device2.makanan) as dd'),
+            DB::raw('count(device3.makanan) as ee'),
+        )->groupBy('makanan.idm', 'makanan.nama', 'makanan.jenis', 'makanan.harga', 'makanan.gambar')->get();
         return view('makanan', ['data' => $data]);
+        // return $data;
     }
 
     public function makananplus()
@@ -275,7 +287,7 @@ class HomeController extends Controller
 
     public function makananalter($id)
     {
-        $data = DB::table('makanan')->where('id', $id)->get();
+        $data = DB::table('makanan')->where('idm', $id)->get();
         return view('makanan.alter', ['data' => $data]);
     }
 
@@ -297,15 +309,15 @@ class HomeController extends Controller
 
     public function makananminus($id)
     {
-        $iname = DB::table('makanan')->select('gambar')->where('id', $id)->value('gambar');
+        $iname = DB::table('makanan')->select('gambar')->where('idm', $id)->value('gambar');
         File::delete('fimages/' . $iname);
-        DB::table('makanan')->where('id', $id)->delete();
+        DB::table('makanan')->where('idm', $id)->delete();
         return redirect('makanan');
     }
 
     public function makananalters(Request $request)
     {
-        $iname = DB::table('makanan')->select('gambar')->where('id', $request->id)->value('gambar');
+        $iname = DB::table('makanan')->select('gambar')->where('idm', $request->id)->value('gambar');
         if ($request->hasFile('file')) {
             File::delete('fimages/' . $iname);
             $file = $request->file('file');
@@ -313,14 +325,14 @@ class HomeController extends Controller
             $tujuan_upload = 'fimages';
             $file->move($tujuan_upload, $nama_file);
 
-            DB::table('makanan')->where('id', $request->id)->update([
+            DB::table('makanan')->where('idm', $request->id)->update([
                 'nama' => $request->nama,
                 'jenis' => $request->jenis,
                 'harga' => $request->harga,
                 'gambar' => $nama_file,
             ]);
         } else {
-            DB::table('makanan')->where('id', $request->id)->update([
+            DB::table('makanan')->where('idm', $request->id)->update([
                 'nama' => $request->nama,
                 'jenis' => $request->jenis,
                 'harga' => $request->harga,
@@ -336,21 +348,66 @@ class HomeController extends Controller
 
     public function data()
     {
-        $tanggal = date('Y-m-d');
-        $data1 = DB::table('device1')->get();
-        $data2 = DB::table('device2')->union($data1)->get();
-        $data3 = DB::table('device3')->union($data2)->get();
+        $data = DB::table('jadwalmenu')
+        ->leftJoin('sarapan1', 'jadwalmenu.id' , '=', 'sarapan1.jadwalmenu')
+        ->leftJoin('sarapan2', 'jadwalmenu.id' , '=', 'sarapan2.jadwalmenu')
+        ->leftJoin('device1', 'jadwalmenu.id' , '=', 'device1.jadwalmenu')
+        ->leftJoin('device2', 'jadwalmenu.id' , '=', 'device2.jadwalmenu')
+        ->leftJoin('device3', 'jadwalmenu.id' , '=', 'device3.jadwalmenu')
+        ->select('jadwalmenu.tanggal', 'jadwalmenu.waktu',
+            DB::raw("count(sarapan1.karyawan) as sarapan1_count"),
+            DB::raw("count(sarapan2.karyawan) as sarapan2_count"),
+            DB::raw('count(device1.karyawan) as device1_count'),
+            DB::raw('count(device2.karyawan) as device2_count'),
+            DB::raw('count(device3.karyawan) as device3_count'),
+        )->groupBy('jadwalmenu.tanggal', 'jadwalmenu.waktu')
+        ->get();
         return view('data', ['data' => $data]);
     }
 
     public function dataid($id)
     {
-        return view('dataid');
+        $data = DB::table('datadepartement')
+        ->join('departement', 'datadepartement.departement', '=', 'departement.departement')
+        ->where('tanggal', $id)->get();
+        return view('dataid', ['data' => $data]);
     }
 
     public function datamakan()
     {
+        $awal = DB::table('datadepartement')->select('tanggal')->distinct()->get();
+        $a = array();
+        $b = array();
+        $c = array();
+        $d = array();
+        $e = array();
+        $f = array();
+        foreach ($awal as $aw) {
+            $col1 = DB::table('datadepartement')->select('tanggal')->where('tanggal', $aw->tanggal)->distinct()->value('tanggal');
+            $col2 = DB::table('datadepartement')->where('tanggal', $aw->tanggal)->sum('shift1');
+            $col3 = DB::table('datadepartement')->where('tanggal', $aw->tanggal)->sum('longshift1');
+            $col4 = DB::table('datadepartement')->where('tanggal', $aw->tanggal)->sum('shift2');
+            $col5 = DB::table('datadepartement')->where('tanggal', $aw->tanggal)->sum('longshift2');
+            $col6 = DB::table('datadepartement')->where('tanggal', $aw->tanggal)->sum('shift3');
+            array_push($a, $col1);
+            array_push($b, $col2);
+            array_push($c, $col3);
+            array_push($d, $col4);
+            array_push($e, $col5);
+            array_push($f, $col6);
+        }
+        $collection = collect([$a, $b, $c, $d, $e, $f])->transpose()->toArray();
+        return view('datamakan', ['union' => $collection]);
+    }
 
-        return view('datamakan');
+    public function detaildatam($id) {
+        $sarapan1 = DB::table('sarapan1')->where('jadwalmenu', $id)->join('karyawan', 'sarapan1.karyawan', '=', 'karyawan.nik')->get();
+        $sarapan2 = DB::table('sarapan2')->where('jadwalmenu', $id)->join('karyawan', 'sarapan2.karyawan', '=', 'karyawan.nik')->get();
+        $device1 = DB::table('device1')->where('jadwalmenu', $id)->join('karyawan', 'device1.karyawan', '=', 'karyawan.nik')->get();
+        $device2 = DB::table('device2')->where('jadwalmenu', $id)->join('karyawan', 'device2.karyawan', '=', 'karyawan.nik')->get();
+        $device3 = DB::table('device3')->where('jadwalmenu', $id)->join('karyawan', 'device3.karyawan', '=', 'karyawan.nik')->get();
+        $data = DB::table('jadwalmenu')->where('id', $id)->get();
+        return view('detaildatam', ['data' => $data ,'data1' => $sarapan1, 'data2' => $sarapan1, 'data3' => $device1, 'data4' => $device2, 'data5' => $device3,]);
+
     }
 }

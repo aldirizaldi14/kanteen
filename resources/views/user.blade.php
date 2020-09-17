@@ -49,9 +49,6 @@
 </div>
 
 <!-- Modal -->
-<!-- Button trigger modal -->
-
-<!-- Modal -->
 <form action="/usersimpan" method="post" onSubmit="return checkPassword(this)">
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">

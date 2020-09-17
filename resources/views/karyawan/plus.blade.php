@@ -63,19 +63,4 @@
 </div>
 </div>
 
-<script>
-function test() {
-    var x = document.getElementById("departemen").value;
- if (x == "Other"){
-    document.getElementById("remark").removeAttribute("hidden");
-    document.getElementById("remark").setAttribute("required", true); 
- }
- else {
-    document.getElementById("remark").setAttribute("hidden", true); 
-    document.getElementById("remark").removeAttribute("required");
-    
- }
-}
-</script>
-
 @endsection

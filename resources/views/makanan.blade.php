@@ -19,6 +19,7 @@
                 <th>Nama Makanan</th>
                 <th>Jenis Makanan</th>
                 <th>Harga</th>
+                <th>Dimakan</th>
                 <th></th>
             </tr>
         </thead>
@@ -28,9 +29,10 @@
                 <td>{{$dt->nama}}</td>
                 <td>{{$dt->jenis}}</td>
                 <td>{{$dt->harga}}</td>
+                <td>{{$dt->aa + $dt->bb + $dt->cc + $dt->dd + $dt->ee}}</td>
                 <td>
-                <a class="btn btn-sm btn-outline-primary" href="/makanan/alter/{{$dt->id}}" role="button">Edit</a> 
-                <a class="btn btn-sm btn-outline-danger" href="/makanan/minus/{{$dt->id}}" role="button">Hapus</a>
+                <a class="btn btn-sm btn-outline-primary" href="/makanan/alter/{{$dt->idm}}" role="button">Edit</a> 
+                <a class="btn btn-sm btn-outline-danger" href="/makanan/minus/{{$dt->idm}}" role="button">Hapus</a>
                 </td>
             </tr>
             @endforeach

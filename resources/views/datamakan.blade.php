@@ -26,54 +26,16 @@
                 </tr>
             </thead>
             <tbody>
+            @for ($i = 0; $i < count($union); $i++)
                 <tr>
-                    <td><a href="12-08-2020">12-08-2020</a></td>
-                    <td>35</td>
-                    <td>0</td>
-                    <td>10</td>
-                    <td>0</td>
-                    <td>55</td>
+                    <td align="center"><a href="/detaildata/{{$union[$i][0]}}">{{date('d F Y', strtotime($union[$i][0]))}}</a></td>
+                    <td align="center">{{$union[$i][1]}}</td>
+                    <td align="center">{{$union[$i][2]}}</td>
+                    <td align="center">{{$union[$i][3]}}</td>
+                    <td align="center">{{$union[$i][4]}}</td>
+                    <td align="center">{{$union[$i][5]}}</td>
                 </tr>
-                <tr>
-                    <td><a href="13-08-2020">13-08-2020</a></td>
-                    <td>25</td>
-                    <td>1</td>
-                    <td>25</td>
-                    <td>1</td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td><a href="14-08-2020">14-08-2020</a></td>
-                    <td>77</td>
-                    <td>1</td>
-                    <td>25</td>
-                    <td>1</td>
-                    <td>55</td>
-                </tr>
-                <tr>
-                    <td><a href="15-08-2020">15-08-2020</a></td>
-                    <td>26</td>
-                    <td>0</td>
-                    <td>11</td>
-                    <td>0</td>
-                    <td>35</td>
-                </tr>
-                <tr>
-                    <td><a href="16-08-2020">16-08-2020</a></td>
-                    <td>80</td>
-                    <td>0</td>
-                    <td>33</td>
-                    <td>1</td>
-                    <td>20</td>
-                </tr>
-                <tr>
-                    <td><a href="17-08-2020">17-08-2020</a></td>
-                    <td>15</td>
-                    <td>2</td>
-                    <td>16</td>
-                    <td>3</td>
-                    <td>14</td>
-                </tr>
+                @endfor
             </tbody>
         </table>
     </div>

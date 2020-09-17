@@ -5,6 +5,7 @@
 <script>
  $(document).ready(function() {
             $('#teras').DataTable({
+                order: [[0, 'desc']],
                 scrollY: '50vh',
                 scrollX: true,
                 scrollCollapse: true,
@@ -43,9 +44,9 @@
         <br>
         @endforeach
         <br>
+                @foreach ($data as $dt)
         <table id="teras" class="display" style="width:100%">
             <thead>
-                @foreach ($data as $dt)
                 <tr>
                     <th>Shift 1 (<b>{{$dt->shift1}}</b>)</th>
                     <th>Long Shift 1 (<b>{{$dt->longshift1}}</b>)</th>
@@ -53,64 +54,35 @@
                     <th>Long Shift 2 (<b>{{$dt->longshift2}}</b>)</th>
                     <th>Shift 3 (<b>{{$dt->shift3}}</b>)</th>
                 </tr>
-                @endforeach
             </thead>
+            @if (date('Y-m-d') < date('Y-m-d',(strtotime ( '-2 day' , strtotime ($dt->tanggal) ) ))) 
+
             <tbody>
+            @for ($i = 0; $i < count($union); $i++)
                 <tr>
-                    <td class="align-top">
-                        <table class="w-100">
-                            @foreach ($data1 as $dt1)
-                            <tr>
-                                <td>{{$dt1->name}} </td>
-                                <td> <a class="btn btn-sm btn-outline-danger" href="/datashiftmk/{{$dt1->id}}" role="button">Hapus</a></td>
-                            </tr>
-                            @endforeach
-                        </table>
-                    </td>
-                <td class="align-top">
-                <table class="w-100">
-                @foreach ($data2 as $dt2)
-                <tr>
-                    <td>{{$dt2->name}}</td>
-                    <td><a class="btn btn-sm btn-outline-danger" href="/datashiftmk/{{$dt2->id}}" role="button">Hapus</a></td>
+                    <td>{{$union[$i][0]}} @if ($union[$i][0] != "") <a class="btn btn-sm btn-xs btn-outline-danger" href="/marah/{{$union[$i][0]}}/shift1/{{$dt->id}}" role="button">x</a>@endif</td>
+                    <td>{{$union[$i][1]}} @if ($union[$i][1] != "") <a class="btn btn-sm btn-xs btn-outline-danger" href="/marah/{{$union[$i][1]}}/shift1/{{$dt->id}}" role="button">x</a>@endif</td>
+                    <td>{{$union[$i][2]}} @if ($union[$i][2] != "") <a class="btn btn-sm btn-xs btn-outline-danger" href="/marah/{{$union[$i][2]}}/shift1/{{$dt->id}}" role="button">x</a>@endif</td>
+                    <td>{{$union[$i][3]}} @if ($union[$i][3] != "") <a class="btn btn-sm btn-xs btn-outline-danger" href="/marah/{{$union[$i][3]}}/shift1/{{$dt->id}}" role="button">x</a>@endif</td>
+                    <td>{{$union[$i][4]}} @if ($union[$i][4] != "") <a class="btn btn-sm btn-xs btn-outline-danger" href="/marah/{{$union[$i][4]}}/shift1/{{$dt->id}}" role="button">x</a>@endif</td>
                 </tr>
-                @endforeach
-                </table>
-                </td>
-                <td  class="align-top">
-                    <table class="w-100">
-                    @foreach ($data3 as $dt3)
-                    <tr>
-                        <td>{{$dt3->name}} </td>
-                        <td><a class="btn btn-sm btn-outline-danger" href="/datashiftmk/{{$dt3->id}}" role="button">Hapus</a></td>
-                    </tr>
-                    @endforeach
-                    </table>
-                </td>
-                <td  class="align-top">
-                    <table class="w-100">
-                    @foreach ($data4 as $dt4)
-                    <tr>
-                        <td>{{$dt4->name}}</td>
-                        <td><a class="btn btn-sm btn-outline-danger" href="/datashiftmk/{{$dt4->id}}" role="button">Hapus</a></td>
-                    </tr>
-                    @endforeach
-                    </table>
-                </td>
-                <td  class="align-top">
-                    <table class="w-100">
-                    @foreach ($data5 as $dt5)
-                    <tr>
-                        <td>{{$dt5->name}}
-                        </td>
-                        <td><a class="btn btn-sm btn-outline-danger" href="/datashiftmk/{{$dt5->id}}" role="button">Hapus</a></td>
-                    </tr>
-                    @endforeach
-                    </table>
-                </td>
-                </tr>
+            @endfor
             </tbody>
+            @else
+            <tbody>
+            @for ($i = 0; $i < count($union); $i++)
+                <tr>
+                    <td>{{$union[$i][0]}}</td>
+                    <td>{{$union[$i][1]}}</td>
+                    <td>{{$union[$i][2]}}</td>
+                    <td>{{$union[$i][3]}}</td>
+                    <td>{{$union[$i][4]}}</td>
+                </tr>
+            @endfor
+            </tbody>
+            @endif
         </table>
+                @endforeach
     </div>
 </div>
 </div>

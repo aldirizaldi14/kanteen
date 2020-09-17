@@ -19,24 +19,80 @@ class UserController extends Controller
 
     public function datashift()
     {
-        $data = DB::table('datadepartement')->orderBy('tanggal', 'desc')->get();
-        return view('datashift', ['data' => $data]);
+        $a1 = Auth::user();
+        if ($a1->role == 'admin' || $a1->role == 'developer' ) {
+            $status = DB::table('datadepartement')->where('status', 0)->where('lastedit', $a1->username)->select('status')->count();
+            $dat0 = DB::table('datadepartement')->where('status', 0)->where('lastedit', $a1->username)->select('id')->value('id');
+            $data = DB::table('datadepartement')->orderBy('tanggal', 'desc')->get();
+        }
+        else {
+            $status = DB::table('datadepartement')->where('status', 0)->where('lastedit', $a1->username)->select('status')->count();
+            $dat0 = DB::table('datadepartement')->where('status', 0)->where('lastedit', $a1->username)->select('id')->value('id');
+            $data = DB::table('datadepartement')->where('departement', $a1->departement)->orderBy('tanggal', 'desc')->get();
+        }
+        return view('datashift', ['data' => $data, 'status' => $status, 'menuju' => $dat0]);
+    }
+
+    public function marahparam($param1, $param2, $param3){
+        DB::table('shiftkary')->join('karyawan', 'shiftkary.nik', '=', 'karyawan.nik')->where('id_data', $param3)->where('shift', $param2)->where('karyawan.name', $param1)->delete();
+
+        return redirect('/datashift/'.$param3);
+    }
+
+    public function datashifte($id) {
+        $sele1 = DB::table('datadepartement')->select('departement')->where('id', $id)->value('departement');
+        $data0 = DB::table('datadepartement')->where('id', $id)->get();
+        $data1 = DB::table('departement')->select('departement')->orderBy('main', 'asc')->get();
+        $data2 = DB::table('karyawan')->where('departemen', $sele1)->orderBy('name', 'asc')->get();
+        return view('datashifte', ['data' => $data0, 'dept' => $data1, 'kary' => $data2]);
+    }
+
+    public function datashiftes(Request $request){
+
+        for ($count = 0; $count < count($request->data); $count++) {
+            DB::table('shiftkary')->insert([
+                'id' => 'LS1'. date('Ymd', strtotime($request->date)).date('His').$count,
+                'id_data' => $request->id,
+                'tanggal' => $request->date,
+                'nik' =>  $request->data[$count],
+                'shift' => $request->shift,
+            ]);
+        }
+        $new = DB::table('datadepartement')->where('id', $request->id)->select($request->shift)->value($request->shift) + $count;
+        DB::table('datadepartement')->where('id', $request->id)->update([
+            $request->shift => $new
+        ]);
+        return redirect('/datashift/'.$request->id);
+    }
+
+    public function refresh($id){
+        $a1 = Auth::user();
+        DB::table('datadepartement')->where('status', 0)->where('lastedit', $a1->username)->where('id', $id)->delete();
+        return redirect('/datashift');
     }
 
     public function detailshift($id){
-        $shift1 = DB::table('shiftkary')->join('karyawan', 'karyawan.nik', '=', 'shiftkary.nik')->where('id_data', $id)->where('shift', 'shift1')->get();
-        $shift2 = DB::table('shiftkary')->join('karyawan', 'karyawan.nik', '=', 'shiftkary.nik')->where('id_data', $id)->where('shift', 'longshift1')->get();
-        $shift3 = DB::table('shiftkary')->join('karyawan', 'karyawan.nik', '=', 'shiftkary.nik')->where('id_data', $id)->where('shift', 'shift2')->get();
-        $shift4 = DB::table('shiftkary')->join('karyawan', 'karyawan.nik', '=', 'shiftkary.nik')->where('id_data', $id)->where('shift', 'longshift2')->get();
-        $shift5 = DB::table('shiftkary')->join('karyawan', 'karyawan.nik', '=', 'shiftkary.nik')->where('id_data', $id)->where('shift', 'shift3')->get();
-        $alldat = DB::table('datadepartement')->where('id', $id)->get();
-        return view('shiftdetail', ['data' => $alldat, 'data1' => $shift1, 'data2' => $shift2, 'data3' => $shift3, 'data4' => $shift4, 'data5' => $shift5]);
+        $alldata = DB::table('datadepartement')->where('id', $id)->get();
+        $shift1 = DB::table('shiftkary')->join('karyawan', 'karyawan.nik', '=', 'shiftkary.nik')->where('id_data', $id)->where('shift', 'shift1')->select('name', 'shift')->pluck('name');
+        $shift2 = DB::table('shiftkary')->join('karyawan', 'karyawan.nik', '=', 'shiftkary.nik')->where('id_data', $id)->where('shift', 'longshift1')->select('name', 'shift')->pluck('name');
+        $shift3 = DB::table('shiftkary')->join('karyawan', 'karyawan.nik', '=', 'shiftkary.nik')->where('id_data', $id)->where('shift', 'shift2')->select('name', 'shift')->pluck('name');
+        $shift4 = DB::table('shiftkary')->join('karyawan', 'karyawan.nik', '=', 'shiftkary.nik')->where('id_data', $id)->where('shift', 'longshift2')->select('name', 'shift')->pluck('name');
+        $shift5 = DB::table('shiftkary')->join('karyawan', 'karyawan.nik', '=', 'shiftkary.nik')->where('id_data', $id)->where('shift', 'shift3')->select('name', 'shift')->pluck('name');
+        $join = collect([$shift1, $shift2, $shift3, $shift4, $shift5])->transpose()->toArray();
+        // return $shift1;
+        return view('shiftdetail', ['data' => $alldata, 'union' => $join]);
     }
 
     public function settingshift()
     {
-        $ada  = DB::table('datadepartement')->where('status', 0)->value('id');
-        $data = DB::table('departement')->select('departement')->orderBy('main', 'asc')->get();
+        $a1 = Auth::user();
+
+        if ($a1->role == 'admin' || $a1->role == 'developer') {
+            $data = DB::table('departement')->select('departement')->orderBy('main', 'asc')->get();
+        }
+        else {
+            $data = DB::table('departement')->select('departement')->where('departement', $a1->departement)->orderBy('main', 'asc')->get();
+        }
         return view('settingshift', ['dept' => $data]);
     }
 
@@ -61,7 +117,6 @@ class UserController extends Controller
                 'shift2' => $request->jshift2,
                 'longshift2' => $request->jlshift2,
                 'shift3' => $request->jshift3,
-                'status' => 1,
             ]);
             return redirect('/settingshift/go/' . $request->id);
         } else {
@@ -70,7 +125,8 @@ class UserController extends Controller
             if (isset($request->shift1)) {
                 for ($count = 0; $count < count($request->shift1); $count++) {
                     DB::table('shiftkary')->insert([
-                        'id' => date('Ymd', strtotime($request->tanggal)).$count . 'shift1',
+                        'id' => 'S1'.date('YmdHis', strtotime($request->tanggal)).$count ,
+                        'id_data' => $request->id,
                         'tanggal' => $request->tanggal,
                         'nik' =>  $request->shift1[$count],
                         'shift' => 'shift1',
@@ -81,7 +137,8 @@ class UserController extends Controller
             if (isset($request->longshift1)) {
                 for ($count = 0; $count < count($request->longshift1); $count++) {
                     DB::table('shiftkary')->insert([
-                        'id' => date('Ymd', strtotime($request->tanggal)).$count  . 'longshift1',
+                        'id' => 'LS1'. date('YmdHis', strtotime($request->tanggal)).$count,
+                        'id_data' => $request->id,
                         'tanggal' => $request->tanggal,
                         'nik' =>  $request->longshift1[$count],
                         'shift' => 'longshift1',
@@ -92,7 +149,8 @@ class UserController extends Controller
             if (isset($request->shift2)) {
                 for ($count = 0; $count < count($request->shift2); $count++) {
                     DB::table('shiftkary')->insert([
-                        'id' => date('Ymd', strtotime($request->tanggal)).$count  . 'shift2',
+                        'id' => 'S2'.date('YmdHis', strtotime($request->tanggal)).$count,
+                        'id_data' => $request->id,
                         'tanggal' => $request->tanggal,
                         'nik' =>  $request->shift2[$count],
                         'shift' => 'shift2',
@@ -103,7 +161,8 @@ class UserController extends Controller
             if (isset($request->longshift2)) {
                 for ($count = 0; $count < count($request->longshift2); $count++) {
                     DB::table('shiftkary')->insert([
-                        'id' => date('Ymd', strtotime($request->tanggal)).$count  . 'longshift2',
+                        'id' => 'LS2'.date('YmdHis', strtotime($request->tanggal)).$count,
+                        'id_data' => $request->id,
                         'tanggal' => $request->tanggal,
                         'nik' =>  $request->longshift2[$count],
                         'shift' => 'longshift2',
@@ -114,19 +173,24 @@ class UserController extends Controller
             if (isset($request->shift3)) {
                 for ($count = 0; $count < count($request->shift3); $count++) {
                     DB::table('shiftkary')->insert([
-                        'id' => date('Ymd', strtotime($request->tanggal)).$count  . 'shift3',
+                        'id' => 'S3'.date('YmdHis', strtotime($request->tanggal)).$count,
+                        'id_data' => $request->id,
                         'tanggal' => $request->tanggal,
                         'nik' =>  $request->shift3[$count],
                         'shift' => 'shift3',
                     ]);
                 }
             }
+            DB::table('datadepartement')->where('id', $request->id)->update([
+                'status' => 1,
+            ]);
             return redirect('/datashift');
         }
     }
 
     public function settingsimpan(Request $request)
     {
+        $a1 = Auth::user();
         $str = $request->departement;
         $new_str = str_replace(' ', '', $str);
         $mark = date('Ymd', strtotime($request->tanggal)) . $new_str;
@@ -141,6 +205,7 @@ class UserController extends Controller
             'longshift2' => $request->jlshift2,
             'shift3' => $request->jshift3,
             'status' => 0,
+            'lastedit' => $a1->username,
         ]);
         return redirect('/settingshift/go/' . $mark);
     }

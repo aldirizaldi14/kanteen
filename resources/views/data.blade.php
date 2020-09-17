@@ -29,13 +29,13 @@
             <tbody>
                 @foreach ($data as $dt)
                 <tr>
-                    <td>14-08-2020</td>
-                    <td>Shift 1</td>
-                    <td>35</td>
-                    <td>14</td>
-                    <td>10</td>
-                    <td>25</td>
-                    <td>55</td>
+                    <td><a href="/datam/{{$dt->tanggal}}{{$dt->waktu}}">{{$dt->tanggal}}</a></td>
+                    <td>{{$dt->waktu}}</td>
+                    <td>{{$dt->sarapan1_count}}</td>
+                    <td>{{$dt->sarapan2_count}}</td>
+                    <td>{{$dt->device1_count}}</td>
+                    <td>{{$dt->device2_count}}</td>
+                    <td>{{$dt->device3_count}}</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -44,4 +44,6 @@
 </div>
 </div>
 </div>
+
+
 @endsection

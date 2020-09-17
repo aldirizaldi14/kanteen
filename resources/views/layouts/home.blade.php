@@ -57,8 +57,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a></a>
                         <a class="nav-item nav-link active" href="/datashift">Data Shift</a>
+                        <a class="nav-item nav-link active" href="/jadwal">Jadwal Menu</a>
                         @can('isAdmin')
                         <div class="dropdown show">
                             <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -66,7 +66,6 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="/karyawan">Karyawan</a>
-                                <a class="dropdown-item" href="/jadwal">Jadwal Menu</a>
                                 <a class="dropdown-item" href="/makanan">Makanan</a>
                                 <a class="dropdown-item" href="/data">Data</a>
                                 <a class="dropdown-item" href="/user">Daftar Pengguna</a>
@@ -126,6 +125,7 @@
     <script>
         $(document).ready(function() {
             $('#example').DataTable({
+                order: [[0, 'desc']],
                 scrollY: '50vh',
                 scrollX: true,
                 scrollCollapse: true,

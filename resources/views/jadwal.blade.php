@@ -23,7 +23,9 @@
                 <th>Menu 1</th>
                 <th>Menu 2</th>
                 <th>Menu 3</th>
+                @can('isAdmin')
                 <th></th>
+                @endcan
             </tr>
         </thead>
         <tbody>
@@ -36,10 +38,12 @@
                 <td>{{$dt->makanan1}}</td>
                 <td>{{$dt->makanan2}}</td>
                 <td>{{$dt->makanan3}}</td>
+                @can('isAdmin')
                 <td>
                 <a class="btn btn-sm btn-outline-success" href="/jadwal/alter/{{$dt->id}}" role="button">Edit</a>
                 <a class="btn btn-sm btn-outline-danger" href="/jadwal/minus/{{$dt->id}}" role="button">Hapus</a>
                 </td>
+                @endcan
             </tr>
             @endforeach
         </tbody>

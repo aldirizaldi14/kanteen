@@ -14,7 +14,7 @@
                 <div class="col-sm-4">
                     <select name="departement" data-live-search="true" id="departement" class="selectpicker w-100">
                         @foreach ($dept as $dp)
-                        <option value="{{$dp->departement}}">{{$dp->departement}}</option>
+                        <option value="{{$dp->departement}}" @if ($dt->departement == $dp->departement) selected @else @endif @>{{$dp->departement}}</option>
                         @endforeach
                     </select>
                 </div>

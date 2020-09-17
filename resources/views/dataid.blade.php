@@ -5,7 +5,7 @@
     <div class="card-header">
     <table class="w-100">
     <tr>
-    <td align="left">{{ __('Data') }}</td>
+    <td align="left">{{ __('Detail Data Pesanan') }}</td>
     <td align="right">
     <a href="/data" class="btn btn-sm btn-outline-primary">Data</a>
     <a href="/data/makan" class="btn btn-sm btn-outline-dark">Peasnan</a>
@@ -17,7 +17,7 @@
         <table id="example" class="display" style="width:100%">
             <thead>
                 <tr>
-                    <th></th>
+                    <th style="width:10%">Main</th>
                     <th style="width:15%">Bagian</th>
                     <th>Total</th>
                     <th>Shift 1</th>
@@ -35,9 +35,9 @@
                     <td>{{$dt->departement}}</td>
                     <td>{{$dt->costcenter}}</td>
                     <td>{{$dt->shift1}}</td>
-                    <td>{{$dt->longshit1}}</td>
+                    <td>{{$dt->longshift1}}</td>
                     <td>{{$dt->shift2}}</td>
-                    <td>{{$dt->longshit2}}</td>
+                    <td>{{$dt->longshift2}}</td>
                     <td>{{$dt->shift3}}</td>
                     <td>{{$dt->remark}}</td>
                 </tr>
