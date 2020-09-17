@@ -29,6 +29,7 @@
                 @if (date('Y-m-d') < date('Y-m-d', strtotime($dt->tanggal) ) ) 
 <th></th>
                 @else
+                <th></th>
                 @endif
                 @endcan
             </tr>
