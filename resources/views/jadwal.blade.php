@@ -41,12 +41,12 @@
                 <td>{{$dt->makanan2}}</td>
                 <td>{{$dt->makanan3}}</td>
                 @can('isAdmin')
-                @if (date('Y-m-d') < date('Y-m-d',(strtotime ( '-1 day' , strtotime ($dt->tanggal) ) ))) 
-                @else
+                @if (date('Y-m-d') < date('Y-m-d', strtotime($dt->tanggal) ) ) 
                 <td>
                 <a class="btn btn-sm btn-outline-success" href="/jadwal/alter/{{$dt->id}}" role="button">Edit</a>
                 <a class="btn btn-sm btn-outline-danger" href="/jadwal/minus/{{$dt->id}}" role="button">Hapus</a>
                 </td>
+                @else
                 @endif
                 @endcan
             </tr>
