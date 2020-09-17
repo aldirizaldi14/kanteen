@@ -48,10 +48,13 @@ $(document).ready(function() {
                 <td>{{$dt->longshift2}}</td>
                 <td>{{$dt->shift3}}</td>
                 @can('isAdmin')
+                @if (date('Y-m-d') <= date('Y-m-d',(strtotime ( $dt->tanggal ) ))) 
+                @else
                 <td>
                 <a class="btn btn-sm btn-outline-primary" href="/datashifte/{{$dt->id}}" role="button">Edit</a>
                 <a class="btn btn-sm btn-outline-danger" href="/datashiftm/{{$dt->id}}" role="button">Hapus</a>
                 </td>
+                @endif
                 @endcan
             </tr>
             @endforeach
