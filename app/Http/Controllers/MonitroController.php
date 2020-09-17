@@ -78,7 +78,41 @@ class MonitroController extends Controller
 
     // AJAX Data
     public function ajax($id) {
-        $data = DB::table($id)->select('karyawan')->get();
+        $now = date('H:i');
+        $a1  = date('H:i', strtotime("11:00"));
+        $ak1 = date('H:i', strtotime("13:20"));
+        $a2  = date('H:i', strtotime("17:00"));
+        $ak2 = date('H:i', strtotime("19:15"));
+        $a3  = date('H:i', strtotime("02:00"));
+        $ak3 = date('H:i', strtotime("03:15"));
+        if ($id == 'device1') {
+            $database = 'sarapan1';
+            $date = date('Y-m-d').'Shift1';
+        }
+        elseif ($id == 'device2') {
+            $database = 'sarapan2';
+            $date = date('Y-m-d').'Shift1';
+        } 
+        else {
+            $database = $id;
+                if (($now >= $a1) && ($now <= $ak1))
+                {
+                    $date = date('Y-m-d').'Shift1';
+                }
+                elseif (($now >= $a2) && ($now <= $ak2)) 
+                {
+                    $date = date('Y-m-d').'Shift2';
+                    
+                }
+                elseif (($now >= $a3) && ($now <= $ak3)) 
+                {
+                    $date = date('Y-m-d').'Shift3';
+                }
+                else {
+                    $date = "";
+                }
+        }
+        $data = DB::table($database)->where('jadwalmenu', $date)->join('karyawan', $database.'.karyawan', '=', 'karyawan.nik')->select('name', 'nik')->get();
         return Datatables::of($data)->make(true);
     }
 
@@ -99,7 +133,7 @@ class MonitroController extends Controller
         $a3  = date('H:i', strtotime("02:00"));
         $ak3 = date('H:i', strtotime("03:15"));
 
-            if (($now >= $a1) && ($now <= $ak1))
+        if (($now >= $a1) && ($now <= $ak1))
         {
            $jadwal = date('Y-m-d').'Shift1';
            $shift = 'Shift 1';
@@ -108,6 +142,7 @@ class MonitroController extends Controller
         {
             $jadwal = date('Y-m-d').'Shift2';
             $shift = 'Shift 2';
+            
         }
         elseif (($now >= $a3) && ($now <= $ak3)) 
         {
@@ -211,8 +246,8 @@ class MonitroController extends Controller
     public function ayam($id) { 
 
         $hex = substr(hexdec($id),0, -6);
-        $part1 = "20".substr($hex,0, -4);
-        $part2 = "00".substr($hex,2);
+        $part1 = substr($hex,0, -4);
+        $part2 = substr($hex,2);
         $total = $part1.$part2;
 
         $exist = DB::table('karyawan')->where('nik', $total)->count();
@@ -284,8 +319,8 @@ class MonitroController extends Controller
     public function daging($id) {
 
         $hex = substr(hexdec($id),0, -6);
-        $part1 = "20".substr($hex,0, -4);
-        $part2 = "00".substr($hex,2);
+        $part1 = substr($hex,0, -4);
+        $part2 = substr($hex,2);
         $total = $part1.$part2;
 
         $exist = DB::table('karyawan')->where('nik', $total)->count();

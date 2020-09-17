@@ -13,7 +13,7 @@
                     <table id="example1" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th>karyawan</th>
+                                <th>Karyawan</th> <th>NIK</th>
                             </tr>
                         </thead>
                     </table>
@@ -32,7 +32,7 @@
                     <table id="example2" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Karyawan</th>
+                                <th>Karyawan</th> <th>NIK</th>
                             </tr>
                         </thead>
                     </table>
@@ -51,7 +51,7 @@
                     <table id="example3" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th>karyawan</th>
+                                <th>Karyawan</th> <th>NIK</th>
                             </tr>
                         </thead>
                     </table>
@@ -79,7 +79,8 @@
                 serverSide: true,
                 ajax: "/server_side/scripts/device1",
                 columns: [
-                    { data: 'karyawan'},
+                    { data: 'name'},
+                    { data: 'nik'},
                 ]
             });
             $('#example2').DataTable({
@@ -92,7 +93,8 @@
                 serverSide: true,
                 ajax: "/server_side/scripts/device2",
                 columns: [
-                    { data: 'karyawan'},
+                    { data: 'name'},
+                    { data: 'nik'},
                 ]
             });
             $('#example3').DataTable({
@@ -105,7 +107,8 @@
                 serverSide: true,
                 ajax: "/server_side/scripts/device3",
                 columns: [
-                    { data: 'karyawan'},
+                    { data: 'name'},
+                    { data: 'nik'},
                 ]
             });
 });

@@ -16,28 +16,28 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'MonitroController@monitor1');
 Route::get('/monitor2', 'MonitroController@monitor2');
 
-Route::get('/refresh/{id}', 'UserController@refresh');
-Route::get('/datashift', 'UserController@datashift');
-Route::get('/datashifte/{id}', 'UserController@datashifte');
-Route::post('/datashiftes', 'UserController@datashiftes');
-Route::get('/datashift/{id}', 'UserController@detailshift');
-Route::get('/datashiftm/{id}', 'UserController@datashift');
-Route::get('/settingshift', 'UserController@settingshift');
-Route::get('/settingshift/go/{id}', 'UserController@settinggo');
-Route::post('/settingshift/goes', 'UserController@settinggoes');
-Route::post('/settingshift/simpan', 'UserController@settingsimpan');
+Route::get('/refresh/{id}', 'UserController@refresh')->middleware('can:isUser');
+Route::get('/datashift', 'UserController@datashift')->middleware('can:isUser');
+Route::get('/datashifte/{id}', 'UserController@datashifte')->middleware('can:isUser');
+Route::post('/datashiftes', 'UserController@datashiftes')->middleware('can:isUser');
+Route::get('/datashift/{id}', 'UserController@detailshift')->middleware('can:isUser');
+Route::get('/datashiftm/{id}', 'UserController@datashift')->middleware('can:isUser');
+Route::get('/settingshift', 'UserController@settingshift')->middleware('can:isUser');
+Route::get('/settingshift/go/{id}', 'UserController@settinggo')->middleware('can:isUser');
+Route::post('/settingshift/goes', 'UserController@settinggoes')->middleware('can:isUser');
+Route::post('/settingshift/simpan', 'UserController@settingsimpan')->middleware('can:isUser');
 
-Route::get('/marah/{param1}/{param2}/{param3}', 'UserController@marahparam');
+Route::get('/marah/{param1}/{param2}/{param3}', 'UserController@marahparam')->middleware('can:isUser');
 
-Route::get('/changepassword', 'UserController@password');
-Route::post('/passchange', 'UserController@changepassword');
+Route::get('/changepassword', 'UserController@password')->middleware('can:isUser');
+Route::post('/passchange', 'UserController@changepassword')->middleware('can:isUser');
 
-Route::get('/userpass/{id}', 'UserController@userpass');
-Route::post('/userchangepass', 'UserController@userchangepass');
+Route::get('/userpass/{id}', 'UserController@userpass')->middleware('can:isUser');
+Route::post('/userchangepass', 'UserController@userchangepass')->middleware('can:isUser');
 
-Route::get('/user', 'UserController@user');
-Route::get('/userminus/{id}', 'UserController@userhapus');
-Route::post('/usersimpan', 'UserController@usersimpan');
+Route::get('/user', 'UserController@user')->middleware('can:isUser');
+Route::get('/userminus/{id}', 'UserController@userhapus')->middleware('can:isUser');
+Route::post('/usersimpan', 'UserController@usersimpan')->middleware('can:isUser');
 
 Auth::routes([
     'register' => false, // Registration Routes...
@@ -49,7 +49,7 @@ Auth::routes([
 Route::get('/server_side/scripts/{id}', 'MonitroController@ajax');
 Route::get('/server_side/count/{id}/{param}', 'MonitroController@count');
 
-Route::get('/dashboard', 'HomeController@dashboard');
+Route::get('/dashboard', 'HomeController@dashboard')->middleware('can:isUser');
 
 Route::get('/karyawan', 'HomeController@karyawan')->middleware('can:isAdmin');
 Route::get('/karyawan/plus', 'HomeController@karyawanplus')->middleware('can:isAdmin');

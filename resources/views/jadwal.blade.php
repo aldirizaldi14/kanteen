@@ -6,10 +6,12 @@
                 <div class="row">
                     <div class="col-sm-3">
                     {{ __('Jadwal Menu') }}
-                </div>    
+                </div>  
+                @can('isAdmin')  
                 <div class="col-sm-9" align="right">
                 <a class="btn btn-sm btn-outline-success" href="/jadwal/plus" role="button">Tambah Jadwal</a>
-                </div>    
+                </div> 
+                @endcan   
                 </div> 
                 </div>   
                 <div class="card-body">
