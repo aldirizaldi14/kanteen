@@ -9,7 +9,7 @@
         @foreach ($data as $dt)
         <form action="simpan" method="post" enctype="multipart/form-data">
         @csrf
-        <input hidden type="text" class="form-control" name="id" value="{{$dt->id}}" autofocus>
+        <input hidden type="text" class="form-control" name="id" value="{{$dt->idm}}" autofocus>
         <div class="row">
             <div class="col-sm-6">
             <div class="row">
