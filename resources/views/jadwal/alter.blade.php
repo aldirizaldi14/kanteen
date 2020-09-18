@@ -9,7 +9,7 @@
         @foreach ($data as $dt)
         <form action="simpan" method="post">
             @csrf
-            <input type="text" class="form-control" name="id" value="{{$dt->id}}" hidden>
+            <input type="text" class="form-control" name="id" value="{{$dt->idm}}" hidden>
             <!-- Tanggal -->
             <div class="row">
                 <div class="col-sm-2">
