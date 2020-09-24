@@ -28,7 +28,9 @@ class UserController extends Controller
         else {
             $status = DB::table('datadepartement')->where('status', 0)->where('lastedit', $a1->username)->select('status')->count();
             $dat0 = DB::table('datadepartement')->where('status', 0)->where('lastedit', $a1->username)->select('id')->value('id');
-            $data = DB::table('datadepartement')->join('departement', 'datadepartement.departement', '=', 'departement.departement')->where('departement.main', $a1->departement)->orderBy('tanggal', 'desc')->get();
+            $data = DB::table('datadepartement')->join('departement', 'datadepartement.departement', '=', 'departement.departement')
+            ->select('datadepartement.id', 'datadepartement.tanggal', 'datadepartement.departement', 'datadepartement.shift1', 'datadepartement.longshift1', 'datadepartement.shift2', 'datadepartement.longshift2', 'datadepartement.shift3', )
+            ->where('departement.main', $a1->departement)->orderBy('tanggal', 'desc')->get();
         }
         return view('datashift', ['data' => $data, 'status' => $status, 'menuju' => $dat0]);
     }
@@ -59,6 +61,13 @@ class UserController extends Controller
 
         for ($count = 0; $count < count($request->data); $count++) {
             if ($request->shift == 'longshift1') {
+                DB::table('shiftkary')->insert([
+                    'id' => 'S0'. date('Ymd', strtotime($request->date)).date('His').$request->data[$count].$count,
+                    'id_data' => $request->id,
+                    'tanggal' => $request->date,
+                    'nik' =>  $request->data[$count],
+                    'shift' => 'shift0',
+                ]);
                 DB::table('shiftkary')->insert([
                     'id' => 'S1'. date('Ymd', strtotime($request->date)).date('His').$request->data[$count].$count,
                     'id_data' => $request->id,
@@ -92,21 +101,40 @@ class UserController extends Controller
             }
             else {
                 if ($request->shift == 'shift1') {
-                    $s = 'S1';
+                    DB::table('shiftkary')->insert([
+                        'id' => 'S1'.date('Ymd', strtotime($request->date)).date('His').$request->data[$count].$count,
+                        'id_data' => $request->id,
+                        'tanggal' => $request->date,
+                        'nik' =>  $request->data[$count],
+                        'shift' => 'shift1',
+                    ]);
+                    DB::table('shiftkary')->insert([
+                        'id' => 'S0'.date('Ymd', strtotime($request->date)).date('His').$request->data[$count].$count,
+                        'id_data' => $request->id,
+                        'tanggal' => $request->date,
+                        'nik' =>  $request->data[$count],
+                        'shift' => 'shift0',
+                    ]);
                 }
                 elseif ($request->shift == 'shift2') {
-                    $s = 'S2';
+                    DB::table('shiftkary')->insert([
+                        'id' => 'S2'.date('Ymd', strtotime($request->date)).date('His').$request->data[$count].$count,
+                        'id_data' => $request->id,
+                        'tanggal' => $request->date,
+                        'nik' =>  $request->data[$count],
+                        'shift' => 'shift2',
+                    ]);
                 }
                 elseif ($request->shift == 'shift3') {
-                    $s = 'S3';
+                    DB::table('shiftkary')->insert([
+                        'id' => 'S3'.date('Ymd', strtotime($request->date)).date('His').$request->data[$count].$count,
+                        'id_data' => $request->id,
+                        'tanggal' => $request->date,
+                        'nik' =>  $request->data[$count],
+                        'shift' => 'shift3',
+                    ]);
                 }
-                DB::table('shiftkary')->insert([
-                    'id' => $s.date('Ymd', strtotime($request->date)).date('His').$request->data[$count].$count,
-                    'id_data' => $request->id,
-                    'tanggal' => $request->date,
-                    'nik' =>  $request->data[$count],
-                    'shift' => 'shift3',
-                ]);
+
             }
             
         }
@@ -184,10 +212,24 @@ class UserController extends Controller
                     'nik' =>  $request->input('nik'.$x),
                     'shift' => 'shift1',
                 ]);
+                DB::table('shiftkary')->insert([
+                    'id' => 'S0'.date('Ymd', strtotime($request->tanggal)).date('His').$request->input('nik'.$x).$a,
+                    'id_data' => $mark,
+                    'tanggal' => $request->tanggal,
+                    'nik' =>  $request->input('nik'.$x),
+                    'shift' => 'shift0',
+                ]);
                 $a++;
                 $inc++;
             }
             elseif ($request->input('shift'.$x) == 'longshift1') {
+                DB::table('shiftkary')->insert([
+                    'id' => 'S0'.date('Ymd', strtotime($request->tanggal)).date('His').$request->input('nik'.$x).$a,
+                    'id_data' => $mark,
+                    'tanggal' => $request->tanggal,
+                    'nik' =>  $request->input('nik'.$x),
+                    'shift' => 'shift0',
+                ]);
                 DB::table('shiftkary')->insert([
                     'id' => 'S1'.date('Ymd', strtotime($request->tanggal)).date('His').$request->input('nik'.$x).$b,
                     'id_data' => $mark,

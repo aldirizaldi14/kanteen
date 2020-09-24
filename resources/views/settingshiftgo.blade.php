@@ -34,47 +34,52 @@
             <div class="row">
                 <div class="col-sm-2">Remark</div>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control w-100" name="remark" placeholder="Remark" value="{{$remark}}">
+                    <input type="text" class="form-control w-100" name="remark" placeholder="Remark"
+                        value="{{$remark}}">
                 </div>
             </div>
             <br>
             <div class="row">
-            <div class="col-sm-8"></div>
-            <div class="col-sm-4" align="right">
-            <input type="text" id="search" onkeyup="myFunction()" placeholder="Search">
-            </div>
-            </div>
-            <br>
-            <div class="row">
-                <table id="input" class="table" style="width:100%">
+            <div class="col-sm-12">
+            
+                <table id="input" class="display" style="width:100%">
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th hidden></th>
                             <th>Karyawan</th>
-                            <th align="center">Absen</th>
-                            <th align="center">Shift 1</th>
-                            <th align="center">Long Shift 1</th>
-                            <th align="center">Shift 2</th>
-                            <th align="center">Long Shift 2</th>
-                            <th align="center">Shift 3</th>
+                            <th>Absen</th>
+                            <th>Shift 1</th>
+                            <th>Long Shift 1</th>
+                            <th>Shift 2</th>
+                            <th>Long Shift 2</th>
+                            <th>Shift 3</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($data as $dt)
                         <tr>
                             <td>{{$i + 1}}</td>
-                            <td hidden><input type="text" class="form-control w-100" name="nik{{$i}}" value="{{$dt->nik}}"></td>
+                            <td hidden><input type="text" class="form-control w-100" name="nik{{$i}}"
+                                    value="{{$dt->nik}}"></td>
                             <td>{{$dt->name}}</td>
-                            <td align="center"><input class="form-check-input" type="radio" name="shift{{$i}}" value="none" checked></td>
-                            <td align="center"><input class="form-check-input" type="radio" name="shift{{$i}}" value="shift1"></td>
-                            <td align="center"><input class="form-check-input" type="radio" name="shift{{$i}}" value="longshift1"></td>
-                            <td align="center"><input class="form-check-input" type="radio" name="shift{{$i}}" value="shift2"></td>
-                            <td align="center"><input class="form-check-input" type="radio" name="shift{{$i}}" value="longshift2"></td>
-                            <td align="center"><input class="form-check-input" type="radio" name="shift{{$i++}}" value="shift3"></td>
+                            <td align="center"><input class="form-check-input" type="radio" name="shift{{$i}}"
+                                    value="none" checked></td>
+                            <td align="center"><input class="form-check-input" type="radio" name="shift{{$i}}"
+                                    value="shift1"></td>
+                            <td align="center"><input class="form-check-input" type="radio" name="shift{{$i}}"
+                                    value="longshift1"></td>
+                            <td align="center"><input class="form-check-input" type="radio" name="shift{{$i}}"
+                                    value="shift2"></td>
+                            <td align="center"><input class="form-check-input" type="radio" name="shift{{$i}}"
+                                    value="longshift2"></td>
+                            <td align="center"><input class="form-check-input" type="radio" name="shift{{$i++}}"
+                                    value="shift3"></td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
+                </div>
             </div>
         </form>
     </div>
@@ -83,24 +88,22 @@
 </div>
 
 <script>
-function myFunction() {
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("search");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("input");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[2];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
+$(document).ready(function() {
+    $('#input').DataTable({
+        order: [
+            [0, 'asc']
+        ],
+        scrollY: '50vh',
+        scrollCollapse: true,
+        paging: false,
+        autowidth: true,
+        info: false,
+        columnDefs: [{
+            orderable: false,
+            targets: [3,4,5,6,7,8]
+        }]
+    });
+});
 </script>
 
 @endsection

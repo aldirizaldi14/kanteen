@@ -188,7 +188,7 @@ class MonitroController extends Controller
         $part2 = substr($hex,2);
         $total = $part1.$part2;
 
-        $now = date('H:i');
+        $now  = date('H:i');
         $s1  = date('H:i', strtotime("06:00"));
         $as1 = date('H:i', strtotime("07:30"));
         $a1  = date('H:i', strtotime("11:00"));
@@ -198,7 +198,20 @@ class MonitroController extends Controller
         $a3  = date('H:i', strtotime("02:00"));
         $ak3 = date('H:i', strtotime("03:15"));
 
-        $exist = DB::table('karyawan')->where('nik', $total)->count();
+        $date = date('Y-m-d'); 
+        if(($now >= $a1) && ($now <= $ak1)) {
+            $waktu = 'shift1';
+        }elseif (($now >= $a2) && ($now <= $ak2)) {
+            $waktu = 'shift2';
+        }elseif (($now >= $a3) && ($now <= $ak3)) {
+            $waktu = 'shift3';
+        }elseif(($now >= $s1) && ($now <= $as1)) {
+            $waktu = 'shift0';
+        }else {
+            $waktu = 'nono';
+        }
+
+        $exist = DB::table('shiftkary')->where('nik', $total)->where('tanggal', $date)->where('shift', $waktu)->where('status', 0)->count();
 
         if($exist == 1 ) {
 
@@ -245,6 +258,9 @@ class MonitroController extends Controller
                 'makanan' => $makan,
                 'status' => 1,
             ]);
+            DB::table('shiftkary')->where('nik', $total)->where('tanggal', $date)->where('shift', $waktu)->where('status', 0)->update([
+                'status' => 1,
+            ]);
             return 0;
         }
 
@@ -265,18 +281,32 @@ class MonitroController extends Controller
         $part2 = substr($hex,2);
         $total = $part1.$part2;
 
-        $exist = DB::table('karyawan')->where('nik', $total)->count();
+        $now = date('H:i');
+        $s1  = date('H:i', strtotime("06:00"));
+        $as1 = date('H:i', strtotime("07:30"));
+        $a1  = date('H:i', strtotime("11:00"));
+        $ak1 = date('H:i', strtotime("13:20"));
+        $a2  = date('H:i', strtotime("17:00"));
+        $ak2 = date('H:i', strtotime("19:15"));
+        $a3  = date('H:i', strtotime("02:00"));
+        $ak3 = date('H:i', strtotime("03:15"));
+
+        $date = date('Y-m-d'); 
+        if(($now >= $a1) && ($now <= $ak1)) {
+            $waktu = 'shift1';
+        }elseif (($now >= $a2) && ($now <= $ak2)) {
+            $waktu = 'shift2';
+        }elseif (($now >= $a3) && ($now <= $ak3)) {
+            $waktu = 'shift3';
+        }elseif(($now >= $s1) && ($now <= $as1)) {
+            $waktu = 'shift0';
+        }else {
+            $waktu = 'nono';
+        }
+
+        $exist = DB::table('shiftkary')->where('nik', $total)->where('tanggal', $date)->where('shift', $waktu)->where('status', 0)->count();
 
         if ($exist == 1) {
-            $now = date('H:i');
-            $s1  = date('H:i', strtotime("06:00"));
-            $as1 = date('H:i', strtotime("07:30"));
-            $a1  = date('H:i', strtotime("11:00"));
-            $ak1 = date('H:i', strtotime("13:20"));
-            $a2  = date('H:i', strtotime("17:00"));
-            $ak2 = date('H:i', strtotime("19:15"));
-            $a3  = date('H:i', strtotime("02:00"));
-            $ak3 = date('H:i', strtotime("03:15"));
     
             if (($now >= $a1) && ($now <= $ak1))
             {
@@ -314,15 +344,16 @@ class MonitroController extends Controller
                 return 1;
             }
             else {
-                $status = 1;
                 DB::table($database)->insert([
                     'jadwalmenu' => $jadwal,
                     'karyawan' => $total,
                     'shift' => $shift,
                     'makanan' => $makan,
-                    'status' => $status,
+                    'status' => 1,
                 ]);
-        
+                DB::table('shiftkary')->where('nik', $total)->where('tanggal', $date)->where('shift', $waktu)->where('status', 0)->update([
+                    'status' => 1,
+                ]);
                 return 0;
             }
         }
@@ -338,8 +369,6 @@ class MonitroController extends Controller
         $part2 = substr($hex,2);
         $total = $part1.$part2;
 
-        $exist = DB::table('karyawan')->where('nik', $total)->count();
-
         $now = date('H:i');
         $s1  = date('H:i', strtotime("06:00"));
         $as1 = date('H:i', strtotime("07:30"));
@@ -349,6 +378,21 @@ class MonitroController extends Controller
         $ak2 = date('H:i', strtotime("19:15"));
         $a3  = date('H:i', strtotime("02:00"));
         $ak3 = date('H:i', strtotime("03:15"));
+
+        $date = date('Y-m-d'); 
+        if(($now >= $a1) && ($now <= $ak1)) {
+            $waktu = 'shift1';
+        }elseif (($now >= $a2) && ($now <= $ak2)) {
+            $waktu = 'shift2';
+        }elseif (($now >= $a3) && ($now <= $ak3)) {
+            $waktu = 'shift3';
+        }elseif(($now >= $s1) && ($now <= $as1)) {
+            $waktu = 'shift0';
+        }else {
+            $waktu = 'nono';
+        }
+
+        $exist = DB::table('shiftkary')->where('nik', $total)->where('tanggal', $date)->where('shift', $waktu)->where('status', 0)->count();
 
         if ($exist == 1) {
 
@@ -384,7 +428,9 @@ class MonitroController extends Controller
                 'makanan' => $makan,
                 'status' => 1,
             ]);
-    
+            DB::table('shiftkary')->where('nik', $total)->where('tanggal', $date)->where('shift', $waktu)->where('status', 0)->update([
+                'status' => 1,
+            ]);
             return 0;
         }
         }

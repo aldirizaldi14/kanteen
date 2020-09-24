@@ -408,7 +408,7 @@ class HomeController extends Controller
         $device2 = DB::table('device2')->where('jadwalmenu', $id)->join('karyawan', 'device2.karyawan', '=', 'karyawan.nik')->get();
         $device3 = DB::table('device3')->where('jadwalmenu', $id)->join('karyawan', 'device3.karyawan', '=', 'karyawan.nik')->get();
         $data = DB::table('jadwalmenu')->where('id', $id)->get();
-        return view('detaildatam', ['data' => $data ,'data1' => $sarapan1, 'data2' => $sarapan1, 'data3' => $device1, 'data4' => $device2, 'data5' => $device3,]);
+        return view('detaildatam', ['data' => $data ,'data1' => $sarapan1, 'data2' => $sarapan2, 'data3' => $device1, 'data4' => $device2, 'data5' => $device3,]);
 
     }
 }
