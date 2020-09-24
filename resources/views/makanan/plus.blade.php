@@ -33,6 +33,7 @@
                         <option value="Ikan">Ikan</option>
                         <option value="Ayam">Ayam</option>
                         <option value="Daging">Daging</option>
+                        <option value="Spesial">Spesial</option>
                         <option value="Sarapan">Sarapan</option>
                     </select>
                 </div>

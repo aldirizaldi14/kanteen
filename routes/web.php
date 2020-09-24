@@ -21,7 +21,7 @@ Route::get('/datashift', 'UserController@datashift')->middleware('can:isUser');
 Route::get('/datashifte/{id}', 'UserController@datashifte')->middleware('can:isUser');
 Route::post('/datashiftes', 'UserController@datashiftes')->middleware('can:isUser');
 Route::get('/datashift/{id}', 'UserController@detailshift')->middleware('can:isUser');
-Route::get('/datashiftm/{id}', 'UserController@datashift')->middleware('can:isUser');
+Route::get('/datashiftm/{id}', 'UserController@datashiftm')->middleware('can:isUser');
 Route::get('/settingshift', 'UserController@settingshift')->middleware('can:isUser');
 Route::get('/settingshift/go/{id}', 'UserController@settinggo')->middleware('can:isUser');
 Route::post('/settingshift/goes', 'UserController@settinggoes')->middleware('can:isUser');

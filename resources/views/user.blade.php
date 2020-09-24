@@ -92,7 +92,7 @@
                         <div class="col-sm-6">
                             <select id="departement" name="departement" class="custom-select" onchange="test()">
                                 @foreach ($dept as $dp)
-                                <option value="{{$dp->departement}}">{{$dp->departement}}</option>
+                                <option value="{{$dp->main}}">{{$dp->main}}</option>
                                 @endforeach
                             </select>
                         </div>

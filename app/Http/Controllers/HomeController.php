@@ -183,10 +183,11 @@ class HomeController extends Controller
 
     public function jadwalplus()
     {
+        $union = DB::table('makanan')->where('jenis', 'Spesial');
         $data1 = DB::table('makanan')->where('jenis', 'Sarapan')->get();
-        $data2 = DB::table('makanan')->where('jenis', 'Ikan')->get();
-        $data3 = DB::table('makanan')->where('jenis', 'Ayam')->get();
-        $data4 = DB::table('makanan')->where('jenis', 'Daging')->get();
+        $data2 = DB::table('makanan')->where('jenis', 'Ikan')->union($union)->get();
+        $data3 = DB::table('makanan')->where('jenis', 'Ayam')->union($union)->get();
+        $data4 = DB::table('makanan')->where('jenis', 'Daging')->union($union)->get();
         return view('jadwal.plus', ['snack' => $data1, 'ikan' => $data2, 'ayam' => $data3, 'daging' => $data4]);
     }
 

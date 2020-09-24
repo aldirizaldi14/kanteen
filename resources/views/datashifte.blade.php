@@ -37,9 +37,7 @@
                 <div class="col-sm-4">
 
                     <select id="departemen" name="departemen" class="custom-select" onchange="test()">
-                        @foreach ($dept as $dp)
-                        <option @if ($dt->departement == $dp->departement) selected @else @endif value="{{$dp->departement}}">{{$dp->departement}}</option>
-                        @endforeach
+                        <option value="{{$dept}}">{{$dept}}</option>
                     </select>
 
                 </div>

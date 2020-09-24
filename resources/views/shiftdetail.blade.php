@@ -49,9 +49,7 @@
             <thead>
                 <tr>
                     <th>Shift 1 (<b>{{$dt->shift1}}</b>)</th>
-                    <th>Long Shift 1 (<b>{{$dt->longshift1}}</b>)</th>
                     <th>Shift 2 (<b>{{$dt->shift2}}</b>)</th>
-                    <th>Long Shift 2 (<b>{{$dt->longshift2}}</b>)</th>
                     <th>Shift 3 (<b>{{$dt->shift3}}</b>)</th>
                 </tr>
             </thead>
@@ -60,9 +58,7 @@
             @for ($i = 0; $i < count($union); $i++)
                 <tr>
                     <td>{{$union[$i][0]}} @if ($union[$i][0] != "") @can('isAdmin') <a class="btn btn-sm btn-xs btn-outline-danger" href="/marah/{{$union[$i][0]}}/shift1/{{$dt->id}}" role="button">x</a>@endif @endcan</td>
-                    <td>{{$union[$i][1]}} @if ($union[$i][1] != "") @can('isAdmin') <a class="btn btn-sm btn-xs btn-outline-danger" href="/marah/{{$union[$i][1]}}/longshift1/{{$dt->id}}" role="button">x</a>@endif @endcan</td>
                     <td>{{$union[$i][2]}} @if ($union[$i][2] != "") @can('isAdmin') <a class="btn btn-sm btn-xs btn-outline-danger" href="/marah/{{$union[$i][2]}}/shift2/{{$dt->id}}" role="button">x</a>@endif @endcan</td>
-                    <td>{{$union[$i][3]}} @if ($union[$i][3] != "") @can('isAdmin') <a class="btn btn-sm btn-xs btn-outline-danger" href="/marah/{{$union[$i][3]}}/longshift2/{{$dt->id}}" role="button">x</a>@endif @endcan</td>
                     <td>{{$union[$i][4]}} @if ($union[$i][4] != "") @can('isAdmin') <a class="btn btn-sm btn-xs btn-outline-danger" href="/marah/{{$union[$i][4]}}/shift3/{{$dt->id}}" role="button">x</a>@endif @endcan</td>
                 </tr>
             @endfor
@@ -72,9 +68,7 @@
             @for ($i = 0; $i < count($union); $i++)
                 <tr>
                     <td>{{$union[$i][0]}}</td>
-                    <td>{{$union[$i][1]}}</td>
                     <td>{{$union[$i][2]}}</td>
-                    <td>{{$union[$i][3]}}</td>
                     <td>{{$union[$i][4]}}</td>
                 </tr>
             @endfor
