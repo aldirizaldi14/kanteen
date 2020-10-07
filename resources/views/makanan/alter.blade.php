@@ -28,11 +28,11 @@
                 </div>
                 <div class="col-sm-8">
                 <select name="jenis" class="custom-select">
-                        <option value="Ikan">Ikan</option>
-                        <option value="Ayam">Ayam</option>
-                        <option value="Daging">Daging</option>
-                        <option value="Spesial">Spesial</option>
-                        <option value="Sarapan">Sarapan</option>
+                        <option @if ($dt->jenis == 'Ikan') selected @else @endif value="Ikan">Ikan</option>
+                        <option @if ($dt->jenis == 'Ayam') selected @else @endif value="Ayam">Ayam</option>
+                        <option @if ($dt->jenis == 'Daging') selected @else @endif value="Daging">Daging</option>
+                        <option @if ($dt->jenis == 'Spesial') selected @else @endif value="Spesial">Spesial</option>
+                        <option @if ($dt->jenis == 'Sarapan') selected @else @endif value="Sarapan">Sarapan</option>
                     </select>
                 </div>
             </div>
