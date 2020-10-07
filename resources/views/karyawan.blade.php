@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.home2')
 
 @section('content')
             <div class="card h-100">
@@ -13,9 +13,10 @@
                     </div>
                 </div>
                 <div class="card-body">
-                <table id="example" class="display" style="width:100%">
+                <table id="karyawan" class="display" style="width:100%">
         <thead>
             <tr>
+                <th>No</th>
                 <th>NIK</th>
                 <th>Nama</th>
                 <th>Deptartemen</th>
@@ -25,6 +26,7 @@
         <tbody>
             @foreach ($data as $dt)
             <tr>
+            <td>{{$i++}}</td>
                 <td>{{$dt->nik}}</td>
                 <td>{{$dt->name}}</td>
                 <td>@if ($dt->departemen == 'Other') {{$dt->departemen}} ({{$dt->remark}}) @else {{$dt->departemen}} @endif</td>
@@ -38,5 +40,24 @@
             </div>
         </div>
     </div>
+@stop
 
-@endsection
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#karyawan').DataTable({
+                order: [[0, 'asc']],
+                scrollY: '50vh',
+                scrollX: true,
+                scrollCollapse: true,
+                paging: false,
+                info: false,
+                dom: 'Bfrtip',
+                buttons: [
+                    'excelHtml5',
+                ]
+            });
+        });
+    </script>
+
+@endpush

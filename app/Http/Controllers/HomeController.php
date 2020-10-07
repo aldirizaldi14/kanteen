@@ -87,7 +87,7 @@ class HomeController extends Controller
     public function karyawan()
     {
         $data = DB::table('karyawan')->get();
-        return view('karyawan', ['data' => $data]);
+        return view('karyawan', ['data' => $data, 'i' => 1]);
     }
 
     public function karyawanalter($id)
