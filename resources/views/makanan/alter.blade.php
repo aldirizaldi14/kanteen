@@ -18,6 +18,7 @@
                 </div>
                 <div class="col-sm-8">
                     <input id="nama" type="text" class="form-control" name="nama" value="{{$dt->nama}}" required autofocus>
+                    <p>{{ $errors->first('nama') }}</p>
                 </div>             
             </div>
             <br>

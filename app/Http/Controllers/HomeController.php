@@ -101,7 +101,11 @@ class HomeController extends Controller
     {
         $iname = DB::table('karyawan')->select('gambar')->where('id', $request->id)->value('gambar');
         if ($request->hasFile('file')) {
-            File::delete('kimages/' . $iname);
+            if(strtolower($iname) == "dummy.png" || strtolower($iname) == "dummy.jpg") {
+
+            }else {
+                File::delete('kimages/' . $iname);
+            }
             $file = $request->file('file');
             $nama_file = $file->getClientOriginalName();
             $tujuan_upload = 'kimages';
@@ -133,7 +137,18 @@ class HomeController extends Controller
 
     public function karyawanminus($id)
     {
+        $iname = DB::table('karyawan')->select('gambar')->where('id', $id)->value('gambar');
+        if(strtolower($iname) == "dummy.png" || strtolower($iname) == "dummy.jpg") {
+
+        }else {
+            File::delete('kimages/' . $iname);
+        }
         $data = DB::table('karyawan')->where('nik', $id)->delete();
+        if($iname == "dummy.png" || $iname == "dummy.jpg") {
+
+        }else {
+            File::delete('kimages/' . $iname);
+        }
         return redirect('/karyawan');
     }
 
@@ -294,12 +309,19 @@ class HomeController extends Controller
 
     public function makanansimpan(Request $request)
     {
+        $messages = [
+            'required' => 'Isi Kolom Makanan',
+            'unique' => 'Nama Makanan Sudah Ada',
+        ];
+        $this->validate($request, [
+            'nama'  => 'required|unique:makanan',
+        ], $messages);
         $file = $request->file('file');
         $nama_file = $file->getClientOriginalName();
         $tujuan_upload = 'fimages';
         $file->move($tujuan_upload, $nama_file);
         DB::table('makanan')->insert([
-            'nama' => $request->nama,
+            'nama' => strtoupper($request->nama),
             'jenis' => $request->jenis,
             'harga' => $request->harga,
             'gambar' => $nama_file,
@@ -311,30 +333,45 @@ class HomeController extends Controller
     public function makananminus($id)
     {
         $iname = DB::table('makanan')->select('gambar')->where('idm', $id)->value('gambar');
-        File::delete('fimages/' . $iname);
+        if(strtolower($iname) == "dummy.png" || strtolower($iname) == "dummy.jpg") {
+
+        }else {
+            File::delete('fimages/' . $iname);
+        }
         DB::table('makanan')->where('idm', $id)->delete();
         return redirect('makanan');
     }
 
     public function makananalters(Request $request)
     {
+        $messages = [
+            'required' => 'Isi Kolom Makanan',
+            'unique' => 'Nama Makanan Sudah Ada',
+        ];
+        $this->validate($request, [
+            'nama'  => 'required|unique:makanan',
+        ], $messages);
         $iname = DB::table('makanan')->select('gambar')->where('idm', $request->id)->value('gambar');
         if ($request->hasFile('file')) {
-            File::delete('fimages/' . $iname);
+            if(strtolower($iname) == "dummy.png" || strtolower($iname) == "dummy.jpg") {
+
+            }else {
+                File::delete('fimages/' . $iname);
+            }
             $file = $request->file('file');
             $nama_file = $file->getClientOriginalName();
             $tujuan_upload = 'fimages';
             $file->move($tujuan_upload, $nama_file);
 
             DB::table('makanan')->where('idm', $request->id)->update([
-                'nama' => $request->nama,
+                'nama' => strtoupper($request->nama),
                 'jenis' => $request->jenis,
                 'harga' => $request->harga,
                 'gambar' => $nama_file,
             ]);
         } else {
             DB::table('makanan')->where('idm', $request->id)->update([
-                'nama' => $request->nama,
+                'nama' => strtoupper($request->nama),
                 'jenis' => $request->jenis,
                 'harga' => $request->harga,
             ]);

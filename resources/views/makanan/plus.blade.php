@@ -15,6 +15,7 @@
                 </div>
                 <div class="col-sm-4">
                     <input id="nama" autocomplete="off" type="text" class="form-control" name="nama" value="{{ old('nama') }}" required autofocus>
+                    <div style="color:red;font-size:12px">{{ $errors->first('nama') }}</div>
                 </div>
                 <div class="col-sm-2">
                 </div>
