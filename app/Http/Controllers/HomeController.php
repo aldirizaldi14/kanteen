@@ -344,13 +344,6 @@ class HomeController extends Controller
 
     public function makananalters(Request $request)
     {
-        $messages = [
-            'required' => 'Isi Kolom Makanan',
-            'unique' => 'Nama Makanan Sudah Ada',
-        ];
-        $this->validate($request, [
-            'nama'  => 'required|unique:makanan',
-        ], $messages);
         $iname = DB::table('makanan')->select('gambar')->where('idm', $request->id)->value('gambar');
         if ($request->hasFile('file')) {
             if(strtolower($iname) == "dummy.png" || strtolower($iname) == "dummy.jpg") {
