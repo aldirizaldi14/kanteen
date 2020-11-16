@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
+use App\Events\BroadcastListener;
 use DataTables;
 
 class MonitroController extends Controller
@@ -437,5 +439,17 @@ class MonitroController extends Controller
         else {
             return 1;
         }
+    }
+
+    public function monitor3() {
+        return view('monitor3');
+    }
+
+    public function test($nik) {
+        $image = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $nik)->value('gambar');
+        $nama = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $nik)->value('name');
+        $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $nik)->value('departemen');
+        event(new BroadcastListener($image, $nama, $nik, $departement));
+        return "Event has been sent!";
     }
 }

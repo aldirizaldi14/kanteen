@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'MonitroController@monitor1');
 Route::get('/monitor2', 'MonitroController@monitor2');
+Route::get('/monitor3', 'MonitroController@monitor3');
 
 Route::get('/refresh/{id}', 'UserController@refresh')->middleware('can:isUser');
 Route::get('/datashift', 'UserController@datashift')->middleware('can:isUser');
@@ -83,3 +84,5 @@ Route::get('/data', 'HomeController@data')->middleware('can:isAdmin');
 Route::get('/datam/{id}', 'HomeController@detaildatam')->middleware('can:isAdmin');
 Route::get('/detaildata/{id}', 'HomeController@dataid')->middleware('can:isAdmin');
 Route::get('/data/makan', 'HomeController@datamakan')->middleware('can:isAdmin');
+
+Route::get('/test/{nik}', 'MonitroController@test');
