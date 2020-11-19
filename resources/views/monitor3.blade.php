@@ -89,18 +89,9 @@
 </div>
 @stop
 @push('scripts')
-<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 <script>
-
-// Enable pusher logging - don't include this in production
-Pusher.logToConsole = true;
-
-var pusher = new Pusher('f86fd724c21dfa97a627', {
-  cluster: 'ap1'
-});
-
-var channel = pusher.subscribe('my-channel');
-channel.bind('my-event', function(data) {
+var channel = Echo.channel('my-channel');
+channel.listen('.my-event', function(data) {
   alert(JSON.stringify(data));
 });
 </script>
