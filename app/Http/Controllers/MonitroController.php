@@ -497,10 +497,7 @@ class MonitroController extends Controller
     }
 
     public function test($nik) {
-        $image = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $nik)->value('gambar');
-        $nama = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $nik)->value('name');
-        $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $nik)->value('departemen');
-        event(new BroadcastListener($image, $nama, $nik));
+        event(new BroadcastListener($nik));
         return "Event has been sent!";
     }
 }

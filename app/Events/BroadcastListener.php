@@ -13,15 +13,11 @@ class BroadcastListener implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $jayam;
-    public $jikan;
-    public $jaging;
+    public $total;
 
-  public function __construct($jayam, $jikan, $jaging)
+  public function __construct($total)
   {
-      $this->jayam = $jayam;
-      $this->jikan = $jikan;
-      $this->jaging = $jaging;
+      $this->total = $total;
   }
 
   public function broadcastOn()
