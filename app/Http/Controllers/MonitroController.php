@@ -210,15 +210,19 @@ class MonitroController extends Controller
         if(($now >= $a1) && ($now <= $ak1)) {
             $waktu = 'shift1';
             $inv = 'device1';
+            $jadwal = date('Y-m-d').'Shift1';
         }elseif (($now >= $a2) && ($now <= $ak2)) {
             $waktu = 'shift2';
             $inv = 'device1';
+            $jadwal = date('Y-m-d').'Shift2';
         }elseif (($now >= $a3) && ($now <= $ak3)) {
             $waktu = 'shift3';
             $inv = 'device1';
+            $jadwal = date('Y-m-d', (strtotime ( '-1 day' ))).'Shift13';
         }elseif(($now >= $s1) && ($now <= $as1)) {
             $waktu = 'shift0';
             $inv = 'sarapan1';
+            $jadwal = date('Y-m-d').'Shift1';
         }else {
             $waktu = 'nono';
         }
@@ -325,15 +329,19 @@ class MonitroController extends Controller
         if(($now >= $a1) && ($now <= $ak1)) {
             $waktu = 'shift1';
             $inv = 'device2';
+            $jadwal = date('Y-m-d').'Shift1';
         }elseif (($now >= $a2) && ($now <= $ak2)) {
             $waktu = 'shift2';
             $inv = 'device2';
+            $jadwal = date('Y-m-d').'Shift2';
         }elseif (($now >= $a3) && ($now <= $ak3)) {
             $waktu = 'shift3';
             $inv = 'device2';
+            $jadwal = date('Y-m-d', (strtotime ( '-1 day' ))).'Shift13';
         }elseif(($now >= $s1) && ($now <= $as1)) {
             $waktu = 'shift0';
             $inv = 'sarapan2';
+            $jadwal = date('Y-m-d').'Shift1';
         }else {
             $waktu = 'nono';
         }
@@ -434,10 +442,13 @@ class MonitroController extends Controller
         $date = date('Y-m-d'); 
         if(($now >= $a1) && ($now <= $ak1)) {
             $waktu = 'shift1';
+            $jadwal = date('Y-m-d').'Shift1';
         }elseif (($now >= $a2) && ($now <= $ak2)) {
             $waktu = 'shift2';
+            $jadwal = date('Y-m-d').'Shift2';
         }elseif (($now >= $a3) && ($now <= $ak3)) {
             $waktu = 'shift3';
+            $jadwal = date('Y-m-d', (strtotime ( '-1 day' ))).'Shift3';
         }elseif(($now >= $s1) && ($now <= $as1)) {
             $waktu = 'shift0';
         }else {
