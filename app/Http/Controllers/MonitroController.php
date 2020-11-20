@@ -410,7 +410,7 @@ class MonitroController extends Controller
             $image       = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('gambar');
             $nama        = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('name');
             $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('departemen');
-            $minus       = DB::table($inv)->where('jadwalmenu', $jadwal)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
+            $minus       = DB::table($inv)->where('jadwalmenu', $wow)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
             $jayam       = $total - $minus;
             event(new AyamListener($image, $nama, $total, 0));
             event(new TotalAyamListener($jayam));
