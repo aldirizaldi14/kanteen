@@ -474,7 +474,7 @@ class MonitroController extends Controller
             $image       = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('gambar');
             $nama        = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('name');
             $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('departemen');
-            $minus       = DB::table($database)->where('jadwalmenu', $jadwal)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
+            $minus       = DB::table('device3')->where('jadwalmenu', $jadwal)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
             $jaging       = $total - $minus;
             event(new DagingListener($image, $nama, $total, 1));
             event(new TotalDagingListener($jaging));
