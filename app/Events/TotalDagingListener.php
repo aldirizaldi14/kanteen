@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -9,18 +10,13 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class BroadcastListener implements ShouldBroadcast
+class TotalDagingListener implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
-    public $jayam;
-    public $jikan;
     public $jaging;
 
-  public function __construct($jayam, $jikan, $jaging)
+  public function __construct($jaging)
   {
-      $this->jayam = $jayam;
-      $this->jikan = $jikan;
       $this->jaging = $jaging;
   }
 
@@ -31,6 +27,6 @@ class BroadcastListener implements ShouldBroadcast
 
   public function broadcastAs()
   {
-      return 'jumlah';
+      return 'jaging';
   }
 }

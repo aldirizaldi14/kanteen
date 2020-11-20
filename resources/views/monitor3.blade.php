@@ -100,7 +100,7 @@ var pusher = new Pusher('f86fd724c21dfa97a627', {
 });
 
 var channel = pusher.subscribe('my-channel');
-channel.bind('my-event', function(data) {
+channel.bind('ayam', function(data) {
   alert(JSON.stringify(data));
 });
 </script>

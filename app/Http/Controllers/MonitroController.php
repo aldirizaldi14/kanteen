@@ -5,7 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-use App\Events\BroadcastListener;
+use App\Events\AyamListener;
+use App\Events\IkanListener;
+use App\Events\DagingListener;
+use App\Events\TotalAyamListener;
+use App\Events\TotalDagingListener;
+use App\Events\TotalIkanListener;
 use DataTables;
 
 class MonitroController extends Controller
@@ -223,6 +228,7 @@ class MonitroController extends Controller
            $shift  = 'Shift 1';
            $jadwal = date('Y-m-d').'Shift1';
            $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('makanan1');
+           $total  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('banyaknya1');
         }
         elseif (($now >= $a2) && ($now <= $ak2)) 
         {
@@ -230,6 +236,7 @@ class MonitroController extends Controller
             $shift  = 'Shift 2';
             $jadwal = date('Y-m-d').'Shift2';
             $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('makanan1');
+            $total  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('banyaknya2');
         }
         elseif (($now >= $a3) && ($now <= $ak3)) 
         {
@@ -237,6 +244,7 @@ class MonitroController extends Controller
             $shift  = 'Shift 3';
             $jadwal = date('Y-m-d', (strtotime ( '-1 day' ))).'Shift13';
             $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('makanan1');
+            $total  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('banyaknya3');
         }
         elseif (($now >= $s1) && ($now <= $as1)) 
         {
@@ -244,6 +252,7 @@ class MonitroController extends Controller
             $shift  = 'Shift 0';
             $jadwal = date('Y-m-d').'Shift1';
             $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('snack1')->value('snack1');
+            $total  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('jsnack1');
         }
 
         $cd1 = DB::table('device1')->where('jadwalmenu', $jadwal)->where('karyawan', $total)->where('shift', $shift)->count();
@@ -263,11 +272,25 @@ class MonitroController extends Controller
             DB::table('shiftkary')->where('nik', $total)->where('tanggal', $date)->where('shift', $waktu)->where('status', 0)->update([
                 'status' => 1,
             ]);
+            $image       = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('gambar');
+            $nama        = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('name');
+            $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('departemen');
+            $minus       = DB::table($database)->where('jadwalmenu', $jadwal)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
+            $jikan       = $total - $minus;
+            event(new IkanListener($image, $nama, $total, 1));
+            event(new TotalIkanListener($jikan));
             return 0;
         }
 
         }
         else {
+            $image       = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('gambar');
+            $nama        = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('name');
+            $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('departemen');
+            $minus       = DB::table($database)->where('jadwalmenu', $jadwal)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
+            $jikan       = $total - $minus;
+            event(new IkanListener($image, $nama, $nik, 0));
+            event(new TotalIkanListener($jikan));
             return 1;
         }
 
@@ -356,10 +379,24 @@ class MonitroController extends Controller
                 DB::table('shiftkary')->where('nik', $total)->where('tanggal', $date)->where('shift', $waktu)->where('status', 0)->update([
                     'status' => 1,
                 ]);
+                $image       = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('gambar');
+                $nama        = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('name');
+                $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('departemen');
+                $minus       = DB::table($database)->where('jadwalmenu', $jadwal)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
+                $jayam       = $total - $minus;
+                event(new IkanListener($image, $nama, $total, 1));
+                event(new TotalIkanListener($jayam));
                 return 0;
             }
         }
         else {
+            $image       = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('gambar');
+            $nama        = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('name');
+            $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('departemen');
+            $minus       = DB::table($database)->where('jadwalmenu', $jadwal)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
+            $jayam       = $total - $minus;
+            event(new IkanListener($image, $nama, $total, 0));
+            event(new TotalIkanListener($jayam));
             return 1;
         }
     }
@@ -433,10 +470,24 @@ class MonitroController extends Controller
             DB::table('shiftkary')->where('nik', $total)->where('tanggal', $date)->where('shift', $waktu)->where('status', 0)->update([
                 'status' => 1,
             ]);
+            $image       = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('gambar');
+            $nama        = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('name');
+            $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('departemen');
+            $minus       = DB::table($database)->where('jadwalmenu', $jadwal)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
+            $jaging       = $total - $minus;
+            event(new IkanListener($image, $nama, $total, 1));
+            event(new TotalIkanListener($jaging));
             return 0;
         }
         }
         else {
+            $image       = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('gambar');
+            $nama        = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('name');
+            $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('departemen');
+            $minus       = DB::table($database)->where('jadwalmenu', $jadwal)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
+            $jaging       = $total - $minus;
+            event(new IkanListener($image, $nama, $total, 0));
+            event(new TotalIkanListener($jaging));
             return 1;
         }
     }
@@ -449,7 +500,7 @@ class MonitroController extends Controller
         $image = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $nik)->value('gambar');
         $nama = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $nik)->value('name');
         $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $nik)->value('departemen');
-        event(new BroadcastListener($image, $nama, $nik, $departement));
+        event(new BroadcastListener($image, $nama, $nik));
         return "Event has been sent!";
     }
 }
