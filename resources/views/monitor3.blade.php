@@ -100,7 +100,13 @@ var pusher = new Pusher('f86fd724c21dfa97a627', {
 });
 
 var channel = pusher.subscribe('my-channel');
+channel.bind('ikan', function(data) {
+  alert(JSON.stringify(data));
+});
 channel.bind('ayam', function(data) {
+  alert(JSON.stringify(data));
+});
+channel.bind('daging', function(data) {
   alert(JSON.stringify(data));
 });
 </script>
