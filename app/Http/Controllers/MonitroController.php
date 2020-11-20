@@ -285,7 +285,7 @@ class MonitroController extends Controller
             $nama        = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('name');
             $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('departemen');
             $minus       = DB::table($database)->where('jadwalmenu', $jadwal)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
-            $jikan       = $total - $minus;
+            $jikan       = $makan - $minus;
             event(new IkanListener($image, $nama, $total, 1));
             event(new TotalIkanListener($jikan));
             return 0;
@@ -297,7 +297,7 @@ class MonitroController extends Controller
             $nama        = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('name');
             $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('departemen');
             $minus       = DB::table($inv)->where('jadwalmenu', $wow)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
-            $jikan       = $total - $minus;
+            $jikan       = $makan - $minus;
             event(new IkanListener($image, $nama, $nik, 0));
             event(new TotalIkanListener($jikan));
             return 1;
@@ -400,7 +400,7 @@ class MonitroController extends Controller
                 $nama        = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('name');
                 $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('departemen');
                 $minus       = DB::table($database)->where('jadwalmenu', $wow)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
-                $jayam       = $total - $minus;
+                $jayam       = $makan - $minus;
                 event(new AyamListener($image, $nama, $total, 1));
                 event(new TotalAyamListener($jayam));
                 return 0;
@@ -411,7 +411,7 @@ class MonitroController extends Controller
             $nama        = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('name');
             $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('departemen');
             $minus       = DB::table($inv)->where('jadwalmenu', $wow)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
-            $jayam       = $total - $minus;
+            $jayam       = $makan - $minus;
             event(new AyamListener($image, $nama, $total, 0));
             event(new TotalAyamListener($jayam));
             return 1;
@@ -498,7 +498,7 @@ class MonitroController extends Controller
             $nama        = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('name');
             $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('departemen');
             $minus       = DB::table('device3')->where('jadwalmenu', $jadwal)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
-            $jaging       = $total - $minus;
+            $jaging      = $makan - $minus;
             event(new DagingListener($image, $nama, $total, 1));
             event(new TotalDagingListener($jaging));
             return 0;
@@ -509,7 +509,7 @@ class MonitroController extends Controller
             $nama        = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('name');
             $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('departemen');
             $minus       = DB::table('device3')->where('jadwalmenu', $wow)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
-            $jaging       = $total - $minus;
+            $jaging       = $makan - $minus;
             event(new DagingListener($image, $nama, $total, 0));
             event(new TotalDagingListener($jaging));
             return 1;
