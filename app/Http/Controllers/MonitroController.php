@@ -224,7 +224,11 @@ class MonitroController extends Controller
             $inv = 'sarapan1';
             $wow = date('Y-m-d').'Shift1';
         }else {
-            $waktu = 'nono';
+            $waktu = 'Shift4';
+            $inv = 'sarapan1';
+            $wow = date('Y-m-d').'Shift4';
+            $makan  = DB::table('jadwalmenu')->where('id', $wow)->select('makanan1')->value('makanan1');
+            $totalmakan  = DB::table('jadwalmenu')->where('id', $wow)->select('makanan1')->value('banyaknya1');
         }
 
         $exist = DB::table('shiftkary')->where('nik', $total)->where('tanggal', $date)->where('shift', $waktu)->where('status', 0)->count();
@@ -237,7 +241,7 @@ class MonitroController extends Controller
            $shift  = 'Shift 1';
            $jadwal = date('Y-m-d').'Shift1';
            $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('makanan1');
-           $total  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('banyaknya1');
+           $totalmakan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('banyaknya1');
         }
         elseif (($now >= $a2) && ($now <= $ak2)) 
         {
@@ -245,7 +249,7 @@ class MonitroController extends Controller
             $shift  = 'Shift 2';
             $jadwal = date('Y-m-d').'Shift2';
             $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('makanan1');
-            $total  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('banyaknya2');
+            $totalmakan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('banyaknya1');
         }
         elseif (($now >= $a3) && ($now <= $ak3)) 
         {
@@ -253,7 +257,7 @@ class MonitroController extends Controller
             $shift  = 'Shift 3';
             $jadwal = date('Y-m-d', (strtotime ( '-1 day' ))).'Shift13';
             $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('makanan1');
-            $total  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('banyaknya3');
+            $totalmakan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('banyaknya1');
         }
         elseif (($now >= $s1) && ($now <= $as1)) 
         {
@@ -261,7 +265,7 @@ class MonitroController extends Controller
             $shift  = 'Shift 0';
             $jadwal = date('Y-m-d').'Shift1';
             $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('snack1')->value('snack1');
-            $total  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('jsnack1');
+            $totalmakan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan1')->value('jsnack1');
         }
 
         $cd1 = DB::table('device1')->where('jadwalmenu', $jadwal)->where('karyawan', $total)->where('shift', $shift)->count();
@@ -285,8 +289,8 @@ class MonitroController extends Controller
             $nama        = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('name');
             $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('departemen');
             $minus       = DB::table($database)->where('jadwalmenu', $jadwal)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
-            $jikan       = $makan - $minus;
-            event(new IkanListener($image, $nama, $total, 1));
+            $jikan       = $totalmakan - $minus;
+            event(new IkanListener($image, $nama, $total, $departement, 1));
             event(new TotalIkanListener($jikan));
             return 0;
         }
@@ -296,9 +300,9 @@ class MonitroController extends Controller
             $image       = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('gambar');
             $nama        = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('name');
             $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('departemen');
-            $minus       = DB::table($inv)->where('jadwalmenu', $wow)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
-            $jikan       = $makan - $minus;
-            event(new IkanListener($image, $nama, $nik, 0));
+            $minus       = DB::table($inv)->where('jadwalmenu', $wow)->where('shift', $waktu)->where('makanan', $makan)->where('status', 1)->count();
+            $jikan       = $totalmakan - $minus;
+            event(new IkanListener($image, $nama, $total, $departement, 0));
             event(new TotalIkanListener($jikan));
             return 1;
         }
@@ -344,6 +348,10 @@ class MonitroController extends Controller
             $wow = date('Y-m-d').'Shift1';
         }else {
             $waktu = 'nono';
+            $inv = 'sarapan2';
+            $wow = date('Y-m-d').'Shift4';
+            $makan  = DB::table('jadwalmenu')->where('id', $wow)->select('makanan2')->value('makanan2');
+            $totalmakan  = DB::table('jadwalmenu')->where('id', $wow)->select('makanan2')->value('banyaknya2');
         }
 
         $exist = DB::table('shiftkary')->where('nik', $total)->where('tanggal', $date)->where('shift', $waktu)->where('status', 0)->count();
@@ -356,6 +364,7 @@ class MonitroController extends Controller
                $shift  = 'Shift 1';
                $jadwal = date('Y-m-d').'Shift1';
                $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan2')->value('makanan2');
+               $totalmakan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan2')->value('banyaknya2');
             }
             elseif (($now >= $a2) && ($now <= $ak2)) 
             {
@@ -363,6 +372,7 @@ class MonitroController extends Controller
                 $shift  = 'Shift 2';
                 $jadwal = date('Y-m-d').'Shift2';
                 $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan2')->value('makanan2');
+                $totalmakan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan2')->value('banyaknya2');
             }
             elseif (($now >= $a3) && ($now <= $ak3)) 
             {
@@ -370,6 +380,7 @@ class MonitroController extends Controller
                 $shift  = 'Shift 3';
                 $jadwal = date('Y-m-d', (strtotime ( '-1 day' ))).'Shift13';
                 $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan2')->value('makanan2');
+                $totalmakan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan2')->value('banyaknya2');
             }
             elseif (($now >= $s1) && ($now <= $as1)) 
             {
@@ -377,6 +388,7 @@ class MonitroController extends Controller
                 $shift  = 'Shift 0';
                 $jadwal = date('Y-m-d').'Shift1';
                 $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('snack2')->value('snack2');
+                $totalmakan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('sarapan2')->value('jsnack2');
             }
 
             $cd1 = DB::table('device1')->where('jadwalmenu', $jadwal)->where('karyawan', $total)->where('shift', $shift)->count();
@@ -400,8 +412,8 @@ class MonitroController extends Controller
                 $nama        = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('name');
                 $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('departemen');
                 $minus       = DB::table($database)->where('jadwalmenu', $wow)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
-                $jayam       = $makan - $minus;
-                event(new AyamListener($image, $nama, $total, 1));
+                $jayam       = 10 - $minus;
+                event(new AyamListener($image, $nama, $total, $departement, 1));
                 event(new TotalAyamListener($jayam));
                 return 0;
             }
@@ -410,9 +422,9 @@ class MonitroController extends Controller
             $image       = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('gambar');
             $nama        = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('name');
             $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('departemen');
-            $minus       = DB::table($inv)->where('jadwalmenu', $wow)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
-            $jayam       = $makan - $minus;
-            event(new AyamListener($image, $nama, $total, 0));
+            $minus       = DB::table($inv)->where('jadwalmenu', $wow)->where('shift', $waktu)->where('makanan', $makan)->where('status', 1)->count();
+            $jayam       = 10 - $minus;
+            event(new AyamListener($image, $nama, $total, $departement, 0));
             event(new TotalAyamListener($jayam));
             return 1;
         }
@@ -451,8 +463,10 @@ class MonitroController extends Controller
             $wow = date('Y-m-d', (strtotime ( '-1 day' ))).'Shift3';
         }elseif(($now >= $s1) && ($now <= $as1)) {
             $waktu = 'shift0';
+            $wow = date('Y-m-d').'Shift0';
         }else {
             $waktu = 'nono';
+            $wow = date('Y-m-d').'Shift0';
         }
 
         $exist = DB::table('shiftkary')->where('nik', $total)->where('tanggal', $date)->where('shift', $waktu)->where('status', 0)->count();
@@ -463,16 +477,22 @@ class MonitroController extends Controller
         {
            $shift  = 'Shift 1';
            $jadwal = date('Y-m-d').'Shift1';
+           $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan3')->value('makanan3');
+           $totalmakan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan3')->value('banyaknya3');
         }
         elseif (($now >= $a2) && ($now <= $ak2)) 
         {
             $shift  = 'Shift 2';
             $jadwal = date('Y-m-d').'Shift2';
+            $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan3')->value('makanan3');
+            $totalmakan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan3')->value('banyaknya3');
         }
         elseif (($now >= $a3) && ($now <= $ak3)) 
         {
             $shift  = 'Shift 3';
             $jadwal = date('Y-m-d', (strtotime ( '-1 day' ))).'Shift3';
+            $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan3')->value('makanan3');
+            $totalmakan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan3')->value('banyaknya3');
         }
 
         $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan2')->value('makanan2');
@@ -498,8 +518,8 @@ class MonitroController extends Controller
             $nama        = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('name');
             $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('departemen');
             $minus       = DB::table('device3')->where('jadwalmenu', $jadwal)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
-            $jaging      = $makan - $minus;
-            event(new DagingListener($image, $nama, $total, 1));
+            $jaging      = $totalmakan - $minus;
+            event(new DagingListener($image, $nama, $total, $departement, 1));
             event(new TotalDagingListener($jaging));
             return 0;
         }
@@ -509,8 +529,8 @@ class MonitroController extends Controller
             $nama        = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('name');
             $departement = DB::table('karyawan')->select('gambar', 'name', 'departemen')->where('nik', $total)->value('departemen');
             $minus       = DB::table('device3')->where('jadwalmenu', $wow)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
-            $jaging       = $makan - $minus;
-            event(new DagingListener($image, $nama, $total, 0));
+            $jaging      = $totalmakan - $minus;
+            event(new DagingListener($image, $nama, $total, $departement, 0));
             event(new TotalDagingListener($jaging));
             return 1;
         }
