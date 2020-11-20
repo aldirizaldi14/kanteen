@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use App\Events\BroadcastListener;
 use App\Events\AyamListener;
 use App\Events\IkanListener;
 use App\Events\DagingListener;
