@@ -11,19 +11,19 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                    <img src="/fimages/Dummy.jpg" class="img-fluid" alt="Responsive image" >
+                    <img id="img_1" src="/fimages/Dummy.jpg" class="img-fluid" alt="Responsive image" >
                     </div>
                     <div class="row">
                     <div class="col-sm-4">Nama</div>
-                    <div class="col-sm-8">: </div>
+                    <div id="name_1" class="col-sm-8">: </div>
                     </div>
                     <div class="row">
                     <div class="col-sm-4">Nik</div>
-                    <div class="col-sm-8">: </div>
+                    <div id="id_1" class="col-sm-8">: </div>
                     </div>
                     <div class="row">
                     <div class="col-sm-4">Departement</div>
-                    <div class="col-sm-8">: </div>
+                    <div id="dept_1" class="col-sm-8">: </div>
                     </div>
                 </div>
                 <div class="card-footer" align="left">
@@ -38,19 +38,19 @@
                 </div>
                 <div class="card-body">
                 <div class="row">
-                    <img src="/fimages/Dummy.jpg" class="img-fluid" alt="Responsive image" >
+                    <img id="img_2" src="/fimages/Dummy.jpg" class="img-fluid" alt="Responsive image" >
                     </div>
                     <div class="row">
                     <div class="col-sm-4">Nama</div>
-                    <div class="col-sm-8">: </div>
+                    <div id="name_2" class="col-sm-8">: </div>
                     </div>
                     <div class="row">
                     <div class="col-sm-4">Nik</div>
-                    <div class="col-sm-8">: </div>
+                    <div id="id_2" class="col-sm-8">: </div>
                     </div>
                     <div class="row">
                     <div class="col-sm-4">Departement</div>
-                    <div class="col-sm-8">: </div>
+                    <div id="dept_2" class="col-sm-8">: </div>
                     </div>
                 </div>
                 <div class="card-footer" align="left">
@@ -65,19 +65,19 @@
                 </div>
                 <div class="card-body">
                 <div class="row">
-                    <img src="/fimages/Dummy.jpg" class="img-fluid" alt="Responsive image" >
+                    <img id="img_3" src="/fimages/Dummy.jpg" class="img-fluid" alt="Responsive image" >
                     </div>
                     <div class="row">
                     <div class="col-sm-4">Nama</div>
-                    <div class="col-sm-8">: </div>
+                    <div id="name_3" class="col-sm-8">: </div>
                     </div>
                     <div class="row">
                     <div class="col-sm-4">Nik</div>
-                    <div class="col-sm-8">: </div>
+                    <div id="id_3" class="col-sm-8">: </div>
                     </div>
                     <div class="row">
                     <div class="col-sm-4">Departement</div>
-                    <div class="col-sm-8">: </div>
+                    <div id="dept_3" class="col-sm-8">: </div>
                     </div>
                 </div>
                 <div class="card-footer" align="left">
@@ -90,23 +90,12 @@
 @stop
 @push('scripts')
 <script>
-
-// Enable pusher logging - don't include this in production
-Pusher.logToConsole = true;
-
-var pusher = new Pusher('f86fd724c21dfa97a627', {
-  cluster: 'ap1'
-});
-
-var channel = pusher.subscribe('my-channel');
-channel.bind('ikan', function(data) {
+var channel = Echo.channel('my-channel');
+channel.listen('.my-event', function(data) {
   alert(JSON.stringify(data));
-});
-channel.bind('ayam', function(data) {
-  alert(JSON.stringify(data));
-});
-channel.bind('daging', function(data) {
-  alert(JSON.stringify(data));
+  $("#name_1").text(": " + "Hello world!");
+  $("#id_1").text(": " + "Hello world!");
+  $("#dept_1").text(": " + "Hello world!");
 });
 </script>
 @endpush

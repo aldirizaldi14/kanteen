@@ -11,7 +11,7 @@
     <!-- Scripts -->
     <script src="{{ asset('/js/jquery.min.js') }}"></script>
     <script src="{{ asset('/js/app.js') }}"></script>
-    <script src="{{ asset('/js/bootstrap.min.js') }}" defer></script>
+    <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
 
     <!-- Styles -->
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
