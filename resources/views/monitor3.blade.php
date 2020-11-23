@@ -9,9 +9,9 @@
                 <div class="card-header">
                     Ikan
                 </div>
-                <div class="card-body">
+                <div id="body_1" class="card-body">
                     <div class="row">
-                    <img id="img_1" src="/fimages/Dummy.jpg" class="img-fluid" alt="Responsive image" >
+                    <img id="img_1" src="/kimages/Dummy.jpg" class="img-fluid" alt="Responsive image" >
                     </div>
                     <div class="row">
                     <div class="col-sm-4">Nama</div>
@@ -36,9 +36,9 @@
                 <div class="card-header">
                     Ayam
                 </div>
-                <div class="card-body">
+                <div id="body_2" class="card-body">
                 <div class="row">
-                    <img id="img_2" src="/fimages/Dummy.jpg" class="img-fluid" alt="Responsive image" >
+                    <img id="img_2" src="/kimages/Dummy.jpg" class="img-fluid" alt="Responsive image" >
                     </div>
                     <div class="row">
                     <div class="col-sm-4">Nama</div>
@@ -63,9 +63,9 @@
                 <div class="card-header" align="center">
                     Daging
                 </div>
-                <div class="card-body">
+                <div id="body_3" class="card-body">
                 <div class="row">
-                    <img id="img_3" src="/fimages/Dummy.jpg" class="img-fluid" alt="Responsive image" >
+                    <img id="img_3" src="/kimages/Dummy.jpg" class="img-fluid" alt="Responsive image" >
                     </div>
                     <div class="row">
                     <div class="col-sm-4">Nama</div>
@@ -91,11 +91,38 @@
 @push('scripts')
 <script>
 var channel = Echo.channel('my-channel');
-channel.listen('.my-event', function(data) {
-  alert(JSON.stringify(data));
-  $("#name_1").text(": " + "Hello world!");
-  $("#id_1").text(": " + "Hello world!");
-  $("#dept_1").text(": " + "Hello world!");
+channel.listen('.ikan', function(data) {
+  $("#name_1").text(": " + data.nama);
+  $("#id_1").text(": " + data.nik);
+  $("#dept_1").text(": " + data.departement);
+  $("#img_1").attr("src", "/kimages/" + data.image); 
+  if (data.status == 0) {
+    $("#body_1").css("background-color", "lightgreen");
+  }else {
+    $("#body_1").css("background-color", "red");
+  }
+});
+channel.listen('.ayam', function(data) {
+  $("#name_2").text(": " + data.nama);
+  $("#id_2").text(": " + data.nik);
+  $("#dept_2").text(": " + data.departement);
+  $("#img_2").attr("src", "/kimages/" + data.image);
+  if (data.status == 0) {
+    $("#body_2").css("background-color", "lightgreen");
+  }else {
+    $("#body_2").css("background-color", "red");
+  }
+});
+channel.listen('.daging', function(data) {
+  $("#name_3").text(": " + data.nama);
+  $("#id_3").text(": " + data.nik);
+  $("#dept_3").text(": " + data.departement);
+  $("#img_3").attr("src", "/kimages/" + data.image);
+  if (data.status == 0) {
+    $("#body_3").css("background-color", "lightgreen");
+  }else {
+    $("#body_3").css("background-color", "red");
+  }
 });
 </script>
 @endpush

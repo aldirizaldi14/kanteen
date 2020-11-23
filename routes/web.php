@@ -85,4 +85,5 @@ Route::get('/datam/{id}', 'HomeController@detaildatam')->middleware('can:isAdmin
 Route::get('/detaildata/{id}', 'HomeController@dataid')->middleware('can:isAdmin');
 Route::get('/data/makan', 'HomeController@datamakan')->middleware('can:isAdmin');
 
-Route::get('/test/{nik}', 'MonitroController@test');
+Route::get('/test/{nik}', 'MonitroController@testnilai');
+Route::get('/tut', 'MonitroController@test');
