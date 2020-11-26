@@ -67,7 +67,7 @@
                         <div class="col-sm-3">
                             Nama
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-9">
                             <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}"
                                 required autofocus>
                         </div>
@@ -78,7 +78,7 @@
                         <div class="col-sm-3">
                             Username
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-9">
                             <input id="username" type="text" min="0" class="form-control" name="username"
                                 value="{{ old('username') }}" required autofocus>
                         </div>
@@ -89,12 +89,27 @@
                         <div class="col-sm-3">
                             Departement
                         </div>
-                        <div class="col-sm-6">
-                            <select id="departement" name="departement" class="custom-select" onchange="test()">
+                        <div class="col-sm-9">
+                            <select id="departement" name="departement" class="custom-select">
+                                <option value=""></option>
                                 @foreach ($dept as $dp)
                                 <option value="{{$dp->main}}">{{$dp->main}}</option>
                                 @endforeach
                             </select>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Section -->
+                    <div class="row">
+                        <div class="col-sm-3">
+                            Section
+                        </div>
+                        <div class="col-sm-9">
+                            <table id="tabel">
+                                <tr>
+                                    <td></td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                     <br>
@@ -103,7 +118,7 @@
                         <div class="col-sm-3">
                             Password
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-9">
                             <input id="password1" minlength="4" type="password" class="form-control" name="password1"
                                 value="{{ old('password1') }}" required autofocus>
                         </div>
@@ -113,7 +128,7 @@
                     <div class="row">
                         <div class="col-sm-3">
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-9">
                             <input id="password2" minlength="4" type="password" class="form-control" name="password2"
                                 value="{{ old('password2') }}" required autofocus>
                         </div>
@@ -143,6 +158,19 @@ function checkPassword(form) {
         return true;
     }
 }
+$(function() {
+    $('#departement').on('change', function() {
+        axios.post('{{ route('data1-json.data1') }}', {
+                    departement: $(this).val()
+                })
+            .then(function(response) {
+                $('#tabel').empty();
+                $.each(response.data, function(departement, departement) {
+                    $('#tabel').append("<tr><td><input type='checkbox'name='opsi[]' class='form-check-input' value='"+departement+"'><label class='form-check-label' for='vehicle[]'> "+departement+"</label></td></tr>");
+                })
+            });
+    });
+});
 </script>
 
 @endsection

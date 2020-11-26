@@ -174,7 +174,7 @@ class UserController extends Controller
         }
         else {
             $karyawan = DB::table('karyawan')->where('departemen', $a1->departement)->orderBy('name', 'asc')->get();
-            $data = DB::table('departement')->select('departement')->where('main', $a1->departement)->orderBy('main', 'asc')->get();
+            $data = DB::table('opsi_user')->select('opsi')->where('username', $a1->username)->orderBy('opsi', 'asc')->get();
         }
         return view('settingshift', ['dept' => $data, 'data' => $karyawan, 'i' => $index]);
     }
@@ -379,6 +379,7 @@ class UserController extends Controller
         $a1 = Auth::user();
         if ($a1->role == 'admin' || $a1->role == 'developer') {
             DB::table('users')->where('username', $id)->delete();
+            DB::table('opsi_user')->where('username', $id)->delete();
             return redirect('/user');
         }
         else {
@@ -389,7 +390,8 @@ class UserController extends Controller
     public function usersimpan(Request $request) {
         $a1 = Auth::user();
         $rules = [
-            'username' => ['required', 'string', 'max:150', 'unique:users'],
+            'username' => ['required', 'string', 'max:100', 'unique:users'],
+            'opsi' => ['required'],
         ];
         $this->validate($request, $rules);
         if ($a1->role == 'admin' || $a1->role == 'developer') {
@@ -400,6 +402,12 @@ class UserController extends Controller
                 'password' => bcrypt($request->password1),
                 'role' => 'user',
             ]);
+            for ($htng = 0; $htng < count($request->opsi); $htng++) {
+                DB::table('opsi_user')->insert([
+                    'username' => $request->username,
+                    'opsi' => $request->opsi[$htng],
+                ]);
+            }
             return redirect('/user');
         }
         else {

@@ -13,9 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes([
+    'register' => false, // Registration Routes...
+    'reset' => false, // Password Reset Routes...
+    'verify' => false, //
+]);
+
 Route::get('/', 'MonitroController@monitor1');
 Route::get('/monitor2', 'MonitroController@monitor2');
-Route::get('/monitor3', 'MonitroController@monitor3');
 
 Route::get('/refresh/{id}', 'UserController@refresh')->middleware('can:isUser');
 Route::get('/datashift', 'UserController@datashift')->middleware('can:isUser');
@@ -40,11 +45,8 @@ Route::get('/user', 'UserController@user')->middleware('can:isUser');
 Route::get('/userminus/{id}', 'UserController@userhapus')->middleware('can:isUser');
 Route::post('/usersimpan', 'UserController@usersimpan')->middleware('can:isUser');
 
-Auth::routes([
-    'register' => false, // Registration Routes...
-    'reset' => false, // Password Reset Routes...
-    'verify' => false, //
-]);
+// JSON 
+Route::post('data1-json', 'MonitroController@select1')->name('data1-json.data1');
 
 // Route AJAX
 Route::get('/server_side/scripts/{id}', 'MonitroController@ajax');
@@ -84,6 +86,3 @@ Route::get('/data', 'HomeController@data')->middleware('can:isAdmin');
 Route::get('/datam/{id}', 'HomeController@detaildatam')->middleware('can:isAdmin');
 Route::get('/detaildata/{id}', 'HomeController@dataid')->middleware('can:isAdmin');
 Route::get('/data/makan', 'HomeController@datamakan')->middleware('can:isAdmin');
-
-Route::get('/test/{nik}', 'MonitroController@testnilai');
-Route::get('/tut', 'MonitroController@test');

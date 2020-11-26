@@ -100,6 +100,10 @@ class HomeController extends Controller
     public function karyawanalters(Request $request)
     {
         $iname = DB::table('karyawan')->select('gambar')->where('id', $request->id)->value('gambar');
+        $bag1  = substr($request->nik,2,-6);
+        $bag2  = substr($request->nik,6);
+        $rfid  = $bag1.$bag2;
+
         if ($request->hasFile('file')) {
             if(strtolower($iname) == "dummy.png" || strtolower($iname) == "dummy.jpg") {
 
@@ -113,6 +117,7 @@ class HomeController extends Controller
 
             DB::table('karyawan')->where('id', $request->id)->update([
                 'nik' => $request->nik,
+                'rfid' => $rfid,
                 'name' => $request->nama,
                 'departemen' => $request->departemen,
                 'remark' => $request->remark,
@@ -121,6 +126,7 @@ class HomeController extends Controller
         } else {
             DB::table('karyawan')->where('id', $request->id)->update([
                 'nik' => $request->nik,
+                'rfid' => $rfid,
                 'name' => $request->nama,
                 'departemen' => $request->departemen,
                 'remark' => $request->remark,
@@ -154,12 +160,16 @@ class HomeController extends Controller
 
     public function karyawansimpan(Request $request)
     {
+        $bag1  = substr($request->nik,2,-6);
+        $bag2  = substr($request->nik,6);
+        $rfid  = $bag1.$bag2;
         $file = $request->file('file');
         $nama_file = $file->getClientOriginalName();
         $tujuan_upload = 'kimages';
         $file->move($tujuan_upload, $nama_file);
         DB::table('karyawan')->insert([
             'nik' => $request->nik,
+            'rfid' => $rfid,
             'name' => $request->nama,
             'departemen' => $request->departemen,
             'remark' => $request->remark,

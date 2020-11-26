@@ -13,6 +13,11 @@
                 <img src="/fimages/{{$ikang}}" class="img-fluid" alt="Responsive image" >
                 </div>
                 <div class="card-footer">
+                <div class="row">
+                <div class="col-sm-12" id="jumlah_1">
+                {{$sisikan}}
+                </div>
+                </div>
                 
   </div>
             </div>
@@ -27,6 +32,11 @@
                     <img src="/fimages/{{$ayamg}}" class="img-fluid" alt="Responsive image" >
                 </div>
                 <div class="card-footer">
+                <div class="row">
+                <div class="col-sm-12" id="jumlah_2">
+                {{$sisayam}}
+                </div>
+                </div>
                 
   </div>
             </div>
@@ -41,7 +51,12 @@
                 <img src="/fimages/{{$gdaging}}" class="img-fluid" alt="Responsive image" >
                 </div>
                 <div class="card-footer">
-  </div>
+                <div class="row">
+                <div class="col-sm-12" id="jumlah_3">
+                {{$sisdaging}}
+                </div>
+                </div>
+                </div>
             </div>
         </div>
     </div>
@@ -74,9 +89,17 @@ function refreshAt(hours, minutes, seconds) {
     var timeout = (then.getTime() - now.getTime());
     setTimeout(function() { window.location.reload(true); }, timeout);
 }
-
-setInterval(function(){
-    $('#example1').DataTable().ajax.reload();
-}, 20000);
+</script>
+<script>
+var channel = Echo.channel('my-channel');
+channel.listen('.jikan', function(data) {
+  $("#jumlah_1").text(data.jikan);
+});
+channel.listen('.jayam', function(data) {
+  $("#Jumlah_2").text(data.jayam);
+});
+channel.listen('.jaging', function(data) {
+  $("#Jumlah_3").text(data.jaging);
+});
 </script>
 @endpush
