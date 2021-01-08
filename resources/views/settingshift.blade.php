@@ -11,12 +11,18 @@
                 <div class="col-sm-2"> Departement</div>
                 <div class="col-sm-4">
                     <select name="departement" id="departement" data-live-search="true" class="selectpicker w-100">
-                        @foreach ($dept as $dp)
+                    @can('isAdmin')
+                    @foreach ($dept as $dp)
                         <option value="{{$dp->departement}}">{{$dp->departement}}</option>
                         @endforeach
+                    @elsecan
+                        @foreach ($dept as $dp)
+                        <option value="{{$dp->opsi}}">{{$dp->opsi}}</option>
+                        @endforeach
+                    @endcan
                     </select>
                 </div>
-            </div>
+            </div>s
             <br>
             <!-- Jumlah Karyawan -->
             <div class="row">

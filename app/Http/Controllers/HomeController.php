@@ -117,7 +117,7 @@ class HomeController extends Controller
 
             DB::table('karyawan')->where('id', $request->id)->update([
                 'nik' => $request->nik,
-                'rfid' => $rfid,
+                'rfid' => $request->rfid,
                 'name' => $request->nama,
                 'departemen' => $request->departemen,
                 'remark' => $request->remark,
@@ -126,7 +126,7 @@ class HomeController extends Controller
         } else {
             DB::table('karyawan')->where('id', $request->id)->update([
                 'nik' => $request->nik,
-                'rfid' => $rfid,
+                'rfid' => $request->rfid,
                 'name' => $request->nama,
                 'departemen' => $request->departemen,
                 'remark' => $request->remark,
@@ -169,7 +169,7 @@ class HomeController extends Controller
         $file->move($tujuan_upload, $nama_file);
         DB::table('karyawan')->insert([
             'nik' => $request->nik,
-            'rfid' => $rfid,
+            'rfid' => $request->rfid,
             'name' => $request->nama,
             'departemen' => $request->departemen,
             'remark' => $request->remark,
@@ -449,6 +449,5 @@ class HomeController extends Controller
         $device3 = DB::table('device3')->where('jadwalmenu', $id)->join('karyawan', 'device3.karyawan', '=', 'karyawan.nik')->get();
         $data = DB::table('jadwalmenu')->where('id', $id)->get();
         return view('detaildatam', ['data' => $data ,'data1' => $sarapan1, 'data2' => $sarapan2, 'data3' => $device1, 'data4' => $device2, 'data5' => $device3,]);
-
     }
 }

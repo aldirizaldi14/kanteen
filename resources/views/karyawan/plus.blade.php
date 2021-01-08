@@ -31,6 +31,16 @@
                 </div>
             </div>
             <br>
+            <!-- NIK -->
+            <div class="row">
+                <div class="col-sm-2">
+                    RFID
+                </div>
+                <div class="col-sm-4">
+                    <input id="rfid" type="number" min="0" class="form-control" name="rfid" value="{{ old('rfid') }}" required autofocus>
+                </div>
+            </div>
+            <br>
             <!-- Dept -->
             <div class="row">
                 <div class="col-sm-2">

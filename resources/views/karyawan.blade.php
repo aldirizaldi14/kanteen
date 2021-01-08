@@ -17,6 +17,7 @@
         <thead>
             <tr>
                 <th>No</th>
+                <th>RFID</th>
                 <th>NIK</th>
                 <th>Nama</th>
                 <th>Deptartemen</th>
@@ -27,6 +28,7 @@
             @foreach ($data as $dt)
             <tr>
             <td>{{$i++}}</td>
+            <td>{{$dt->rfid}}</td>
                 <td>{{$dt->nik}}</td>
                 <td>{{$dt->name}}</td>
                 <td>@if ($dt->departemen == 'Other') {{$dt->departemen}} ({{$dt->remark}}) @else {{$dt->departemen}} @endif</td>

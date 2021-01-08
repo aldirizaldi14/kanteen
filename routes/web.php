@@ -20,7 +20,9 @@ Auth::routes([
 ]);
 
 Route::get('/', 'MonitroController@monitor1');
+Route::get('/monitor0', 'MonitroController@monitor0');
 Route::get('/monitor2', 'MonitroController@monitor2');
+Route::get('/monitor3', 'MonitroController@monitor3');
 
 Route::get('/refresh/{id}', 'UserController@refresh')->middleware('can:isUser');
 Route::get('/datashift', 'UserController@datashift')->middleware('can:isUser');

@@ -16,6 +16,11 @@ use DataTables;
 
 class MonitroController extends Controller
 {
+    public function monitor0()
+    {
+        return view('monitor0');
+    }
+
     public function monitor1()
     {
         // $now = date('H:i');
@@ -85,7 +90,7 @@ class MonitroController extends Controller
             $sel2 = DB::table('jadwalmenu')->select('snack2')->where('id', $date)->value('snack2');
             $ikan = DB::table('makanan')->select('gambar')->where('jenis', 'sarapan')->where('nama', $sel1)->value('gambar');
             $ayam = DB::table('makanan')->select('gambar')->where('jenis', 'sarapan')->where('nama', $sel2)->value('gambar');
-            $jum1 = DB::table('jadwalmenu')->select('jsnack1')->where('id', $date)->value('jsnack1');
+            $jum1 = DB::table('jadwalmenu')->select('jsnack1')->where('id', $date)->value('jsnack1') - DB::table('jadwalmenu')->select('jsnack1')->where('id', $date)->value('jsnack1');
             $jum2 = DB::table('jadwalmenu')->select('jsnack2')->where('id', $date)->value('jsnack2');
             return view('monitor1', ['data1' => $sel1, 'data2' => $sel2, 'data3' => '', 'ikang' => $ikan, 'ayamg' => $ayam, 'gdaging' => '',
             'sisikan' => $jum1, 'sisayam' => $jum2, 'sisdaging' => '',
@@ -110,6 +115,26 @@ class MonitroController extends Controller
         if ((($now >= $a1) && ($now <= $ak1)) || (($now >= $a2) && ($now <= $ak2)) || (($now >= $a3) && ($now <= $ak3)) || (($now >= $s1) && ($now <= $as1)) )
                 {
                     return view('monitor2');
+                }
+                else {
+                    return view('monitor0');
+                }
+    }
+
+    public function monitor3()
+    {
+        $now = date('H:i');
+        $s1  = date('H:i', strtotime("06:00"));
+        $as1 = date('H:i', strtotime("07:30"));
+        $a1  = date('H:i', strtotime("11:00"));
+        $ak1 = date('H:i', strtotime("13:20"));
+        $a2  = date('H:i', strtotime("17:00"));
+        $ak2 = date('H:i', strtotime("19:15"));
+        $a3  = date('H:i', strtotime("02:00"));
+        $ak3 = date('H:i', strtotime("03:15"));
+        if ((($now >= $a1) && ($now <= $ak1)) || (($now >= $a2) && ($now <= $ak2)) || (($now >= $a3) && ($now <= $ak3)) || (($now >= $s1) && ($now <= $as1)) )
+                {
+                    return view('monitor3');
                 }
                 else {
                     return view('monitor0');
@@ -208,7 +233,7 @@ class MonitroController extends Controller
 
     public function ikan($id) {
 
-        $hex = substr(hexdec($id),0, -6);
+        $hex = hexdec($id);
         $temp  = DB::table('karyawan')->select('nik')->where('rfid', $hex)->value('nik');
 
         $now  = date('H:i');
@@ -312,7 +337,7 @@ class MonitroController extends Controller
     // =============================================
     public function ayam($id) { 
 
-        $hex = substr(hexdec($id),0, -6);
+        $hex = hexdec($id);
         $temp  = DB::table('karyawan')->select('nik')->where('rfid', $hex)->value('nik');
 
         $now = date('H:i');
@@ -417,7 +442,7 @@ class MonitroController extends Controller
 
     public function daging($id) {
 
-        $hex = substr(hexdec($id),0, -6);
+        $hex = hexdec($id);
         $temp  = DB::table('karyawan')->select('nik')->where('rfid', $hex)->value('nik');
 
         $now = date('H:i');

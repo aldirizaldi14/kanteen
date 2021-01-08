@@ -60,7 +60,9 @@ class UserController extends Controller
     public function datashiftes(Request $request){
 
         for ($count = 0; $count < count($request->data); $count++) {
+            
             if ($request->shift == 'longshift1') {
+                if (DB::table('shiftkary')->where('shift', 'shift1')->where('tanggal', $request->date)->where('nik', $request->data[$count])->doesntExist() && DB::table('shiftkary')->where('shift', 'shift2')->where('tanggal', $request->date)->where('nik', $request->data[$count])->doesntExist()) {
                 DB::table('shiftkary')->insert([
                     'id' => 'S0'. date('Ymd', strtotime($request->date)).date('His').$request->data[$count].$count,
                     'id_data' => $request->id,
@@ -82,8 +84,18 @@ class UserController extends Controller
                     'nik' =>  $request->data[$count],
                     'shift' => 'shift2',
                 ]);
+                $new = DB::table('datadepartement')->where('id', $request->id)->select($request->shift)->value($request->shift) + 1;
+                DB::table('datadepartement')->where('id', $request->id)->update([
+                    $request->shift => $new
+                ]);
+                }
+                else 
+                {
+                    // Paketan Doesnt exist
+                }
             }
             elseif ($request->shift == 'longshift2') {
+                if (DB::table('shiftkary')->where('shift', 'shift2')->where('tanggal', $request->date)->where('nik', $request->data[$count])->doesntExist() && DB::table('shiftkary')->where('shift', 'shift3')->where('tanggal', $request->date)->where('nik', $request->data[$count])->doesntExist()) {
                 DB::table('shiftkary')->insert([
                     'id' => 'S2'. date('Ymd', strtotime($request->date)).date('His').$request->data[$count].$count,
                     'id_data' => $request->id,
@@ -98,8 +110,18 @@ class UserController extends Controller
                     'nik' =>  $request->data[$count],
                     'shift' => 'shift3',
                 ]);
+                $new = DB::table('datadepartement')->where('id', $request->id)->select($request->shift)->value($request->shift) + 1;
+                DB::table('datadepartement')->where('id', $request->id)->update([
+                    $request->shift => $new
+                ]);
+            }
+            else 
+            {
+                // Paketan Doesnt exist
+            }
             }
             else {
+                if (DB::table('shiftkary')->where('shift', $request->shift)->where('tanggal', $request->date)->where('nik', $request->data[$count])->doesntExist()) {
                 if ($request->shift == 'shift1') {
                     DB::table('shiftkary')->insert([
                         'id' => 'S1'.date('Ymd', strtotime($request->date)).date('His').$request->data[$count].$count,
@@ -134,14 +156,18 @@ class UserController extends Controller
                         'shift' => 'shift3',
                     ]);
                 }
-
+                $new = DB::table('datadepartement')->where('id', $request->id)->select($request->shift)->value($request->shift) + 1;
+                DB::table('datadepartement')->where('id', $request->id)->update([
+                    $request->shift => $new
+                ]);
             }
-            
+            else 
+            {
+                // Paketan Doesnt exist
+            }
+            }
+
         }
-        $new = DB::table('datadepartement')->where('id', $request->id)->select($request->shift)->value($request->shift) + $count;
-        DB::table('datadepartement')->where('id', $request->id)->update([
-            $request->shift => $new
-        ]);
         return redirect('/datashift/'.$request->id);
     }
 

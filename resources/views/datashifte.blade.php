@@ -21,10 +21,10 @@
                 <div class="col-sm-2">
                     <select name="shift" class="form-control" required id="shift">
                         <option value="shift1">Shift 1</option>
-                        <option value="longshift1">Long Shift 1</option>
                         <option value="shift2">Shift 2</option>
-                        <option value="longshift2">Long Shift 2</option>
                         <option value="shift3">Shift 3</option>
+                        <option value="longshift1">Long Shift 1</option>
+                        <option value="longshift2">Long Shift 2</option>
                     </select>
                 </div>
             </div>

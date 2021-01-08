@@ -96,6 +96,7 @@
                                     <a class="dropdown-item" href="/dashboard">Dashboard</a>
                                     <a class="dropdown-item" href="/">Monitor 1</a>
                                     <a class="dropdown-item" href="/monitor2">Monitor 2</a>
+                                    <a class="dropdown-item" href="/monitor3">Monitor 3</a>
                                     <a class="dropdown-item" href="/changepassword">Rubah Password</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
