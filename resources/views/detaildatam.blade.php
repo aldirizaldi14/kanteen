@@ -52,7 +52,7 @@
 
     <div class="row justify-content-center align-items-center">
     <div class="col-sm-12">
-    <table id="data" class="display" style="width:100%">
+    <table id="example1" class="display" style="width:100%">
                     <thead>
                         <tr>
                             <th>Nik Karyawan</th>
@@ -119,14 +119,18 @@
 </div>
 <script>
         $(document).ready(function() {
-            $('table.display').DataTable({
+            $('#example1').DataTable({
                 order: [[0, 'desc']],
                 scrollY: '50vh',
                 scrollX: true,
                 scrollCollapse: true,
                 paging: false,
                 info: false,
-                searching: false
+                searching: false,
+                dom: 'Bfrtip',
+                buttons: [
+                    'excelHtml5',
+                ]
             });
         });
     </script>
