@@ -22,7 +22,7 @@
                     @endcan
                     </select>
                 </div>
-            </div>s
+            </div>
             <br>
             <!-- Jumlah Karyawan -->
             <div class="row">

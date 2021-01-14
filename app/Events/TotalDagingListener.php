@@ -13,10 +13,12 @@ class TotalDagingListener implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $jaging;
+    public $status;
 
-  public function __construct($jaging)
+  public function __construct($jaging, $status)
   {
       $this->jaging = $jaging;
+      $this->status = $status;
   }
 
   public function broadcastOn()

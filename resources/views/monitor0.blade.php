@@ -4,7 +4,7 @@
 <div class="container" align="center">
     <div class="row">
         <div class="col-sm-12 mx-auto">
-                <img src="{{ asset('images/loading.jpg') }}" class="img-fluid" alt="Responsive image" >
+            <img src="{{ asset('images/loading.jpg') }}" class="img-fluid" alt="Responsive image">
         </div>
     </div>
 
@@ -14,18 +14,18 @@
 @push('scripts')
 <script>
 $(document).ready(function() {
-    refreshAt(06,00,05);
-    refreshAt(11,00,05);
-    refreshAt(17,00,05);
-    refreshAt(02,00,05);
+    refreshAt(06, 00, 05);
+    refreshAt(11, 00, 05);
+    refreshAt(17, 00, 05);
+    refreshAt(02, 00, 05);
 });
 
 function refreshAt(hours, minutes, seconds) {
     var now = new Date();
     var then = new Date();
 
-    if(now.getHours() > hours ||
-       (now.getHours() == hours && now.getMinutes() > minutes) ||
+    if (now.getHours() > hours ||
+        (now.getHours() == hours && now.getMinutes() > minutes) ||
         now.getHours() == hours && now.getMinutes() == minutes && now.getSeconds() >= seconds) {
         then.setDate(now.getDate() + 1);
     }
@@ -34,7 +34,20 @@ function refreshAt(hours, minutes, seconds) {
     then.setSeconds(seconds);
 
     var timeout = (then.getTime() - now.getTime());
-    setTimeout(function() { window.location.reload(true); }, timeout);
+    setTimeout(function() {
+        window.location.reload(true);
+    }, timeout);
 }
+setInterval(function() {
+    if (new Date().getHours() == 6) {
+        location.reload()
+    } else if (new Date().getHours() == 11) {
+        location.reload()
+    } else if (new Date().getHours() == 17) {
+        location.reload()
+    } else if (new Date().getHours() == 2) {
+        location.reload()
+    }
+}, 30000);
 </script>
 @endpush

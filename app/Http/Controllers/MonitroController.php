@@ -123,18 +123,88 @@ class MonitroController extends Controller
 
     public function monitor3()
     {
-        $now = date('H:i');
-        $s1  = date('H:i', strtotime("06:00"));
-        $as1 = date('H:i', strtotime("07:30"));
-        $a1  = date('H:i', strtotime("11:00"));
-        $ak1 = date('H:i', strtotime("13:20"));
-        $a2  = date('H:i', strtotime("17:00"));
-        $ak2 = date('H:i', strtotime("19:15"));
-        $a3  = date('H:i', strtotime("02:00"));
-        $ak3 = date('H:i', strtotime("03:15"));
-        if ((($now >= $a1) && ($now <= $ak1)) || (($now >= $a2) && ($now <= $ak2)) || (($now >= $a3) && ($now <= $ak3)) || (($now >= $s1) && ($now <= $as1)) )
+                $now = date('H:i');
+                $s1  = date('H:i', strtotime("06:00"));
+                $as1 = date('H:i', strtotime("07:30"));
+                $a1  = date('H:i', strtotime("11:00"));
+                $ak1 = date('H:i', strtotime("13:20"));
+                $a2  = date('H:i', strtotime("17:00"));
+                $ak2 = date('H:i', strtotime("19:15"));
+                $a3  = date('H:i', strtotime("02:00"));
+                $ak3 = date('H:i', strtotime("03:15"));
+        
+                if (($now >= $a1) && ($now <= $ak1))
                 {
-                    return view('monitor3');
+                    $date = date('Y-m-d').'Shift1';
+                    $sel1 = DB::table('jadwalmenu')->select('makanan1')->where('id', $date)->value('makanan1');
+                    $sel2 = DB::table('jadwalmenu')->select('makanan2')->where('id', $date)->value('makanan2');
+                    $sel3 = DB::table('jadwalmenu')->select('makanan3')->where('id', $date)->value('makanan3');
+                    $ikan = DB::table('makanan')->select('gambar')->where('jenis', 'ikan')->where('nama', $sel1)->value('gambar');
+                    $ayam = DB::table('makanan')->select('gambar')->where('jenis', 'ayam')->where('nama', $sel2)->value('gambar');
+                    $daging = DB::table('makanan')->select('gambar')->where('jenis', 'daging')->where('nama', $sel3)->value('gambar');
+                    $ambil1 = DB::table('device1')->where('jadwalmenu', $date)->count();
+                    $ambil2 = DB::table('device2')->where('jadwalmenu', $date)->count();
+                    $ambil3 = DB::table('device3')->where('jadwalmenu', $date)->count();
+                    $jum1 = DB::table('jadwalmenu')->select('banyaknya1')->where('id', $date)->value('banyaknya1') - $ambil1;
+                    $jum2 = DB::table('jadwalmenu')->select('banyaknya2')->where('id', $date)->value('banyaknya2') - $ambil2;
+                    $jum3 = DB::table('jadwalmenu')->select('banyaknya3')->where('id', $date)->value('banyaknya3') - $ambil3;
+                    return view('monitor3', ['data1' => $sel1, 'data2' => $sel2, 'data3' => $sel3, 
+                    'ikang' => $ikan, 'ayamg' => $ayam, 'gdaging' => $daging, 
+                    'sisikan' => $jum1, 'sisayam' => $jum2, 'sisdaging' => $jum3,
+                    ]);
+                }
+                elseif (($now >= $a2) && ($now <= $ak2)) 
+                {
+                    $date = date('Y-m-d').'Shift2';
+                    $sel1 = DB::table('jadwalmenu')->select('makanan1')->where('id', $date)->value('makanan1');
+                    $sel2 = DB::table('jadwalmenu')->select('makanan2')->where('id', $date)->value('makanan2');
+                    $sel3 = DB::table('jadwalmenu')->select('makanan3')->where('id', $date)->value('makanan3');
+                    $ikan = DB::table('makanan')->select('gambar')->where('jenis', 'ikan')->where('nama', $sel1)->value('gambar');
+                    $ayam = DB::table('makanan')->select('gambar')->where('jenis', 'ayam')->where('nama', $sel2)->value('gambar');
+                    $daging = DB::table('makanan')->select('gambar')->where('jenis', 'daging')->where('nama', $sel3)->value('gambar');
+                    $ambil1 = DB::table('device1')->where('jadwalmenu', $date)->count();
+                    $ambil2 = DB::table('device2')->where('jadwalmenu', $date)->count();
+                    $ambil3 = DB::table('device3')->where('jadwalmenu', $date)->count();
+                    $jum1 = DB::table('jadwalmenu')->select('banyaknya1')->where('id', $date)->value('banyaknya1') - $ambil1;
+                    $jum2 = DB::table('jadwalmenu')->select('banyaknya2')->where('id', $date)->value('banyaknya2') - $ambil2;
+                    $jum3 = DB::table('jadwalmenu')->select('banyaknya3')->where('id', $date)->value('banyaknya3') - $ambil3;
+                    return view('monitor3', ['data1' => $sel1, 'data2' => $sel2, 'data3' => $sel3, 'ikang' => $ikan, 'ayamg' => $ayam, 'gdaging' => $daging, 
+                    'sisikan' => $jum1, 'sisayam' => $jum2, 'sisdaging' => $jum3,
+                    ]);
+                }
+                elseif (($now >= $a3) && ($now <= $ak3)) 
+                {
+                    $date = date('Y-m-d', (strtotime ( '-1 day' ))).'Shift3';
+                    $sel1 = DB::table('jadwalmenu')->select('makanan1')->where('id', $date)->value('makanan1');
+                    $sel2 = DB::table('jadwalmenu')->select('makanan2')->where('id', $date)->value('makanan2');
+                    $sel3 = DB::table('jadwalmenu')->select('makanan3')->where('id', $date)->value('makanan3');
+                    $ikan = DB::table('makanan')->select('gambar')->where('jenis', 'ikan')->where('nama', $sel1)->value('gambar');
+                    $ayam = DB::table('makanan')->select('gambar')->where('jenis', 'ayam')->where('nama', $sel2)->value('gambar');
+                    $daging = DB::table('makanan')->select('gambar')->where('jenis', 'daging')->where('nama', $sel3)->value('gambar');
+                    $ambil1 = DB::table('device1')->where('jadwalmenu', $date)->count();
+                    $ambil2 = DB::table('device2')->where('jadwalmenu', $date)->count();
+                    $ambil3 = DB::table('device3')->where('jadwalmenu', $date)->count();
+                    $jum1 = DB::table('jadwalmenu')->select('banyaknya1')->where('id', $date)->value('banyaknya1') - $ambil1;
+                    $jum2 = DB::table('jadwalmenu')->select('banyaknya2')->where('id', $date)->value('banyaknya2') - $ambil2;
+                    $jum3 = DB::table('jadwalmenu')->select('banyaknya3')->where('id', $date)->value('banyaknya3') - $ambil3;
+                    return view('monitor3', ['data1' => $sel1, 'data2' => $sel2, 'data3' => $sel3, 'ikang' => $ikan, 'ayamg' => $ayam, 'gdaging' => $daging, 
+                    'sisikan' => $jum1, 'sisayam' => $jum2, 'sisdaging' => $jum3,
+                    ]);
+                }
+                elseif (($now >= $s1) && ($now <= $as1)) 
+                {
+                    $date = date('Y-m-d').'Shift1';
+                    $sel1 = DB::table('jadwalmenu')->select('snack1')->where('id', $date)->value('snack1');
+                    $sel2 = DB::table('jadwalmenu')->select('snack2')->where('id', $date)->value('snack2');
+                    $ikan = DB::table('makanan')->select('gambar')->where('jenis', 'sarapan')->where('nama', $sel1)->value('gambar');
+                    $ayam = DB::table('makanan')->select('gambar')->where('jenis', 'sarapan')->where('nama', $sel2)->value('gambar');
+                    $ambil1 = DB::table('sarapan1')->where('jadwalmenu', $date)->count();
+                    $ambil2 = DB::table('sarapan2')->where('jadwalmenu', $date)->count();
+                    $jum1 = DB::table('jadwalmenu')->select('jsnack1')->where('id', $date)->value('jsnack1') - $ambil1;
+                    $jum2 = DB::table('jadwalmenu')->select('jsnack2')->where('id', $date)->value('jsnack2') - $ambil2;
+                    return view('monitor3', ['data1' => $sel1, 'data2' => $sel2, 'data3' => '', 'ikang' => $ikan, 'ayamg' => $ayam, 'gdaging' => '',
+                    'sisikan' => $jum1, 'sisayam' => $jum2, 'sisdaging' => '',
+                    ]);
                 }
                 else {
                     return view('monitor0');
@@ -144,20 +214,27 @@ class MonitroController extends Controller
     // AJAX Data
     public function ajax($id) {
         $now = date('H:i');
+        $s1  = date('H:i', strtotime("06:00"));
+        $as1 = date('H:i', strtotime("07:30"));
         $a1  = date('H:i', strtotime("11:00"));
         $ak1 = date('H:i', strtotime("13:20"));
         $a2  = date('H:i', strtotime("17:00"));
         $ak2 = date('H:i', strtotime("19:15"));
         $a3  = date('H:i', strtotime("02:00"));
         $ak3 = date('H:i', strtotime("03:15"));
-        if ($id == 'device1') {
-            $database = 'sarapan1';
-            $date = date('Y-m-d').'Shift1';
+        if (($now >= $s1) && ($now <= $as1)) {
+            if ($id == 'device1') {
+                $database = 'sarapan1';
+                $date = date('Y-m-d').'Shift1';
+            }
+            elseif ($id == 'device2') {
+                $database = 'sarapan2';
+                $date = date('Y-m-d').'Shift1';
+            } else {
+                $database = 'device3';
+                $date = "";
+            }
         }
-        elseif ($id == 'device2') {
-            $database = 'sarapan2';
-            $date = date('Y-m-d').'Shift1';
-        } 
         else {
             $database = $id;
                 if (($now >= $a1) && ($now <= $ak1))

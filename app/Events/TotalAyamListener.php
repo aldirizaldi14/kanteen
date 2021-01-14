@@ -14,10 +14,12 @@ class TotalAyamListener implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $jayam;
+    public $status;
 
-  public function __construct($jayam)
+  public function __construct($jayam, $status)
   {
       $this->jayam = $jayam;
+      $this->status = $status;
   }
 
   public function broadcastOn()
