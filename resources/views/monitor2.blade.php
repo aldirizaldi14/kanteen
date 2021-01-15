@@ -94,8 +94,8 @@ $(document).ready(function() {
 
     refreshAt(07, 30, 05);
     refreshAt(13, 20, 05);
-    refreshAt(17, 00, 05);
-    refreshAt(02, 00, 05);
+    refreshAt(18, 45, 05);
+    refreshAt(03, 10, 05);
 
     $('#example1').DataTable({
         scrollY: "300px",
@@ -166,6 +166,17 @@ function refreshAt(hours, minutes, seconds) {
     var timeout = (then.getTime() - now.getTime());
     setTimeout(function() { window.location.reload(true); }, timeout);
 }
+setInterval(function() {
+    if (new Date().getHours() == 7 && new Date().getMinutes() > 30) {
+        location.reload()
+    } else if (new Date().getHours() == 13 && new Date().getMinutes() > 25) {
+        location.reload()
+    } else if (new Date().getHours() == 17 && new Date().getMinutes() > 45) {
+        location.reload()
+    } else if (new Date().getHours() == 3 && new Date().getMinutes() > 10) {
+        location.reload()
+    }
+}, 30000);
 </script>
 <script>
 var channel = Echo.channel('my-channel');

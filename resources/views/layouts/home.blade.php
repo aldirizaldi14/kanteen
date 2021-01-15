@@ -69,6 +69,17 @@
                                 <a class="dropdown-item" href="/departement">Departement</a>
                             </div>
                         </div>
+                        <div class="dropdown show">
+                            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Data Upload
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/upload/karywawan">Karyawan</a>
+                                <a class="dropdown-item" href="/upload/makanan">Makanan</a>
+                                <a class="dropdown-item" href="/upload/menu">Jadwal Menu</a>
+                                <a class="dropdown-item" href="/upload/data">Data Shift</a>
+                            </div>
+                        </div>
                         @endcan
                     </div>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
