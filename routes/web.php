@@ -92,3 +92,6 @@ Route::get('/data/makan', 'HomeController@datamakan')->middleware('can:isAdmin')
 Route::get('/upload/{id}', 'UploadController@view')->middleware('can:isAdmin');
 
 Route::post('/excel/settingshift', 'UploadController@settingshift')->middleware('can:isAdmin');
+Route::post('/excel/uploadkaryawan', 'UploadController@uploadkaryawan')->middleware('can:isAdmin');
+Route::post('/excel/uploadmakanan', 'UploadController@uploadmakanan')->middleware('can:isAdmin');
+Route::post('/excel/uploadmenu', 'UploadController@uploadmenu')->middleware('can:isAdmin');

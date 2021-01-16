@@ -390,17 +390,17 @@ class HomeController extends Controller
     public function data()
     {
         $data = DB::table('jadwalmenu')
-        ->leftJoin('sarapan1', 'jadwalmenu.id' , '=', 'sarapan1.jadwalmenu')
-        ->leftJoin('sarapan2', 'jadwalmenu.id' , '=', 'sarapan2.jadwalmenu')
-        ->leftJoin('device1', 'jadwalmenu.id' , '=', 'device1.jadwalmenu')
-        ->leftJoin('device2', 'jadwalmenu.id' , '=', 'device2.jadwalmenu')
-        ->leftJoin('device3', 'jadwalmenu.id' , '=', 'device3.jadwalmenu')
+        ->join('sarapan1', 'jadwalmenu.id' , '=', 'sarapan1.jadwalmenu', 'full outer join')
+        ->join('sarapan2', 'jadwalmenu.id' , '=', 'sarapan2.jadwalmenu', 'full outer join')
+        ->join('device1', 'jadwalmenu.id' , '=', 'device1.jadwalmenu', 'full outer join')
+        ->join('device2', 'jadwalmenu.id' , '=', 'device2.jadwalmenu', 'full outer join')
+        ->join('device3', 'jadwalmenu.id' , '=', 'device3.jadwalmenu', 'full outer join')
         ->select('jadwalmenu.tanggal', 'jadwalmenu.waktu',
             DB::raw("count(sarapan1.karyawan) as sarapan1_count"),
             DB::raw("count(sarapan2.karyawan) as sarapan2_count"),
-            DB::raw('count(device1.karyawan) as device1_count'),
-            DB::raw('count(device2.karyawan) as device2_count'),
-            DB::raw('count(device3.karyawan) as device3_count'),
+            DB::raw("count(device1.karyawan) as device1_count"),
+            DB::raw("count(device2.karyawan) as device2_count"),
+            DB::raw("count(device3.karyawan) as device3_count"),
         )->groupBy('jadwalmenu.tanggal', 'jadwalmenu.waktu')
         ->get();
         return view('data', ['data' => $data]);

@@ -6,6 +6,9 @@ use File;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\DataShiftImport;
+use App\Imports\KaryawanImport;
+use App\Imports\MakananImport;
+use App\Imports\MenuMakanImport;
 
 
 class UploadController extends Controller
@@ -31,6 +34,21 @@ class UploadController extends Controller
     public function settingshift(Request $request){
         $path = $request->file('file'); 
         Excel::import(new DataShiftImport, $path);
+        return redirect()->back()->with('message', 'Finish Upload');
+    }
+    public function uploadkaryawan(Request $request){
+        $path = $request->file('file'); 
+        Excel::import(new KaryawanImport, $path);
+        return redirect()->back()->with('message', 'Finish Upload');
+    }
+    public function uploadmakanan(Request $request){
+        $path = $request->file('file'); 
+        Excel::import(new MakananImport, $path);
+        return redirect()->back()->with('message', 'Finish Upload');
+    }
+    public function uploadmenu(Request $request){
+        $path = $request->file('file'); 
+        Excel::import(new MenuMakanImport, $path);
         return redirect()->back()->with('message', 'Finish Upload');
     }
 }

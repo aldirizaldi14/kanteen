@@ -10,7 +10,9 @@
             <div class="row">
             <div class="col-sm-12">
             <p>Upload data karyawan, mohon untuk menggunakan kaidah format yang telah tersedia.</p>
-            <p>Untuk contoh kaidah bisa anda unduh di tautan <a href="{{ asset('/temp/Karyawan.xlsx') }}">berikut ini</a></p>
+            <p>Untuk contoh kaidah bisa anda unduh di tautan <a href="{{ asset('/temp/Karyawan.xlsx') }}">berikut ini.</a></p>
+            <br>
+            <p>NB: Foto Pada Karyawan Tidak dapat dikutkan dalam proses ini.</p>
             </div>
             </div>
             <br>

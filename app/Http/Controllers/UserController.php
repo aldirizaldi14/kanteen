@@ -21,18 +21,26 @@ class UserController extends Controller
     {
         $a1 = Auth::user();
         if ($a1->role == 'admin' || $a1->role == 'developer' ) {
-            $status = DB::table('datadepartement')->where('status', 0)->where('lastedit', $a1->username)->select('status')->count();
-            $dat0 = DB::table('datadepartement')->where('status', 0)->where('lastedit', $a1->username)->select('id')->value('id');
-            $data = DB::table('datadepartement')->orderBy('tanggal', 'desc')->get();
+            $data = DB::table('shiftkary')->join('departement', 'shiftkary.id_data', '=', 'departement.departement')
+            ->select('shiftkary.tanggal as tanggal', 'shiftkary.id_data as departement', 
+            DB::raw("count(case when shift = 'shift1' then 1 end) as shift1"), 
+            DB::raw("count(case when shift = 'shift2' then 1 end) as shift2"), 
+            DB::raw("count(case when shift = 'shift3' then 1 end) as shift3"), 
+            )
+            ->groupBy('shiftkary.tanggal', 'shiftkary.id_data')
+            ->orderBy('tanggal', 'desc')->get();
         }
         else {
-            $status = DB::table('datadepartement')->where('status', 0)->where('lastedit', $a1->username)->select('status')->count();
-            $dat0 = DB::table('datadepartement')->where('status', 0)->where('lastedit', $a1->username)->select('id')->value('id');
-            $data = DB::table('datadepartement')->join('departement', 'datadepartement.departement', '=', 'departement.departement')
-            ->select('datadepartement.id', 'datadepartement.tanggal', 'datadepartement.departement', 'datadepartement.shift1', 'datadepartement.longshift1', 'datadepartement.shift2', 'datadepartement.longshift2', 'datadepartement.shift3', )
+            $data = DB::table('shiftkary')->join('departement', 'shiftkary.id_data', '=', 'departement.departement')
+            ->select('shiftkary.tanggal as tanggal', 'shiftkary.id_data as departement', 
+            DB::raw("count(case when shift = 'shift1' then 1 end) as shift1"), 
+            DB::raw("count(case when shift = 'shift2' then 1 end) as shift2"), 
+            DB::raw("count(case when shift = 'shift3' then 1 end) as shift3"), 
+            )
+            ->groupBy('shiftkary.tanggal', 'shiftkary.id_data')
             ->where('departement.main', $a1->departement)->orderBy('tanggal', 'desc')->get();
         }
-        return view('datashift', ['data' => $data, 'status' => $status, 'menuju' => $dat0]);
+        return view('datashift', ['data' => $data]);
     }
 
     public function datashiftm($id){
