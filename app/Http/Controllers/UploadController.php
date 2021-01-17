@@ -14,7 +14,7 @@ use App\Imports\MenuMakanImport;
 class UploadController extends Controller
 {
     public function view($id) {
-        if ($id == 'karyawan') {
+        if ($id == 'karywawan') {
             return view('uploads.karyawan');
         }
         else if ($id == 'makanan') {

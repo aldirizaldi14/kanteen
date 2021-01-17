@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="card h-100">
-    <div class="card-header">{{ __('Pengaturan Makan') }}</div>
+    <div class="card-header">{{ __('Data Upload Shift Karyawan') }}</div>
     <div class="card-body">
         <form action="/excel/settingshift" method="post" enctype="multipart/form-data">
             @csrf

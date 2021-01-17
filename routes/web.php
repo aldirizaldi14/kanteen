@@ -35,7 +35,9 @@ Route::get('/settingshift/go/{id}', 'UserController@settinggo')->middleware('can
 Route::post('/settingshift/goes', 'UserController@settinggoes')->middleware('can:isUser');
 Route::post('/settingshift/simpan', 'UserController@settingsimpan')->middleware('can:isUser');
 
-Route::get('/marah/{param1}/{param2}/{param3}', 'UserController@marahparam')->middleware('can:isUser');
+Route::get('/marahe/{param1}', 'UserController@marahe')->middleware('can:isUser');
+Route::get('/rubahe/{param1}', 'UserController@rubahe')->middleware('can:isUser');
+Route::post('/rubahes', 'UserController@rubahes')->middleware('can:isUser');
 
 Route::get('/changepassword', 'UserController@password')->middleware('can:isUser');
 Route::post('/passchange', 'UserController@changepassword')->middleware('can:isUser');

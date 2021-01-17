@@ -6,17 +6,17 @@
         {{ __('Tambah Karyawan') }}
     </div>
     <div class="card-body">
-    @foreach ($data as $dt)
-        <form id="dynamic_field" action="/datashiftes" method="post" enctype="multipart/form-data">
+        <form id="dynamic_field" action="/datashiftes" method="post">
             @csrf
-            <input id="id" hidden type="text" class="form-control" name="id" value="{{$dt->id}}" required autofocus>
             <!-- Nama -->
             <div class="row">
                 <div class="col-sm-2">
                     Tanggal
                 </div>
                 <div class="col-sm-4">
-                    <input id="date" type="date" class="form-control" name="date" value="{{$dt->tanggal}}" required autofocus>
+                <select id="date" name="date" class="custom-select">
+                        <option value="{{$tanggal}}">{{$tanggal}}</option>
+                    </select>
                 </div>
                 <div class="col-sm-2">
                     <select name="shift" class="form-control" required id="shift">
@@ -63,7 +63,6 @@
             </div>
             <br>
         </form>
-        @endforeach
     </div>
 </div>
 </div>

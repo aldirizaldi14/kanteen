@@ -18,14 +18,11 @@
             <thead>
                 <tr>
                     <th style="width:10%">Main</th>
-                    <th style="width:15%">Bagian</th>
+                    <th style="width:20%">Bagian</th>
                     <th>Total</th>
                     <th>Shift 1</th>
-                    <th>Long Shift 1</th>
                     <th>Shift 2</th>
-                    <th>Long Shift 2</th>
                     <th>Shift 3</th>
-                    <th>Remark</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,11 +32,8 @@
                     <td>{{$dt->departement}}</td>
                     <td>{{$dt->costcenter}}</td>
                     <td>{{$dt->shift1}}</td>
-                    <td>{{$dt->longshift1}}</td>
                     <td>{{$dt->shift2}}</td>
-                    <td>{{$dt->longshift2}}</td>
                     <td>{{$dt->shift3}}</td>
-                    <td>{{$dt->remark}}</td>
                 </tr>
                 @endforeach
             </tbody>

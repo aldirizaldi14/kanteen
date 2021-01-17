@@ -389,56 +389,60 @@ class HomeController extends Controller
 
     public function data()
     {
-        $data = DB::table('jadwalmenu')
-        ->join('sarapan1', 'jadwalmenu.id' , '=', 'sarapan1.jadwalmenu', 'full outer join')
-        ->join('sarapan2', 'jadwalmenu.id' , '=', 'sarapan2.jadwalmenu', 'full outer join')
-        ->join('device1', 'jadwalmenu.id' , '=', 'device1.jadwalmenu', 'full outer join')
-        ->join('device2', 'jadwalmenu.id' , '=', 'device2.jadwalmenu', 'full outer join')
-        ->join('device3', 'jadwalmenu.id' , '=', 'device3.jadwalmenu', 'full outer join')
-        ->select('jadwalmenu.tanggal', 'jadwalmenu.waktu',
-            DB::raw("count(sarapan1.karyawan) as sarapan1_count"),
-            DB::raw("count(sarapan2.karyawan) as sarapan2_count"),
-            DB::raw("count(device1.karyawan) as device1_count"),
-            DB::raw("count(device2.karyawan) as device2_count"),
-            DB::raw("count(device3.karyawan) as device3_count"),
-        )->groupBy('jadwalmenu.tanggal', 'jadwalmenu.waktu')
-        ->get();
-        return view('data', ['data' => $data]);
-    }
-
-    public function dataid($id)
-    {
-        $data = DB::table('datadepartement')
-        ->join('departement', 'datadepartement.departement', '=', 'departement.departement')
-        ->where('tanggal', $id)->get();
-        return view('dataid', ['data' => $data]);
-    }
-
-    public function datamakan()
-    {
-        $awal = DB::table('datadepartement')->select('tanggal')->distinct()->get();
+        $awal1 = DB::table('jadwalmenu')->select('tanggal')->distinct()->get();
+        $awal2 = DB::table('jadwalmenu')->select('waktu')->distinct()->get();
         $a = array();
         $b = array();
         $c = array();
         $d = array();
         $e = array();
         $f = array();
-        foreach ($awal as $aw) {
-            $col1 = DB::table('datadepartement')->select('tanggal')->where('tanggal', $aw->tanggal)->distinct()->value('tanggal');
-            $col2 = DB::table('datadepartement')->where('tanggal', $aw->tanggal)->sum('shift1');
-            $col3 = DB::table('datadepartement')->where('tanggal', $aw->tanggal)->sum('longshift1');
-            $col4 = DB::table('datadepartement')->where('tanggal', $aw->tanggal)->sum('shift2');
-            $col5 = DB::table('datadepartement')->where('tanggal', $aw->tanggal)->sum('longshift2');
-            $col6 = DB::table('datadepartement')->where('tanggal', $aw->tanggal)->sum('shift3');
-            array_push($a, $col1);
-            array_push($b, $col2);
-            array_push($c, $col3);
-            array_push($d, $col4);
-            array_push($e, $col5);
-            array_push($f, $col6);
+        $g = array();
+        foreach ($awal1 as $aw1) {
+            $awal2 = DB::table('jadwalmenu')->where('tanggal', $aw1->tanggal)->select('waktu')->distinct()->get();
+            foreach ($awal2 as $aw2) {
+                $col1 = DB::table('sarapan1')->where('jadwalmenu', $aw1->tanggal.$aw2->waktu)->count();
+                $col2 = DB::table('sarapan2')->where('jadwalmenu', $aw1->tanggal.$aw2->waktu)->count();
+                $col3 = DB::table('device1')->where('jadwalmenu', $aw1->tanggal.$aw2->waktu)->count();
+                $col4 = DB::table('device2')->where('jadwalmenu', $aw1->tanggal.$aw2->waktu)->count();
+                $col5 = DB::table('device3')->where('jadwalmenu', $aw1->tanggal.$aw2->waktu)->count();
+                array_push($a, $aw1->tanggal);
+                array_push($b, $aw2->waktu);
+                array_push($c, $col1);
+                array_push($d, $col2);
+                array_push($e, $col3);
+                array_push($f, $col4);
+                array_push($g, $col5);
+            }
         }
-        $collection = collect([$a, $b, $c, $d, $e, $f])->transpose()->toArray();
-        return view('datamakan', ['union' => $collection]);
+        $collection = collect([$a, $b, $c, $d, $e, $f, $g])->transpose()->toArray();
+        return view('data', ['union' => $collection]);
+    }
+
+    public function dataid($id)
+    {
+        $data = DB::table('departement')
+        ->rightjoin('shiftkary', 'departement.departement', '=', 'shiftkary.id_data')
+        ->where('shiftkary.tanggal', $id)
+        ->select('departement.main as main', 'shiftkary.id_data as departement', 'departement.costcenter as costcenter',
+        DB::raw("count(case when shift = 'shift1' then 1 end) as shift1"), 
+        DB::raw("count(case when shift = 'shift2' then 1 end) as shift2"), 
+        DB::raw("count(case when shift = 'shift3' then 1 end) as shift3"), 
+        )->groupBy('shiftkary.tanggal', 'shiftkary.id_data', 'departement.main', 'departement.costcenter')
+        ->orderBy('tanggal', 'desc')->get();
+        return view('dataid', ['data' => $data]);
+    }
+
+    public function datamakan()
+    {
+        $data = DB::table('shiftkary')->select('tanggal', 
+        DB::raw("count(case when shift = 'shift1' then 1 end) as shift1"), 
+        DB::raw("count(case when shift = 'shift2' then 1 end) as shift2"), 
+        DB::raw("count(case when shift = 'shift3' then 1 end) as shift3"), 
+        DB::raw("count(*) as total"), 
+        )->groupBy('shiftkary.tanggal')
+        ->orderBy('tanggal', 'desc')->get();
+        return view('datamakan', ['data' => $data]);
     }
 
     public function detaildatam($id) {

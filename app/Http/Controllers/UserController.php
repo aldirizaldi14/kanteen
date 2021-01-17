@@ -44,25 +44,79 @@ class UserController extends Controller
     }
 
     public function datashiftm($id){
-        DB::table('datadepartement')->where('id', $id)->delete();
-        DB::table('shiftkary')->where('id_data', $id)->delete();
+        $tanggal = substr($id, 0,10);
+        $deptart = substr($id, 10);
+        DB::table('shiftkary')->where('id_data', $deptart)->where('tanggal', $tanggal)->delete();
         return redirect('/datashift');
     }
 
-    public function marahparam($param1, $param2, $param3){
-        DB::table('shiftkary')->join('karyawan', 'shiftkary.nik', '=', 'karyawan.nik')->where('id_data', $param3)->where('shift', $param2)->where('karyawan.name', $param1)->delete();
-        $new = DB::table('datadepartement')->where('id', $param3)->select($param2)->value($param2) - 1;
-        DB::table('datadepartement')->where('id', $param3)->update([
-            $param2 => $new,
-        ]);
+    public function marahe($param1){
+        DB::table('shiftkary')->where('id', $param1)->delete();
         return redirect('/datashift/'.$param3);
+    }
+    public function rubahe($param1){
+        $data = DB::table('shiftkary')->leftJoin('karyawan', 'karyawan.nik', '=', 'shiftkary.nik')
+        ->select('shiftkary.id as id', 'shiftkary.nik as nik', 'karyawan.name as name', 'shiftkary.shift as waktu', 'shiftkary.tanggal as tanggal', 'shiftkary.id_data as dept')
+        ->where('shiftkary.id', $param1)->get();
+        return view('jadwal.rubahe', ['param' => $data]);
+    }
+
+    public function rubahes(Request $request){
+        $a = DB::table('shiftkary')->where('id', $request->id)->select('tanggal')->value('tanggal');
+        $b = DB::table('shiftkary')->where('id', $request->id)->select('id_data')->value('id_data');
+        $c = DB::table('shiftkary')->where('id', $request->id)->select('nik')->value('nik');
+        $op1 = DB::table('shiftkary')->where('id', $request->id)->select('shift')->value('shift');
+        $b1 = substr($request->id, 2);
+        $b2 = substr($request->shift, 5);
+        if ($op1 == $request->shift) {
+            // Do Nothing
+        } else {
+            if ($op1 == 'shift0') {
+                DB::table('shiftkary')->where('nik', $c)->where('tanggal', $a)->where('id_data', $b)->where('shift', 'shift1')->delete();
+                DB::table('shiftkary')->where('id', $request->id)->update(['id' => 'U'.$b2.$b1, 'shift' => $request->shift,]);
+            } elseif ($op1 == 'shift1') {
+                DB::table('shiftkary')->where('nik', $c)->where('tanggal', $a)->where('id_data', $b)->where('shift', 'shift0')->delete();
+                DB::table('shiftkary')->where('id', $request->id)->update(['id' => 'U'.$b2.$b1, 'shift' => $request->shift,]);
+            } elseif ($op1 == 'shift2') {
+                if ($request->shift == 'shift3') {
+                    DB::table('shiftkary')->where('id', $request->id)->update(['id' => 'U'.$b2.$b1, 'shift' => $request->shift,]);
+                } else {
+                    DB::table('shiftkary')->where('id', $request->id)->update(['id' => 'U'.$b2.$b1, 'shift' => $request->shift,]);
+                    DB::table('shiftkary')->insert([
+                        'id' => 'U0'.$b1,
+                        'id_data' => $b,
+                        'tanggal' => $a,
+                        'nik' => $c,
+                        'shift' => 'shift0',
+                        'status' => 0
+                        ]);
+                }
+            } elseif ($op1 == 'shift3') {
+                if ($request->shift == 'shift2') {
+                    DB::table('shiftkary')->where('id', $request->id)->update(['id' => 'U'.$b2.$b1, 'shift' => $request->shift,]);
+                } else {
+                    DB::table('shiftkary')->where('id', $request->id)->update(['id' => 'U'.$b2.$b1, 'shift' => $request->shift,]);
+                    DB::table('shiftkary')->insert([
+                        'id' => 'U0'.$b1,
+                        'id_data' => $b,
+                        'tanggal' => $a,
+                        'nik' => $c,
+                        'shift' => 'shift0',
+                        'status' => 0
+                        ]);
+                }
+            }
+        }
+        return redirect('/datashift/'.$a.$b);
     }
 
     public function datashifte($id) {
-        $sele1 = DB::table('datadepartement')->select('departement')->where('id', $id)->value('departement');
-        $data0 = DB::table('datadepartement')->where('id', $id)->get();
-        $data2 = DB::table('karyawan')->where('departemen', $sele1)->orderBy('name', 'asc')->get();
-        return view('datashifte', ['data' => $data0, 'dept' => $sele1, 'kary' => $data2]);
+        $tanggal = substr($id, 0,10);
+        $deptart = substr($id, 10);
+
+        $sele1 = DB::table('datadepartement')->select('departement')->where('id', $deptart)->value('departement');
+        $data2 = DB::table('karyawan')->where('departemen', $deptart)->orderBy('name', 'asc')->get();
+        return view('datashifte', ['tanggal' => $tanggal, 'dept' => $deptart, 'kary' => $data2]);
     }
 
     public function datashiftes(Request $request){
@@ -186,15 +240,22 @@ class UserController extends Controller
     }
 
     public function detailshift($id){
-        $alldata = DB::table('datadepartement')->where('id', $id)->get();
-        $shift1 = DB::table('shiftkary')->join('karyawan', 'karyawan.nik', '=', 'shiftkary.nik')->where('id_data', $id)->where('shift', 'shift1')->select('name', 'shift')->pluck('name');
-        $shift2 = DB::table('shiftkary')->join('karyawan', 'karyawan.nik', '=', 'shiftkary.nik')->where('id_data', $id)->where('shift', 'longshift1')->select('name', 'shift')->pluck('name');
-        $shift3 = DB::table('shiftkary')->join('karyawan', 'karyawan.nik', '=', 'shiftkary.nik')->where('id_data', $id)->where('shift', 'shift2')->select('name', 'shift')->pluck('name');
-        $shift4 = DB::table('shiftkary')->join('karyawan', 'karyawan.nik', '=', 'shiftkary.nik')->where('id_data', $id)->where('shift', 'longshift2')->select('name', 'shift')->pluck('name');
-        $shift5 = DB::table('shiftkary')->join('karyawan', 'karyawan.nik', '=', 'shiftkary.nik')->where('id_data', $id)->where('shift', 'shift3')->select('name', 'shift')->pluck('name');
-        $join = collect([$shift1, $shift2, $shift3, $shift4, $shift5])->transpose()->toArray();
-        // return $shift1;
-        return view('shiftdetail', ['data' => $alldata, 'union' => $join]);
+        $tanggal = substr($id, 0,10);
+        $deptart = substr($id, 10);
+
+        $alldata = DB::table('shiftkary')->where('id_data', $deptart)->where('tanggal', $tanggal)
+        ->select('id_data', 'tanggal', 
+        DB::raw("count(case when shift = 'shift1' then 1 end) as shift1"), 
+        DB::raw("count(case when shift = 'shift2' then 1 end) as shift2"), 
+        DB::raw("count(case when shift = 'shift3' then 1 end) as shift3"), 
+        )->groupBy('tanggal', 'id_data')
+        ->orderBy('tanggal', 'desc')->get();
+
+        $karyawan = DB::table('shiftkary')->where('shiftkary.id_data', $deptart)->where('shiftkary.tanggal', $tanggal)->where('shift', '!=', 'shift0')
+        ->leftjoin('karyawan', 'shiftkary.nik', '=', 'karyawan.nik')
+        ->select('shiftkary.nik', 'karyawan.name', 'shiftkary.shift', 'shiftkary.status')
+        ->get();
+        return view('shiftdetail', ['data' => $alldata, 'daftar' => $karyawan, 'tanggal' => $tanggal, 'dept' => $deptart, 'i' => 1]);
     }
 
     public function settingshift()

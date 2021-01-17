@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="card h-100">
-    <div class="card-header">{{ __('Pengaturan Makan') }}</div>
+    <div class="card-header">{{ __('Data Upload Makanan') }}</div>
     <div class="card-body">
         <form action="/excel/uploadmakanan" method="post" enctype="multipart/form-data">
             @csrf

@@ -27,17 +27,17 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($data as $dt)
+                @for ($i = 0; $i < count($union); $i++)
                 <tr>
-                    <td><a href="/datam/{{$dt->tanggal}}{{$dt->waktu}}">{{$dt->tanggal}}</a></td>
-                    <td>{{$dt->waktu}}</td>
-                    <td>{{$dt->sarapan1_count}}</td>
-                    <td>{{$dt->sarapan2_count}}</td>
-                    <td>{{$dt->device1_count}}</td>
-                    <td>{{$dt->device2_count}}</td>
-                    <td>{{$dt->device3_count}}</td>
+                    <td align="center"><a href="/datam/{{$union[$i][0]}}{{$union[$i][1]}}">{{date('d F Y', strtotime($union[$i][0]))}}</a></td>
+                    <td align="center">{{$union[$i][1]}}</td>
+                    <td align="center">{{$union[$i][2]}}</td>
+                    <td align="center">{{$union[$i][3]}}</td>
+                    <td align="center">{{$union[$i][4]}}</td>
+                    <td align="center">{{$union[$i][5]}}</td>
+                    <td align="center">{{$union[$i][6]}}</td>
                 </tr>
-                @endforeach
+                @endfor
             </tbody>
         </table>
     </div>

@@ -19,23 +19,21 @@
                 <tr>
                     <th style="width:15%">Tanggal</th>
                     <th>Shift 1</th>
-                    <th>Long Shift 1</th>
                     <th>Shift 2</th>
-                    <th>Long Shift 2</th>
                     <th>Shift 3</th>
+                    <th>Total</th>
                 </tr>
             </thead>
             <tbody>
-            @for ($i = 0; $i < count($union); $i++)
+            @foreach ($data as $dt)
                 <tr>
-                    <td align="center"><a href="/detaildata/{{$union[$i][0]}}">{{date('d F Y', strtotime($union[$i][0]))}}</a></td>
-                    <td align="center">{{$union[$i][1]}}</td>
-                    <td align="center">{{$union[$i][2]}}</td>
-                    <td align="center">{{$union[$i][3]}}</td>
-                    <td align="center">{{$union[$i][4]}}</td>
-                    <td align="center">{{$union[$i][5]}}</td>
+                    <td><a href="/detaildata/{{$dt->tanggal}}">{{$dt->tanggal}}</a></td>
+                    <td>{{$dt->shift1}}</td>
+                    <td>{{$dt->shift2}}</td>
+                    <td>{{$dt->shift3}}</td>
+                    <td>{{$dt->total}}</td>
                 </tr>
-                @endfor
+                @endforeach
             </tbody>
         </table>
     </div>

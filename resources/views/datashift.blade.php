@@ -29,7 +29,7 @@
         <tbody>
             @foreach ($data as $dt)
             <tr>
-                <td><a class="link" href="/datashift/{{$dt->tanggal}}/{{$dt->departement}}" role="button">{{$dt->tanggal}}</a></td>
+                <td><a class="link" href="/datashift/{{$dt->tanggal}}{{$dt->departement}}" role="button">{{$dt->tanggal}}</a></td>
                 <td>{{$dt->departement}}</td>
                 <td>{{$dt->shift1}}</td>
                 <td>{{$dt->shift2}}</td>
@@ -37,11 +37,14 @@
                 @can('isAdmin')
                 @if (date('Y-m-d') <= date('Y-m-d',(strtotime ( $dt->tanggal ) ))) 
                 <td>
-                <a class="btn btn-sm btn-outline-primary" href="/datashifte/{{$dt->tanggal}}/{{$dt->departement}}" role="button">Edit</a>
-                <a class="btn btn-sm btn-outline-danger" href="/datashiftm/{{$dt->tanggal}}/{{$dt->departement}}" role="button">Hapus</a>
+                <a class="btn btn-sm btn-outline-primary" href="/datashifte/{{$dt->tanggal}}{{$dt->departement}}" role="button">Edit</a>
+                <a class="btn btn-sm btn-outline-danger" href="/datashiftm/{{$dt->tanggal}}{{$dt->departement}}" role="button">Hapus</a>
                 </td>
                 @else
-                <td></td>
+                <td>
+                <button class="btn btn-sm btn-outline-primary" href="#" role="button" disabled>Edit</button>
+                <button class="btn btn-sm btn-outline-danger" href="#" role="button" disabled>Hapus</button>
+                </td>
                 @endif
                 @endcan
             </tr>

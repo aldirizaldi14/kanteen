@@ -6,7 +6,7 @@
 $(document).ready(function() {
     $('#teras').DataTable({
         order: [
-            [0, 'desc']
+            [0, 'asc']
         ],
         scrollY: '50vh',
         scrollX: true,
@@ -27,64 +27,69 @@ $(document).ready(function() {
         </div>
     </div>
     <div class="card-body">
-        @foreach ($data as $dt)
+        <br>
         <div class="row">
-            <div class="col-sm-2">
-                Tanggal
-            </div>
-            <div class="col-sm-3">
-                {{date('d F Y', strtotime($dt->tanggal))}}
-            </div>
-            <div class="col-sm-1"></div>
-            <div class="col-sm-2">
-                Departement
-            </div>
-            <div class="col-sm-3">
-                {{$dt->departement}}
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-3">Tanggal</div>
+                    <div class="col-md-3">Departement</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"><b>{{date('d F Y', strtotime($tanggal))}}</b></div>
+                    <div class="col-md-3"><b>{{$dept}}</b></div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-3">Shift 1</div>
+                    <div class="col-md-3">Shift 2</div>
+                    <div class="col-md-3">Shift 3</div>
+                </div>
+                @foreach ($data as $dt)
+                <div class="row">
+                    <div class="col-md-3"><b>{{$dt->shift1}}</b></div>
+                    <div class="col-md-3"><b>{{$dt->shift2}}</b></div>
+                    <div class="col-md-3"><b>{{$dt->shift3}}</b></div>
+                </div>
+                @endforeach
+                <br>
+
+                <table id="teras" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nik Karyawan</th>
+                            <th>Nama Karyawan</th>
+                            <th>Shift</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach ($daftar as $df)
+                        <tr>
+                            <td>{{$i++}}</td>
+                            <td>{{$df->nik}}</td>
+                            <td>{{$df->name}}</td>
+                            <td>{{ucwords($df->shift)}}</td>
+                            <td>@if ($df->status == 0) Belum Ambil Makan @else Ambil Makan @endif</td>
+                            @if (date('Y-m-d') < date('Y-m-d',(strtotime ( '-2 day' , strtotime ($dt->tanggal)))))
+                                <td>
+                                <a class="btn btn-sm btn-outline-primary" href="/rubahe/{{$dt->id}}" role="button">Edit</a>
+                                <a class="btn btn-sm btn-outline-danger" href="/marahe/{{$dt->id}}" role="button">Hapus</a>
+                                </td>
+                                @else
+                                <td>
+                                <button class="btn btn-sm btn-outline-primary" href="#" disabled role="button">Edit</button>
+                                <button class="btn btn-sm btn-outline-danger" href="#" disabled role="button">Hapus</button>
+                                </td>
+                                @endif
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
-        <br>
-        @endforeach
-        <br>
-        @foreach ($data as $dt)
-        <table id="teras" class="display" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Shift 1 (<b>{{$dt->shift1}}</b>)</th>
-                    <th>Shift 2 (<b>{{$dt->shift2}}</b>)</th>
-                    <th>Shift 3 (<b>{{$dt->shift3}}</b>)</th>
-                </tr>
-            </thead>
-            @if (date('Y-m-d') < date('Y-m-d',(strtotime ( '-2 day' , strtotime ($dt->tanggal)))))
-                <tbody>
-                    @for ($i = 0; $i < count($union); $i++) <tr>
-                        <td>{{$union[$i][0]}} @if ($union[$i][0] != "") @can('isAdmin') <a
-                                class="btn btn-sm btn-xs btn-outline-danger"
-                                href="/marah/{{$union[$i][0]}}/shift1/{{$dt->id}}" role="button">x</a>@endif @endcan
-                        </td>
-                        <td>{{$union[$i][2]}} @if ($union[$i][2] != "") @can('isAdmin') <a
-                                class="btn btn-sm btn-xs btn-outline-danger"
-                                href="/marah/{{$union[$i][2]}}/shift2/{{$dt->id}}" role="button">x</a>@endif @endcan
-                        </td>
-                        <td>{{$union[$i][4]}} @if ($union[$i][4] != "") @can('isAdmin') <a
-                                class="btn btn-sm btn-xs btn-outline-danger"
-                                href="/marah/{{$union[$i][4]}}/shift3/{{$dt->id}}" role="button">x</a>@endif @endcan
-                        </td>
-                        </tr>
-                        @endfor
-                </tbody>
-                @else
-                <tbody>
-                    @for ($i = 0; $i < count($union); $i++) <tr>
-                        <td>{{$union[$i][0]}}</td>
-                        <td>{{$union[$i][2]}}</td>
-                        <td>{{$union[$i][4]}}</td>
-                        </tr>
-                        @endfor
-                </tbody>
-                @endif
-        </table>
-        @endforeach
     </div>
 </div>
 </div>

@@ -41,8 +41,6 @@
             <h1>
                 Error 404
             </h1>
-            <br>
-            <h3>{{$exception->getMessage()}}</h3>
     </div>
 </body>
 

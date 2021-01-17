@@ -14,8 +14,56 @@ class MenuMakanImport implements ToModel
     */
     public function model(array $row)
     {
-        return new MenuMakan([
-            //
-        ]);
+        if ($row[1] == 'Shift1') {
+            DB::table('shiftkary')->insert([
+                'id' => date('Ymd', strtotime($row[0])).$row[1],
+                'tanggal' => $row[0],
+                'waktu' =>  $row[1],
+                'snack1' => $row[2],
+                'jsnack1' => $row[3],
+                'snack2' => $row[4],
+                'jsnack2' => $row[5],
+                'makanan1' => $row[6],
+                'banyaknya1' => $row[7],
+                'makanan2' => $row[8],
+                'banyaknya2' => $row[9],
+                'makanan3' => $row[10],
+                'banyaknya3' => $row[11],
+            ]);
+        }
+        elseif ($row[1] == 'Shift2') {
+            DB::table('shiftkary')->insert([
+                'id' => date('Ymd', strtotime($row[0])).$row[1],
+                'tanggal' => $row[0],
+                'waktu' =>  $row[1],
+                'snack1' => '-',
+                'jsnack1' => 0,
+                'snack2' => '-',
+                'jsnack2' => 0,
+                'makanan1' => $row[6],
+                'banyaknya1' => $row[7],
+                'makanan2' => $row[8],
+                'banyaknya2' => $row[9],
+                'makanan3' => $row[10],
+                'banyaknya3' => $row[11],
+            ]);
+        }
+        elseif ($row[1] == 'Shift3') {
+            DB::table('shiftkary')->insert([
+                'id' => date('Ymd', strtotime($row[0])).$row[1],
+                'tanggal' => $row[0],
+                'waktu' =>  $row[1],
+                'snack1' => '-',
+                'jsnack1' => 0,
+                'snack2' => '-',
+                'jsnack2' => 0,
+                'makanan1' => $row[6],
+                'banyaknya1' => $row[7],
+                'makanan2' => $row[8],
+                'banyaknya2' => $row[9],
+                'makanan3' => $row[10],
+                'banyaknya3' => $row[11],
+            ]);
+        }
     }
-}
+    }

@@ -14,8 +14,11 @@ class MakananImport implements ToModel
     */
     public function model(array $row)
     {
-        return new Makanan([
-            //
+        DB::table('makanan')->insert([
+            'nama' => $row[0],
+            'jenis' => $row[1],
+            'harga' =>  $row[2],
+            'gambar' => 'Dummy.jpg',
         ]);
     }
 }
