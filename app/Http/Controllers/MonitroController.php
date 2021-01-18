@@ -21,6 +21,11 @@ class MonitroController extends Controller
         return view('monitor0');
     }
 
+    public function monitor4()
+    {
+        return view('monitor4');
+    }
+
     public function monitor1()
     {
         // $now = date('H:i');

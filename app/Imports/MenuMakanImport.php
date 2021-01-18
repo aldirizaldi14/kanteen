@@ -4,6 +4,10 @@ namespace App\Imports;
 
 use App\MenuMakan;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\SkipsOnError;
+use Maatwebsite\Excel\Concerns\SkipsErrors;
 
 class MenuMakanImport implements ToModel
 {
@@ -12,6 +16,7 @@ class MenuMakanImport implements ToModel
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
+    use Importable, SkipsErrors;
     public function model(array $row)
     {
         if ($row[1] == 'Shift1') {

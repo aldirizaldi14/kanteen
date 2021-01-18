@@ -8,18 +8,17 @@
         <div class="col-sm-4">
             <div class="card" align="center">
                 <div class="card-header">
-                    <h4>{{$data1}} <b id="jumlah1">{{$sisikan}}</b></h4>
+                    <h4>data1 <b id="jumlah_1">Sisas</b></h4>        
                 </div>
                 <div class="card-body">
                 <div class="row" style="height:500px">
-                <div class="col-sm-12">
-                    <img src="/fimages/{{$ikang}}" class="img-fluid h-100" alt="No Image">
-                </div>
+                <div class="col-md-12">
+                <img src="/fimages/Dummy.jpg" class="img-fluid h-50" alt="No Image">
                 </div>
                 </div>
                 <div class="row">
-                <div class="col-sm-12">
-                <table id="example1" class="display" style="width:100%;height:250px">
+                        <div class="col-sm-12">
+                        <table id="example1" class="display" style="width:100%;height:250px">
                         <thead>
                             <tr>
                                 <th>Karyawan</th>
@@ -27,64 +26,70 @@
                             </tr>
                         </thead>
                     </table>
-                </div>
-                </div>
-                <div class="card-footer">
-                    <div class="row">
-                <h5>Status : <b id="msg1"></b></h5>
+                        </div>
                     </div>
                 </div>
+                <div class="card-footer">
+                    
+                </div>
             </div>
+            
         </div>
         <!-- colom 2 -->
         <div class="col-sm-4">
-            <div class="card" align="center">
+            <div class="card h-25" align="center">
                 <div class="card-header">
-                    <h4>{{$data2}} <b id="jumlah_2">{{$sisayam}}</b></h4>
+                    <h4>data2</h4>
                 </div>
                 <div class="card-body">
-                <div class="row" style="height:500px">
-                <div class="col-sm-12">
-                    <img src="/fimages/{{$ayamg}}" class="img-fluid h-50" alt="No Image">
-                </div>
-                </div>
-                <div class="row">
-                <div class="col-sm-12">
-                <table id="example2" class="display" style="width:100%;height:250px">
-                        <thead>
-                            <tr>
-                                <th>Karyawan</th>
-                                <th>NIK</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-                </div>
+                    <img src="/fimages/Dummy.jpg" class="img-fluid h-100" alt="No Image">
                 </div>
                 <div class="card-footer">
                     <div class="row">
                         <div class="col-sm-12" id="jumlah_2">
-                        <h5>Status : <b id="msg2"></b></h5>
+                            sisayam
                         </div>
                     </div>
+                </div>
+            </div>
+            <!-- br -->
+            <div class="card">
+                <div class="card-body">
+                    <table id="example2" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Karyawan</th>
+                                <th>NIK</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="card-footer" align="left">
+                <h5>Status : <b id="msg2"></b></h5>
                 </div>
             </div>
         </div>
         <!-- colom 3 -->
         <div class="col-sm-4">
-            <div class="card" align="center">
+            <div class="card h-25" align="center">
                 <div class="card-header">
-                    <h4>{{$data3}} <b id="jumlah_3">{{$sisdaging}}</b></h4>
+                    <h4>data3</h4>
                 </div>
                 <div class="card-body">
-                <div class="row" style="height:500px">
-                <div class="col-sm-12">
-                    <img src="/fimages/{{$gdaging}}" class="img-fluid h-50" alt="No Image">
+                    <img src="/fimages/Dummy.jpg" class="img-fluid h-100" alt="No Image">
                 </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-sm-12" id="jumlah_3">
+                            sisdaging
+                        </div>
+                    </div>
                 </div>
-                <div class="row">
-                <div class="col-sm-12">
-                <table id="example3" class="display" style="width:100%;height:250px">
+            </div>
+            <!-- br -->
+            <div class="card">
+                <div class="card-body">
+                    <table id="example3" class="display" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Karyawan</th>
@@ -93,14 +98,8 @@
                         </thead>
                     </table>
                 </div>
-                </div>
-                </div>
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="col-sm-12" id="jumlah_3">
-                        <h5>Status : <b id="msg3"></b></h5>
-                        </div>
-                    </div>
+                <div class="card-footer" align="left">
+                <h5>Status : <b id="msg3"></b></h5>
                 </div>
             </div>
         </div>
