@@ -259,54 +259,13 @@ class MonitroController extends Controller
                     $date = "";
                 }
         }
-        $data = DB::table($database)->where('jadwalmenu', $date)->join('karyawan', $database.'.karyawan', '=', 'karyawan.nik')->select('name', 'nik')->get();
+        $data = DB::table($database)->where('jadwalmenu', $date)->join('karyawan', $database.'.karyawan', '=', 'karyawan.nik')->select('name', 'nik')->orderBy('time', 'desc')->get();
         return Datatables::of($data)->make(true);
     }
 
     public function karyawanjson($id) {
         $data = DB::table('karyawan')->where('departemen', $id)->orderBy('name', 'asc')->get();
         return $data;
-    }
-
-        // AJAX Data
-    public function count($id, $param1) {
-        $now = date('H:i');
-        $s1  = date('H:i', strtotime("06:00"));
-        $as1 = date('H:i', strtotime("07:30"));
-        $a1  = date('H:i', strtotime("11:00"));
-        $ak1 = date('H:i', strtotime("13:20"));
-        $a2  = date('H:i', strtotime("17:00"));
-        $ak2 = date('H:i', strtotime("19:15"));
-        $a3  = date('H:i', strtotime("02:00"));
-        $ak3 = date('H:i', strtotime("03:15"));
-
-        if (($now >= $a1) && ($now <= $ak1))
-        {
-           $jadwal = date('Y-m-d').'Shift1';
-           $shift = 'Shift 1';
-        }
-        elseif (($now >= $a2) && ($now <= $ak2)) 
-        {
-            $jadwal = date('Y-m-d').'Shift2';
-            $shift = 'Shift 2';
-            
-        }
-        elseif (($now >= $a3) && ($now <= $ak3)) 
-        {
-            $jadwal = date('Y-m-d').'Shift3';
-            $shift = 'Shift 3';
-        }
-        elseif (($now >= $s1) && ($now <= $as1)) 
-        {
-            $jadwal = date('Y-m-d').'Shift1';
-            $shift = 'Shift 0';
-        }
-        else {
-            $jadwal = "";
-            $shift = "";
-        }
-            $data = DB::table($id)->where('id', $jadwal)->where('shift', $shift)->count();
-            return $data;
     }
 
     // =============================================

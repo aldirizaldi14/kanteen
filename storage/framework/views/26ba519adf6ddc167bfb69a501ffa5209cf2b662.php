@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container-fluid">
     <!-- Row 1 -->
     <div class="row">
@@ -8,12 +6,12 @@
         <div class="col-sm-4">
             <div class="card" align="center">
                 <div class="card-header">
-                    <h4>{{$data1}} <b id="jumlah1">{{$sisikan}}</b></h4>
+                    <h4><?php echo e($data1); ?> <b id="jumlah1"><?php echo e($sisikan); ?></b></h4>
                 </div>
                 <div class="card-body">
                 <div class="row" style="height:500px">
                 <div class="col-sm-12">
-                    <img src="/fimages/{{$ikang}}" class="img-fluid w-100" alt="No Image">
+                    <img src="/fimages/<?php echo e($ikang); ?>" class="img-fluid w-100" alt="No Image">
                 </div>
                 </div>
                 <br>
@@ -41,12 +39,12 @@
         <div class="col-sm-4">
             <div class="card" align="center">
                 <div class="card-header">
-                    <h4>{{$data2}} <b id="jumlah_2">{{$sisayam}}</b></h4>
+                    <h4><?php echo e($data2); ?> <b id="jumlah_2"><?php echo e($sisayam); ?></b></h4>
                 </div>
                 <div class="card-body">
                 <div class="row" style="height:500px">
                 <div class="col-sm-12">
-                    <img src="/fimages/{{$ayamg}}" class="img-fluid w-100" alt="No Image">
+                    <img src="/fimages/<?php echo e($ayamg); ?>" class="img-fluid w-100" alt="No Image">
                 </div>
                 </div>
                 <br>
@@ -76,12 +74,12 @@
         <div class="col-sm-4">
             <div class="card" align="center">
                 <div class="card-header">
-                    <h4>{{$data3}} <b id="jumlah_3">{{$sisdaging}}</b></h4>
+                    <h4><?php echo e($data3); ?> <b id="jumlah_3"><?php echo e($sisdaging); ?></b></h4>
                 </div>
                 <div class="card-body">
                 <div class="row" style="height:500px">
                 <div class="col-sm-12">
-                    <img src="/fimages/{{$gdaging}}" class="img-fluid w-100" alt="No Image">
+                    <img src="/fimages/<?php echo e($gdaging); ?>" class="img-fluid w-100" alt="No Image">
                 </div>
                 </div>
                 <br>
@@ -109,9 +107,9 @@
         </div>
     </div>
 </div>
-@stop
+<?php $__env->stopSection(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 <script>
 $(document).ready(function() {
 
@@ -236,4 +234,5 @@ channel.listen('.jaging', function(data) {
   }
 });
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/kantin/resources/views/monitor3.blade.php ENDPATH**/ ?>

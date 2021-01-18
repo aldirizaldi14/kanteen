@@ -55,7 +55,6 @@ Route::post('data1-json', 'MonitroController@select1')->name('data1-json.data1')
 
 // Route AJAX
 Route::get('/server_side/scripts/{id}', 'MonitroController@ajax');
-Route::get('/server_side/count/{id}/{param}', 'MonitroController@count');
 
 Route::get('/dashboard', 'HomeController@dashboard')->middleware('can:isUser');
 
