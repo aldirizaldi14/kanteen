@@ -1,4 +1,11 @@
 <?php $__env->startSection('content'); ?>
+
+<style>
+td { 
+    font-size: 35px;
+ }
+</style>
+
 <div class="container-fluid">
     <!-- Row 1 -->
     <div class="row">
@@ -6,12 +13,12 @@
         <div class="col-sm-4">
             <div class="card" align="center">
                 <div class="card-header">
-                    <h4><?php echo e($data1); ?> <b id="jumlah1"><?php echo e($sisikan); ?></b></h4>
+                    <h4><?php echo e($data1); ?> <b id="jumlah_1"><?php echo e($sisikan); ?></b></h4>
                 </div>
                 <div class="card-body">
-                <div class="row" style="height:500px">
-                <div class="col-sm-12">
-                    <img src="/fimages/<?php echo e($ikang); ?>" class="img-fluid w-100" alt="No Image">
+                <div class="row" style="height:450px">
+                <div class="col-sm-12" style="height:450px">
+                    <img src="/fimages/<?php echo e($ikang); ?>" class="img-fluid h-100" alt="No Image">
                 </div>
                 </div>
                 <br>
@@ -20,8 +27,8 @@
                 <table id="example1" class="display" style="width:100%;height:250px">
                         <thead>
                             <tr>
+                                <th>id</th>
                                 <th>Karyawan</th>
-                                <th>NIK</th>
                             </tr>
                         </thead>
                     </table>
@@ -42,9 +49,9 @@
                     <h4><?php echo e($data2); ?> <b id="jumlah_2"><?php echo e($sisayam); ?></b></h4>
                 </div>
                 <div class="card-body">
-                <div class="row" style="height:500px">
-                <div class="col-sm-12">
-                    <img src="/fimages/<?php echo e($ayamg); ?>" class="img-fluid w-100" alt="No Image">
+                <div class="row" style="height:450px">
+                <div class="col-sm-12" style="height:450px">
+                    <img src="/fimages/<?php echo e($ayamg); ?>" class="img-fluid h-100" alt="No Image">
                 </div>
                 </div>
                 <br>
@@ -53,8 +60,8 @@
                 <table id="example2" class="display" style="width:100%;height:250px">
                         <thead>
                             <tr>
+                                <th>id</th>
                                 <th>Karyawan</th>
-                                <th>NIK</th>
                             </tr>
                         </thead>
                     </table>
@@ -77,9 +84,9 @@
                     <h4><?php echo e($data3); ?> <b id="jumlah_3"><?php echo e($sisdaging); ?></b></h4>
                 </div>
                 <div class="card-body">
-                <div class="row" style="height:500px">
-                <div class="col-sm-12">
-                    <img src="/fimages/<?php echo e($gdaging); ?>" class="img-fluid w-100" alt="No Image">
+                <div class="row" style="height:450px">
+                <div class="col-sm-12" style="height:450px">
+                    <img src="/fimages/<?php echo e($gdaging); ?>" class="img-fluid h-100" alt="No Image">
                 </div>
                 </div>
                 <br>
@@ -88,8 +95,8 @@
                 <table id="example3" class="display" style="width:100%;height:250px">
                         <thead>
                             <tr>
+                                <th>id</th>
                                 <th>Karyawan</th>
-                                <th>NIK</th>
                             </tr>
                         </thead>
                     </table>
@@ -127,13 +134,19 @@ $(document).ready(function() {
         processing: true,
         serverSide: true,
         ajax: "/server_side/scripts/device1",
-        columns: [
+        order: [[ 0, "desc" ]],
+        columns: [{
+                data:'id'
+        },
             {
                 data: 'name'
             },
+        ], 
+        columnDefs: [ 
             {
-                data: 'nik'
-            },
+                "targets": [ 0 ],
+                "visible": false
+            }
         ]
     });
     $('#example2').DataTable({
@@ -145,13 +158,19 @@ $(document).ready(function() {
         processing: true,
         serverSide: true,
         ajax: "/server_side/scripts/device2",
-        columns: [
+        order: [[ 0, "desc" ]],
+        columns: [{
+            data: 'id'
+        },
             {
                 data: 'name'
             },
+        ], 
+        columnDefs: [ 
             {
-                data: 'nik'
-            },
+                "targets": [ 0 ],
+                "visible": false,
+            }
         ]
     });
     $('#example3').DataTable({
@@ -163,13 +182,19 @@ $(document).ready(function() {
         processing: true,
         serverSide: true,
         ajax: "/server_side/scripts/device3",
-        columns: [
+        order: [[ 0, "desc" ]],
+        columns: [{
+                data: 'id'
+        },
             {
                 data: 'name'
             },
+        ], 
+        columnDefs: [ 
             {
-                data: 'nik'
-            },
+                "targets": [ 0 ],
+                "visible": false
+            }
         ]
     });
 });
@@ -216,7 +241,7 @@ channel.listen('.jikan', function(data) {
   }
 });
 channel.listen('.jayam', function(data) {
-    $("#Jumlah_2").text(data.jayam);
+    $("#jumlah_2").text(data.jayam);
     $('#example2').DataTable().ajax.reload();
     if (data.status == 1) {
     $("#msg2").text("OK");
@@ -225,7 +250,7 @@ channel.listen('.jayam', function(data) {
   }
 });
 channel.listen('.jaging', function(data) {
-    $("#Jumlah_3").text(data.jaging);
+    $("#jumlah_3").text(data.jaging);
     $('#example3').DataTable().ajax.reload();
     if (data.status == 1) {
     $("#msg3").text("OK");

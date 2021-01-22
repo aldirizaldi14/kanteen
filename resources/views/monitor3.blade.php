@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+
+<style>
+td { 
+    font-size: 35px;
+ }
+</style>
+
 <div class="container-fluid">
     <!-- Row 1 -->
     <div class="row">
@@ -8,12 +15,12 @@
         <div class="col-sm-4">
             <div class="card" align="center">
                 <div class="card-header">
-                    <h4>{{$data1}} <b id="jumlah1">{{$sisikan}}</b></h4>
+                    <h4>{{$data1}} <b id="jumlah_1">{{$sisikan}}</b></h4>
                 </div>
                 <div class="card-body">
-                <div class="row" style="height:500px">
-                <div class="col-sm-12">
-                    <img src="/fimages/{{$ikang}}" class="img-fluid w-100" alt="No Image">
+                <div class="row" style="height:450px">
+                <div class="col-sm-12" style="height:450px">
+                    <img src="/fimages/{{$ikang}}" class="img-fluid h-100" alt="No Image">
                 </div>
                 </div>
                 <br>
@@ -22,8 +29,8 @@
                 <table id="example1" class="display" style="width:100%;height:250px">
                         <thead>
                             <tr>
+                                <th>id</th>
                                 <th>Karyawan</th>
-                                <th>NIK</th>
                             </tr>
                         </thead>
                     </table>
@@ -44,9 +51,9 @@
                     <h4>{{$data2}} <b id="jumlah_2">{{$sisayam}}</b></h4>
                 </div>
                 <div class="card-body">
-                <div class="row" style="height:500px">
-                <div class="col-sm-12">
-                    <img src="/fimages/{{$ayamg}}" class="img-fluid w-100" alt="No Image">
+                <div class="row" style="height:450px">
+                <div class="col-sm-12" style="height:450px">
+                    <img src="/fimages/{{$ayamg}}" class="img-fluid h-100" alt="No Image">
                 </div>
                 </div>
                 <br>
@@ -55,8 +62,8 @@
                 <table id="example2" class="display" style="width:100%;height:250px">
                         <thead>
                             <tr>
+                                <th>id</th>
                                 <th>Karyawan</th>
-                                <th>NIK</th>
                             </tr>
                         </thead>
                     </table>
@@ -79,9 +86,9 @@
                     <h4>{{$data3}} <b id="jumlah_3">{{$sisdaging}}</b></h4>
                 </div>
                 <div class="card-body">
-                <div class="row" style="height:500px">
-                <div class="col-sm-12">
-                    <img src="/fimages/{{$gdaging}}" class="img-fluid w-100" alt="No Image">
+                <div class="row" style="height:450px">
+                <div class="col-sm-12" style="height:450px">
+                    <img src="/fimages/{{$gdaging}}" class="img-fluid h-100" alt="No Image">
                 </div>
                 </div>
                 <br>
@@ -90,8 +97,8 @@
                 <table id="example3" class="display" style="width:100%;height:250px">
                         <thead>
                             <tr>
+                                <th>id</th>
                                 <th>Karyawan</th>
-                                <th>NIK</th>
                             </tr>
                         </thead>
                     </table>
@@ -129,13 +136,19 @@ $(document).ready(function() {
         processing: true,
         serverSide: true,
         ajax: "/server_side/scripts/device1",
-        columns: [
+        order: [[ 0, "desc" ]],
+        columns: [{
+                data:'id'
+        },
             {
                 data: 'name'
             },
+        ], 
+        columnDefs: [ 
             {
-                data: 'nik'
-            },
+                "targets": [ 0 ],
+                "visible": false
+            }
         ]
     });
     $('#example2').DataTable({
@@ -147,13 +160,19 @@ $(document).ready(function() {
         processing: true,
         serverSide: true,
         ajax: "/server_side/scripts/device2",
-        columns: [
+        order: [[ 0, "desc" ]],
+        columns: [{
+            data: 'id'
+        },
             {
                 data: 'name'
             },
+        ], 
+        columnDefs: [ 
             {
-                data: 'nik'
-            },
+                "targets": [ 0 ],
+                "visible": false,
+            }
         ]
     });
     $('#example3').DataTable({
@@ -165,13 +184,19 @@ $(document).ready(function() {
         processing: true,
         serverSide: true,
         ajax: "/server_side/scripts/device3",
-        columns: [
+        order: [[ 0, "desc" ]],
+        columns: [{
+                data: 'id'
+        },
             {
                 data: 'name'
             },
+        ], 
+        columnDefs: [ 
             {
-                data: 'nik'
-            },
+                "targets": [ 0 ],
+                "visible": false
+            }
         ]
     });
 });
@@ -218,7 +243,7 @@ channel.listen('.jikan', function(data) {
   }
 });
 channel.listen('.jayam', function(data) {
-    $("#Jumlah_2").text(data.jayam);
+    $("#jumlah_2").text(data.jayam);
     $('#example2').DataTable().ajax.reload();
     if (data.status == 1) {
     $("#msg2").text("OK");
@@ -227,7 +252,7 @@ channel.listen('.jayam', function(data) {
   }
 });
 channel.listen('.jaging', function(data) {
-    $("#Jumlah_3").text(data.jaging);
+    $("#jumlah_3").text(data.jaging);
     $('#example3').DataTable().ajax.reload();
     if (data.status == 1) {
     $("#msg3").text("OK");

@@ -11,7 +11,7 @@
                 <div class="col-sm-2"> Departement</div>
                 <div class="col-sm-3">
                     <select name="departement" id="departement" class="selectpicker w-100 disabled">
-                        <option value="{{$departement}}">{{$departement}}</option>
+                        <option value="{{$costcenter}}">{{$departement}}</option>
                     </select>
                 </div>
                 <div class="col-sm-2"></div>

@@ -37,7 +37,7 @@
                 <div class="col-sm-4">
 
                     <select id="departemen" name="departemen" class="custom-select" onchange="test()">
-                        <option value="{{$dept}}">{{$dept}}</option>
+                        <option value="{{$costcenter}}">{{$dept}}</option>
                     </select>
 
                 </div>

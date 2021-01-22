@@ -29,7 +29,7 @@
         <tbody>
             @foreach ($data as $dt)
             <tr>
-                <td><a class="link" href="/datashift/{{$dt->tanggal}}{{$dt->departement}}" role="button">{{$dt->tanggal}}</a></td>
+                <td><a class="link" href="/datashift/{{$dt->tanggal}}{{$dt->costcenter}}" role="button">{{$dt->tanggal}}</a></td>
                 <td>{{$dt->departement}}</td>
                 <td>{{$dt->shift1}}</td>
                 <td>{{$dt->shift2}}</td>

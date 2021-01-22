@@ -19,10 +19,11 @@
                 <tr>
                     <th style="width:10%">Main</th>
                     <th style="width:20%">Bagian</th>
-                    <th>Total</th>
+                    <th>costcenter</th>
                     <th>Shift 1</th>
                     <th>Shift 2</th>
                     <th>Shift 3</th>
+                    <th>Total</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,6 +35,7 @@
                     <td>{{$dt->shift1}}</td>
                     <td>{{$dt->shift2}}</td>
                     <td>{{$dt->shift3}}</td>
+                    <td>{{$dt->shift3 + $dt->shift2 + $dt->shift1}}</td>
                 </tr>
                 @endforeach
             </tbody>

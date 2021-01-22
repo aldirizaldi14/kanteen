@@ -23,3 +23,5 @@ Route::get('/karyawan/{id}', 'MonitroController@karyawanjson');
 Route::get('/86b19a0013a70a10e5c46bfd2b0b8504/{id}', 'MonitroController@ikan');
 Route::get('/bffa783a022fe2d98692014dda6d7a4c/{id}', 'MonitroController@ayam');
 Route::get('/53a976d2265fa15658eec491822c7389/{id}', 'MonitroController@daging');
+
+Route::get('/nilai/{id}', 'MonitroController@nilai');

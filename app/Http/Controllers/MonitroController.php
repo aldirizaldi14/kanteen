@@ -132,7 +132,7 @@ class MonitroController extends Controller
                 $s1  = date('H:i', strtotime("06:00"));
                 $as1 = date('H:i', strtotime("07:30"));
                 $a1  = date('H:i', strtotime("11:00"));
-                $ak1 = date('H:i', strtotime("13:20"));
+                $ak1 = date('H:i', strtotime("13:50"));
                 $a2  = date('H:i', strtotime("17:00"));
                 $ak2 = date('H:i', strtotime("19:15"));
                 $a3  = date('H:i', strtotime("02:00"));
@@ -144,9 +144,9 @@ class MonitroController extends Controller
                     $sel1 = DB::table('jadwalmenu')->select('makanan1')->where('id', $date)->value('makanan1');
                     $sel2 = DB::table('jadwalmenu')->select('makanan2')->where('id', $date)->value('makanan2');
                     $sel3 = DB::table('jadwalmenu')->select('makanan3')->where('id', $date)->value('makanan3');
-                    $ikan = DB::table('makanan')->select('gambar')->where('jenis', 'ikan')->where('nama', $sel1)->value('gambar');
-                    $ayam = DB::table('makanan')->select('gambar')->where('jenis', 'ayam')->where('nama', $sel2)->value('gambar');
-                    $daging = DB::table('makanan')->select('gambar')->where('jenis', 'daging')->where('nama', $sel3)->value('gambar');
+                    $ikan = DB::table('makanan')->select('gambar')->where('nama', $sel1)->value('gambar');
+                    $ayam = DB::table('makanan')->select('gambar')->where('nama', $sel2)->value('gambar');
+                    $daging = DB::table('makanan')->select('gambar')->where('nama', $sel3)->value('gambar');
                     $ambil1 = DB::table('device1')->where('jadwalmenu', $date)->count();
                     $ambil2 = DB::table('device2')->where('jadwalmenu', $date)->count();
                     $ambil3 = DB::table('device3')->where('jadwalmenu', $date)->count();
@@ -222,7 +222,7 @@ class MonitroController extends Controller
         $s1  = date('H:i', strtotime("06:00"));
         $as1 = date('H:i', strtotime("07:30"));
         $a1  = date('H:i', strtotime("11:00"));
-        $ak1 = date('H:i', strtotime("13:20"));
+        $ak1 = date('H:i', strtotime("13:50"));
         $a2  = date('H:i', strtotime("17:00"));
         $ak2 = date('H:i', strtotime("19:15"));
         $a3  = date('H:i', strtotime("02:00"));
@@ -259,7 +259,7 @@ class MonitroController extends Controller
                     $date = "";
                 }
         }
-        $data = DB::table($database)->where('jadwalmenu', $date)->join('karyawan', $database.'.karyawan', '=', 'karyawan.nik')->select('name', 'nik')->orderBy('time', 'desc')->get();
+        $data = DB::table($database)->where('jadwalmenu', $date)->join('karyawan', $database.'.karyawan', '=', 'karyawan.nik')->select('name', 'nik', $database.'.id as id')->orderBy($database.'.id', 'desc')->get();
         return Datatables::of($data)->make(true);
     }
 
@@ -537,7 +537,7 @@ class MonitroController extends Controller
             $totalmakan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('banyaknya3')->value('banyaknya3');
         }
 
-        $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan2')->value('makanan2');
+        $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan3')->value('makanan3');
 
         $cd1 = DB::table('device1')->where('jadwalmenu', $jadwal)->where('karyawan', $temp)->where('shift', $shift)->count();
         $cd2 = DB::table('device2')->where('jadwalmenu', $jadwal)->where('karyawan', $temp)->where('shift', $shift)->count();
@@ -580,5 +580,10 @@ class MonitroController extends Controller
     {
         $data1 = DB::table('departement')->where('main', $request->get('departement'))->orderBy('departement', 'asc')->distinct()->pluck('departement');
         return response()->json($data1);
+    }
+
+    public function nilai($id)
+    {
+        return $id;
     }
 }

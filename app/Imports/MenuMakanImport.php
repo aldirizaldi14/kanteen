@@ -20,7 +20,7 @@ class MenuMakanImport implements ToModel
     public function model(array $row)
     {
         if ($row[1] == 'Shift1') {
-            DB::table('shiftkary')->insert([
+            DB::table('jadwalmenu')->insert([
                 'id' => date('Ymd', strtotime($row[0])).$row[1],
                 'tanggal' => $row[0],
                 'waktu' =>  $row[1],
@@ -37,7 +37,7 @@ class MenuMakanImport implements ToModel
             ]);
         }
         elseif ($row[1] == 'Shift2') {
-            DB::table('shiftkary')->insert([
+            DB::table('jadwalmenu')->insert([
                 'id' => date('Ymd', strtotime($row[0])).$row[1],
                 'tanggal' => $row[0],
                 'waktu' =>  $row[1],
@@ -54,7 +54,7 @@ class MenuMakanImport implements ToModel
             ]);
         }
         elseif ($row[1] == 'Shift3') {
-            DB::table('shiftkary')->insert([
+            DB::table('jadwalmenu')->insert([
                 'id' => date('Ymd', strtotime($row[0])).$row[1],
                 'tanggal' => $row[0],
                 'waktu' =>  $row[1],

@@ -13,7 +13,7 @@
                     <select name="departement" id="departement" data-live-search="true" class="selectpicker w-100">
                     @can('isAdmin')
                     @foreach ($dept as $dp)
-                        <option value="{{$dp->departement}}">{{$dp->departement}}</option>
+                        <option value="{{$dp->costcenter}}">{{$dp->departement}}</option>
                         @endforeach
                     @elsecan
                         @foreach ($dept as $dp)

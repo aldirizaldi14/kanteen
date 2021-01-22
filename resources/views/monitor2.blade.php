@@ -6,7 +6,7 @@
         <!-- colom 1 -->
         <div class="col-sm-4">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header" align="center">
                     Ikan
                 </div>
                 <div id="body_1" class="card-body">
@@ -33,7 +33,7 @@
         <!-- colom 2 -->
         <div class="col-sm-4">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header" align="center">
                     Ayam
                 </div>
                 <div id="body_2" class="card-body">
@@ -96,59 +96,6 @@ $(document).ready(function() {
     refreshAt(13, 20, 05);
     refreshAt(18, 45, 05);
     refreshAt(03, 10, 05);
-
-    $('#example1').DataTable({
-        scrollY: "300px",
-        searching: false,
-        scrollCollapse: true,
-        paging: false,
-        info: false,
-        processing: true,
-        serverSide: true,
-        ajax: "/server_side/scripts/device1",
-        columns: [{
-                data: 'name'
-            },
-            {
-                data: 'nik'
-            },
-        ]
-    });
-    $('#example2').DataTable({
-        scrollY: "300px",
-        searching: false,
-        scrollCollapse: true,
-        paging: false,
-        info: false,
-        processing: true,
-        serverSide: true,
-        ajax: "/server_side/scripts/device2",
-        columns: [{
-                data: 'name'
-            },
-            {
-                data: 'nik'
-            },
-        ]
-    });
-    $('#example3').DataTable({
-        scrollY: "300px",
-        searching: false,
-        scrollCollapse: true,
-        paging: false,
-        info: false,
-        processing: true,
-        serverSide: true,
-        ajax: "/server_side/scripts/device3",
-        columns: [{
-                data: 'name'
-            },
-            {
-                data: 'nik'
-            },
-        ]
-    });
-});
 
 function refreshAt(hours, minutes, seconds) {
     var now = new Date();

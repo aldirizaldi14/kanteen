@@ -11,6 +11,7 @@
             <div class="col-sm-12">
             <p>Upload data Jadwal Menu Makanan, mohon untuk menggunakan kaidah format yang telah tersedia.</p>
             <p>Untuk contoh kaidah bisa anda unduh di tautan <a href="{{ asset('/temp/UploadMenu.xlsx') }}">berikut ini</a></p>
+            <p>Pastikan berkas hanya mengandung satu lembar kerja (sheet)</p>
             </div>
             </div>
             <br>

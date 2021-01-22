@@ -422,13 +422,13 @@ class HomeController extends Controller
     public function dataid($id)
     {
         $data = DB::table('departement')
-        ->rightjoin('shiftkary', 'departement.departement', '=', 'shiftkary.id_data')
+        ->rightjoin('shiftkary', 'departement.costcenter', '=', 'shiftkary.id_data')
         ->where('shiftkary.tanggal', $id)
-        ->select('departement.main as main', 'shiftkary.id_data as departement', 'departement.costcenter as costcenter',
+        ->select('departement.main as main', 'shiftkary.id_data as costcenter', 'departement.departement as departement',
         DB::raw("count(case when shift = 'shift1' then 1 end) as shift1"), 
         DB::raw("count(case when shift = 'shift2' then 1 end) as shift2"), 
         DB::raw("count(case when shift = 'shift3' then 1 end) as shift3"), 
-        )->groupBy('shiftkary.tanggal', 'shiftkary.id_data', 'departement.main', 'departement.costcenter')
+        )->groupBy('shiftkary.tanggal', 'shiftkary.id_data', 'departement.main', 'departement.departement')
         ->orderBy('tanggal', 'desc')->get();
         return view('dataid', ['data' => $data]);
     }

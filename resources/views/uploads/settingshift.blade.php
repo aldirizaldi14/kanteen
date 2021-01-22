@@ -9,8 +9,9 @@
             <!-- Departement -->
             <div class="row">
             <div class="col-sm-12">
-            <p>Upload data shift karyawan, mohon untuk menggunakan kaidah format yang telah tersedia.</p>
+            <p>Upload data shift karyawan, mohon untuk menggunakan kaidah format yang telah tersedia.</p> 
             <p>Untuk contoh kaidah bisa anda unduh di tautan <a href="{{ asset('/temp/SettingShift.xlsx') }}">berikut ini</a></p>
+            <p>Pastikan berkas hanya mengandung satu lembar kerja (sheet)</p>
             </div>
             </div>
             <br>

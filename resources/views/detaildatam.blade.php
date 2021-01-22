@@ -126,7 +126,7 @@
                 scrollCollapse: true,
                 paging: false,
                 info: false,
-                searching: false,
+                searching: true,
                 dom: 'Bfrtip',
                 buttons: [
                     'excelHtml5',
