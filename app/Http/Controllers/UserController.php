@@ -55,8 +55,8 @@ class UserController extends Controller
         return redirect('/datashift/'.$param3);
     }
     public function rubahe($param1){
-        $data = DB::table('shiftkary')->leftJoin('karyawan', 'karyawan.nik', '=', 'shiftkary.nik')
-        ->select('shiftkary.id as id', 'shiftkary.nik as nik', 'karyawan.name as name', 'shiftkary.shift as waktu', 'shiftkary.tanggal as tanggal', 'shiftkary.id_data as dept')
+        $data = DB::table('shiftkary')->leftJoin('karyawan', 'karyawan.nik', '=', 'shiftkary.nik')->join('departement', 'departement.costcenter', '=', 'shiftkary.id_data')
+        ->select('shiftkary.id as id', 'shiftkary.nik as nik', 'karyawan.name as name', 'shiftkary.shift as waktu', 'shiftkary.tanggal as tanggal', 'shiftkary.id_data as costcenter', 'departement.departement as dept')
         ->where('shiftkary.id', $param1)->get();
         return view('jadwal.rubahe', ['param' => $data]);
     }
@@ -242,7 +242,7 @@ class UserController extends Controller
 
         $karyawan = DB::table('shiftkary')->where('shiftkary.id_data', $deptart)->where('shiftkary.tanggal', $tanggal)->where('shift', '!=', 'shift0')
         ->leftjoin('karyawan', 'shiftkary.nik', '=', 'karyawan.nik')
-        ->select('shiftkary.nik', 'karyawan.name', 'shiftkary.shift', 'shiftkary.status')
+        ->select('shiftkary.nik', 'karyawan.name', 'shiftkary.shift', 'shiftkary.status', 'shiftkary.id as id')
         ->get();
         return view('shiftdetail', ['data' => $alldata, 'daftar' => $karyawan, 'tanggal' => $tanggal, 'dept' => $deptart, 'i' => 1]);
     }

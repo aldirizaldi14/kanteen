@@ -19,10 +19,12 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-3">Tanggal</div>
+                    <div class="col-md-3">CostCenter</div>
                     <div class="col-md-3">Departement</div>
                 </div>
                 <div class="row">
                     <div class="col-md-3"><b>{{date('d F Y', strtotime($pr->tanggal))}}</b></div>
+                    <div class="col-md-3"><b>{{$pr->costcenter}}</b></div>
                     <div class="col-md-3"><b>{{$pr->dept}}</b></div>
                 </div>
                 <br>
