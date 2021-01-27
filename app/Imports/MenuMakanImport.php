@@ -6,10 +6,11 @@ use App\MenuMakan;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\SkipsOnError;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
 
-class MenuMakanImport implements ToModel
+class MenuMakanImport implements ToModel, SkipsOnError, WithHeadingRow
 {
     /**
     * @param array $row
@@ -19,55 +20,55 @@ class MenuMakanImport implements ToModel
     use Importable, SkipsErrors;
     public function model(array $row)
     {
-        if ($row[1] == 'Shift1') {
+        if ($row['shift'] == 'Shift1') {
             DB::table('jadwalmenu')->insert([
-                'id' => date('Ymd', strtotime($row[0])).$row[1],
-                'tanggal' => $row[0],
-                'waktu' =>  $row[1],
-                'snack1' => $row[2],
-                'jsnack1' => $row[3],
-                'snack2' => $row[4],
-                'jsnack2' => $row[5],
-                'makanan1' => $row[6],
-                'banyaknya1' => $row[7],
-                'makanan2' => $row[8],
-                'banyaknya2' => $row[9],
-                'makanan3' => $row[10],
-                'banyaknya3' => $row[11],
+                'id' => date('Y-m-d', strtotime($row['tanggal'])).$row['shift'],
+                'tanggal' => $row['tanggal'],
+                'waktu' =>  $row['shift'],
+                'snack1' => $row['snack_1'],
+                'jsnack1' => $row['jumlah_snack_1'],
+                'snack2' => $row['snack_2'],
+                'jsnack2' => $row['jumlah_snack_2'],
+                'makanan1' => $row['menu_ikan'],
+                'banyaknya1' => $row['jumlah_menu_ikan'],
+                'makanan2' => $row['menu_ayam'],
+                'banyaknya2' => $row['jumlah_menu_ayam'],
+                'makanan3' => $row['menu_daging'],
+                'banyaknya3' => $row['jumlah_menu_daging'],
             ]);
         }
-        elseif ($row[1] == 'Shift2') {
+        elseif ($row['shift'] == 'Shift2') {
             DB::table('jadwalmenu')->insert([
-                'id' => date('Ymd', strtotime($row[0])).$row[1],
-                'tanggal' => $row[0],
-                'waktu' =>  $row[1],
+                'id' => date('Y-m-d', strtotime($row['tanggal'])).$row['shift'],
+                'tanggal' => $row['tanggal'],
+                'waktu' =>  $row['shift'],
                 'snack1' => '-',
                 'jsnack1' => 0,
                 'snack2' => '-',
                 'jsnack2' => 0,
-                'makanan1' => $row[6],
-                'banyaknya1' => $row[7],
-                'makanan2' => $row[8],
-                'banyaknya2' => $row[9],
-                'makanan3' => $row[10],
-                'banyaknya3' => $row[11],
+                'makanan1' => $row['menu_ikan'],
+                'banyaknya1' => $row['jumlah_menu_ikan'],
+                'makanan2' => $row['menu_ayam'],
+                'banyaknya2' => $row['jumlah_menu_ayam'],
+                'makanan3' => $row['menu_daging'],
+                'banyaknya3' => $row['jumlah_menu_daging'],
             ]);
         }
-        elseif ($row[1] == 'Shift3') {
+        elseif ($row['shift'] == 'Shift3') {
             DB::table('jadwalmenu')->insert([
-                'id' => date('Ymd', strtotime($row[0])).$row[1],
-                'tanggal' => $row[0],
-                'waktu' =>  $row[1],
+                'id' => date('Y-m-d', strtotime($row['tanggal'])).$row['shift'],
+                'tanggal' => $row['tanggal'],
+                'waktu' =>  $row['shift'],
                 'snack1' => '-',
                 'jsnack1' => 0,
                 'snack2' => '-',
                 'jsnack2' => 0,
-                'makanan1' => $row[6],
-                'banyaknya1' => $row[7],
-                'makanan2' => $row[8],
-                'banyaknya2' => $row[9],
-                'makanan3' => $row[10],
-                'banyaknya3' => $row[11],
+                'makanan1' => $row['menu_ikan'],
+                'banyaknya1' => $row['jumlah_menu_ikan'],
+                'makanan2' => $row['menu_ayam'],
+                'banyaknya2' => $row['jumlah_menu_ayam'],
+                'makanan3' => $row['menu_daging'],
+                'banyaknya3' => $row['jumlah_menu_daging'],
             ]);
         }
     }

@@ -33,7 +33,7 @@
         <tbody>
             @foreach ($data as $dt)
             <tr>
-                <td>{{date('d-m-Y', strtotime($dt->tanggal))}}</td>
+                <td>{{date('Y-m-d', strtotime($dt->tanggal))}}</td>
                 <td>{{$dt->waktu}}</td>
                 <td>{{$dt->snack1}}</td>
                 <td>{{$dt->snack2}}</td>

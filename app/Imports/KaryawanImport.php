@@ -4,13 +4,14 @@ namespace App\Imports;
 
 use App\Karyawan;
 use Maatwebsite\Excel\Concerns\ToModel;
-
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\SkipsOnError;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
 
-class KaryawanImport implements ToModel
+
+class KaryawanImport implements ToModel, SkipsOnError, WithHeadingRow
 {
     /**
     * @param array $row
@@ -21,10 +22,10 @@ class KaryawanImport implements ToModel
     public function model(array $row)
     {
         DB::table('karyawan')->insert([
-            'nik' => $row[0],
-            'rfid' => $row[1],
-            'name' =>  $row[2],
-            'departement' => $row[3],
+            'nik' => $row['emp_id'],
+            'rfid' => $row['rfid'],
+            'name' =>  $row['name'],
+            'departemen' => $row['dept'],
             'gambar' => 'Dummy.jpg',
         ]);
     }
