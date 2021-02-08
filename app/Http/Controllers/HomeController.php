@@ -69,13 +69,13 @@ class HomeController extends Controller
         $data0 = DB::table('departement')->where('id', $id)->get();
         $data1 = DB::table('departement')->select('main')->distinct()->get();
         $data2 = DB::table('departement')->select('departement')->distinct()->get();
-        return view('departement.alter', ['data' => $data0, 'list1' => $data1, 'list2' => $data2]);
+        return view('departement.alter', ['data' => $data0, 'list1' => $data1, 'list2' => $data2, 'id' => $id]);
     }
 
     public function deptalters(Request $request) {
         DB::table('departement')->where('id', $request->id)->update([
             'main' => $request->main,
-            'departemen' => $request->nama,
+            'departement' => $request->nama,
             'costcenter' => $request->costcenter,
         ]);
         return redirect('/departement');
@@ -102,7 +102,6 @@ class HomeController extends Controller
         $iname = DB::table('karyawan')->select('gambar')->where('id', $request->id)->value('gambar');
         $bag1  = substr($request->nik,2,-6);
         $bag2  = substr($request->nik,6);
-        $rfid  = $bag1.$bag2;
 
         if ($request->hasFile('file')) {
             if(strtolower($iname) == "dummy.png" || strtolower($iname) == "dummy.jpg") {
@@ -122,6 +121,7 @@ class HomeController extends Controller
                 'departemen' => $request->departemen,
                 'remark' => $request->remark,
                 'gambar' => $nama_file,
+                'fungsi' => $request->fungsi,
             ]);
         } else {
             DB::table('karyawan')->where('id', $request->id)->update([
@@ -130,6 +130,7 @@ class HomeController extends Controller
                 'name' => $request->nama,
                 'departemen' => $request->departemen,
                 'remark' => $request->remark,
+                'fungsi' => $request->fungsi,
             ]);
         }
         return redirect('/karyawan');
@@ -174,6 +175,7 @@ class HomeController extends Controller
             'departemen' => $request->departemen,
             'remark' => $request->remark,
             'gambar' => $nama_file,
+            'fungsi' => $request->fungsi,
         ]);
         return redirect('/karyawan');
     }

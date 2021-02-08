@@ -76,7 +76,7 @@ Route::get('/departement', 'HomeController@departement')->middleware('can:isAdmi
 Route::get('/departement/alter/{id}', 'HomeController@deptalter')->middleware('can:isAdmin');
 Route::get('/departement/plus', 'HomeController@deptplus')->middleware('can:isAdmin');
 Route::get('/departement/minus/{id}', 'HomeController@deptminus')->middleware('can:isAdmin');
-Route::post('/departement/alter/simpan', 'HomeController@deptalters')->middleware('can:isAdmin');
+Route::post('/departement/deptalters', 'HomeController@deptalters')->middleware('can:isAdmin');
 Route::post('/departement/simpan', 'HomeController@deptsave')->middleware('can:isAdmin');
 
 Route::get('/makanan', 'HomeController@makanan')->middleware('can:isAdmin');

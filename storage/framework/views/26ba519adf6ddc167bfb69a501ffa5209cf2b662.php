@@ -13,7 +13,7 @@ td {
         <div class="col-sm-4">
             <div class="card" align="center">
                 <div class="card-header">
-                    <h4><?php echo e($data1); ?> <b id="jumlah_1"><?php echo e($sisikan); ?></b></h4>
+                    <h4><?php echo e($data1); ?></h4>
                 </div>
                 <div class="card-body">
                 <div class="row" style="height:450px">
@@ -46,7 +46,7 @@ td {
         <div class="col-sm-4">
             <div class="card" align="center">
                 <div class="card-header">
-                    <h4><?php echo e($data2); ?> <b id="jumlah_2"><?php echo e($sisayam); ?></b></h4>
+                    <h4><?php echo e($data2); ?></h4>
                 </div>
                 <div class="card-body">
                 <div class="row" style="height:450px">
@@ -81,7 +81,7 @@ td {
         <div class="col-sm-4">
             <div class="card" align="center">
                 <div class="card-header">
-                    <h4><?php echo e($data3); ?> <b id="jumlah_3"><?php echo e($sisdaging); ?></b></h4>
+                    <h4><?php echo e($data3); ?></h4>
                 </div>
                 <div class="card-body">
                 <div class="row" style="height:450px">
@@ -228,12 +228,18 @@ setInterval(function() {
         location.reload()
     }
 }, 30000);
+setInterval(function() {
+    $('#example1').DataTable().ajax.reload();
+    $('#example2').DataTable().ajax.reload();
+    $('#example3').DataTable().ajax.reload();
+}, 2000);
 </script>
 <script>
 var channel = Echo.channel('my-channel');
 channel.listen('.jikan', function(data) {
-    $("#jumlah_1").text(data.jikan);
     $('#example1').DataTable().ajax.reload();
+    $('#example2').DataTable().ajax.reload();
+    $('#example3').DataTable().ajax.reload();
     if (data.status == 1) {
     $("#msg1").text("OK");
   }else {
@@ -241,8 +247,9 @@ channel.listen('.jikan', function(data) {
   }
 });
 channel.listen('.jayam', function(data) {
-    $("#jumlah_2").text(data.jayam);
+    $('#example1').DataTable().ajax.reload();
     $('#example2').DataTable().ajax.reload();
+    $('#example3').DataTable().ajax.reload();
     if (data.status == 1) {
     $("#msg2").text("OK");
   }else {
@@ -250,7 +257,8 @@ channel.listen('.jayam', function(data) {
   }
 });
 channel.listen('.jaging', function(data) {
-    $("#jumlah_3").text(data.jaging);
+    $('#example1').DataTable().ajax.reload();
+    $('#example2').DataTable().ajax.reload();
     $('#example3').DataTable().ajax.reload();
     if (data.status == 1) {
     $("#msg3").text("OK");

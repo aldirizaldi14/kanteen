@@ -73,7 +73,7 @@ $(document).ready(function() {
                             <td>{{$df->name}}</td>
                             <td>{{ucwords($df->shift)}}</td>
                             <td>@if ($df->status == 0) Belum Ambil Makan @else Ambil Makan @endif</td>
-                            @if (date('Y-m-d') < date('Y-m-d',(strtotime ( '-2 day' , strtotime ($dt->tanggal)))))
+                            @if (date('Y-m-d') <= date('Y-m-d',(strtotime ($dt->tanggal))))
                                 <td>
                                 <a class="btn btn-sm btn-outline-primary" href="/rubahe/{{$df->id}}" role="button">Edit</a>
                                 <a class="btn btn-sm btn-outline-danger" href="/marahe/{{$df->id}}" role="button">Hapus</a>

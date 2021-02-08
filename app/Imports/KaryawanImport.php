@@ -27,6 +27,7 @@ class KaryawanImport implements ToModel, SkipsOnError, WithHeadingRow
             'name' =>  $row['name'],
             'departemen' => $row['dept'],
             'gambar' => 'Dummy.jpg',
+            'fungsi' => $row['fungsi'],
         ]);
     }
 }

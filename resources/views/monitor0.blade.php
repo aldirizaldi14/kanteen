@@ -14,10 +14,19 @@
 @push('scripts')
 <script>
 $(document).ready(function() {
-    refreshAt(06, 00, 05);
+    refreshAt(06, 08, 05);
+    refreshAt(06, 12, 05);
+    refreshAt(06, 15, 05);
+    refreshAt(06, 20, 05);
+    refreshAt(06, 22, 05);
+    refreshAt(06, 23, 05);
+    refreshAt(06, 24, 05);
+    refreshAt(06, 25, 05);
     refreshAt(11, 00, 05);
     refreshAt(17, 00, 05);
-    refreshAt(02, 00, 05);
+    refreshAt(02, 01, 05);
+    refreshAt(02, 02, 05);
+    refreshAt(02, 03, 05);
 });
 
 function refreshAt(hours, minutes, seconds) {
@@ -40,13 +49,13 @@ function refreshAt(hours, minutes, seconds) {
 }
 setInterval(function() {
     if (new Date().getHours() == 6) {
-        location.reload()
+        location.reload();
     } else if (new Date().getHours() == 11) {
-        location.reload()
+        location.reload();
     } else if (new Date().getHours() == 17) {
-        location.reload()
+        location.reload();
     } else if (new Date().getHours() == 2) {
-        location.reload()
+        location.reload();
     }
 }, 30000);
 </script>

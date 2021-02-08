@@ -325,25 +325,21 @@ class MonitroController extends Controller
         if(strpos(strtolower($ceks), 'subcont')) {
             $exist = 1;
         } else {
-            $exist = DB::table('shiftkary')->where('nik', $temp)->where('tanggal', $date)->where('shift', $waktu)->where('status', 0)->count();
+            // $exist = DB::table('shiftkary')->where('nik', $temp)->where('tanggal', $date)->where('shift', $waktu)->where('status', 0)->count();
+            $exist = 1;
         }
 
 
         $minus       = DB::table($database)->where('jadwalmenu', $jadwal)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
         if($exist == 1 ) {
 
-        // Cek Subcont 02
-        if(strpos(strtolower($ceks), 'subcont')) {
-            $cd1 = 0;
-            $cd2 = 0;
-            $cd3 = 0;
-        } else {
             $cd1 = DB::table('device1')->where('jadwalmenu', $jadwal)->where('karyawan', $temp)->where('shift', $shift)->count();
             $cd2 = DB::table('device2')->where('jadwalmenu', $jadwal)->where('karyawan', $temp)->where('shift', $shift)->count();
             $cd3 = DB::table('device3')->where('jadwalmenu', $jadwal)->where('karyawan', $temp)->where('shift', $shift)->count();
-        }
+            $ctotal = $cd1 + $cd2 + $cd3;
+            $climit = DB::table('karyawan')->select('fungsi')->where('rfid', $hex)->value('fungsi');
 
-        if (($cd1 == 1)||($cd2 == 1)||($cd3 == 1)) {
+        if ($ctotal >= $climit) {
             return 1;
         }
         else {
@@ -440,23 +436,20 @@ class MonitroController extends Controller
         if(strpos(strtolower($ceks), 'subcont')) {
             $exist = 1;
         } else {
-            $exist = DB::table('shiftkary')->where('nik', $temp)->where('tanggal', $date)->where('shift', $waktu)->where('status', 0)->count();
+            // $exist = DB::table('shiftkary')->where('nik', $temp)->where('tanggal', $date)->where('shift', $waktu)->where('status', 0)->count();
+            $exist = 1;
         }
 
         $minus       = DB::table($database)->where('jadwalmenu', $jadwal)->where('status', 1)->count();
         if ($exist == 1) {
 
-        // Cek Subcont 02
-        if(strpos(strtolower($ceks), 'subcont')) {
-            $cd1 = 0;
-            $cd2 = 0;
-            $cd3 = 0;
-        } else {
             $cd1 = DB::table('device1')->where('jadwalmenu', $jadwal)->where('karyawan', $temp)->where('shift', $shift)->count();
             $cd2 = DB::table('device2')->where('jadwalmenu', $jadwal)->where('karyawan', $temp)->where('shift', $shift)->count();
             $cd3 = DB::table('device3')->where('jadwalmenu', $jadwal)->where('karyawan', $temp)->where('shift', $shift)->count();
-        }
-            if (($cd1 == 1)||($cd2 == 1)||($cd3 == 1)) {
+            $ctotal = $cd1 + $cd2 + $cd3;
+            $climit = DB::table('karyawan')->select('fungsi')->where('rfid', $hex)->value('fungsi');
+
+            if ($ctotal >= $climit) {
                 return 1;
             }
             else {
@@ -544,7 +537,8 @@ class MonitroController extends Controller
         if(strpos(strtolower($ceks), 'subcont')) {
             $exist = 1;
         } else {
-            $exist = DB::table('shiftkary')->where('nik', $temp)->where('tanggal', $date)->where('shift', $waktu)->where('status', 0)->count();
+            // $exist = DB::table('shiftkary')->where('nik', $temp)->where('tanggal', $date)->where('shift', $waktu)->where('status', 0)->count();
+            $exist = 1;
         }
 
         $minus       = DB::table('device3')->where('jadwalmenu', $jadwal)->where('status', 1)->count();
@@ -552,17 +546,13 @@ class MonitroController extends Controller
 
         $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan3')->value('makanan3');
 
-        // Cek Subcont 02
-        if(strpos(strtolower($ceks), 'subcont')) {
-            $cd1 = 0;
-            $cd2 = 0;
-            $cd3 = 0;
-        } else {
             $cd1 = DB::table('device1')->where('jadwalmenu', $jadwal)->where('karyawan', $temp)->where('shift', $shift)->count();
             $cd2 = DB::table('device2')->where('jadwalmenu', $jadwal)->where('karyawan', $temp)->where('shift', $shift)->count();
             $cd3 = DB::table('device3')->where('jadwalmenu', $jadwal)->where('karyawan', $temp)->where('shift', $shift)->count();
-        }
-        if (($cd1 == 1)||($cd2 == 1)||($cd3 == 1)) {
+            $ctotal = $cd1 + $cd2 + $cd3;
+            $climit = DB::table('karyawan')->select('fungsi')->where('rfid', $hex)->value('fungsi');
+
+        if ($ctotal >= $climit) {
             return 1;
         }
         else {

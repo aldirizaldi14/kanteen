@@ -6,8 +6,9 @@
         {{ __('Tambah Departement') }}
     </div>
     <div class="card-body">
-        <form action="simpan" method="post" enctype="multipart/form-data">
+        <form action="/departement/deptalters" method="post" enctype="multipart/form-data">
         @csrf
+        <input id="id" list="main" hidden type="text" class="form-control" name="id" value="{{$id}}" required autofocus>
         @foreach ($data as $dt)
             <!-- Nama -->
             <div class="row">
