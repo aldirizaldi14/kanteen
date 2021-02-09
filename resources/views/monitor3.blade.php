@@ -15,7 +15,7 @@ td {
         <div class="col-sm-4">
             <div class="card" align="center">
                 <div class="card-header">
-                    <h4>{{$data1}}</h4>
+                    <h1><b>{{$data1}}</b></h1>
                 </div>
                 <div class="card-body">
                 <div class="row" style="height:450px">
@@ -39,7 +39,9 @@ td {
                 </div>
                 <div class="card-footer">
                     <div class="row">
-                <h5>Status : <b id="msg1"></b></h5>
+                    <div class="col-sm-12" >
+                    <h1>Sisa :  <b id="jumlah_1"> {{$sisikan}} </b></h1>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -48,7 +50,7 @@ td {
         <div class="col-sm-4">
             <div class="card" align="center">
                 <div class="card-header">
-                    <h4>{{$data2}}</h4>
+                    <h1><b>{{$data2}}</b></h1>
                 </div>
                 <div class="card-body">
                 <div class="row" style="height:450px">
@@ -72,8 +74,8 @@ td {
                 </div>
                 <div class="card-footer">
                     <div class="row">
-                        <div class="col-sm-12" id="jumlah_2">
-                        <h5>Status : <b id="msg2"></b></h5>
+                        <div class="col-sm-12">
+                        <h1>Sisa :  <b id="jumlah_2"> {{$sisayam}} </b></h1>
                         </div>
                     </div>
                 </div>
@@ -83,7 +85,7 @@ td {
         <div class="col-sm-4">
             <div class="card" align="center">
                 <div class="card-header">
-                    <h4>{{$data3}}</h4>
+                    <h1><b>{{$data3}} </b></h1>
                 </div>
                 <div class="card-body">
                 <div class="row" style="height:450px">
@@ -107,8 +109,8 @@ td {
                 </div>
                 <div class="card-footer">
                     <div class="row">
-                        <div class="col-sm-12" id="jumlah_3">
-                        <h5>Status : <b id="msg3"></b></h5>
+                        <div class="col-sm-12">
+                        <h1>Sisa :  <b id="jumlah_3"> {{$sisdaging}} </b></h1>
                         </div>
                     </div>
                 </div>
@@ -239,6 +241,7 @@ setInterval(function() {
 <script>
 var channel = Echo.channel('my-channel');
 channel.listen('.jikan', function(data) {
+    $("#jumlah_1").text(data.jikan);
     $('#example1').DataTable().ajax.reload();
     $('#example2').DataTable().ajax.reload();
     $('#example3').DataTable().ajax.reload();
@@ -249,6 +252,7 @@ channel.listen('.jikan', function(data) {
   }
 });
 channel.listen('.jayam', function(data) {
+    $("#jumlah_2").text(data.jikan);
     $('#example1').DataTable().ajax.reload();
     $('#example2').DataTable().ajax.reload();
     $('#example3').DataTable().ajax.reload();
@@ -259,6 +263,7 @@ channel.listen('.jayam', function(data) {
   }
 });
 channel.listen('.jaging', function(data) {
+    $("#jumlah_3").text(data.jikan);
     $('#example1').DataTable().ajax.reload();
     $('#example2').DataTable().ajax.reload();
     $('#example3').DataTable().ajax.reload();

@@ -14,9 +14,6 @@
                 </div>
                 <div class="card-footer">
                     <div class="row">
-                        <div class="col-sm-12" id="jumlah_1">
-                            {{$sisikan}}
-                        </div>
                     </div>
                 </div>
             </div>
@@ -32,9 +29,6 @@
                 </div>
                 <div class="card-footer">
                     <div class="row">
-                        <div class="col-sm-12" id="jumlah_2">
-                            {{$sisayam}}
-                        </div>
                     </div>
                 </div>
             </div>
@@ -50,9 +44,6 @@
                 </div>
                 <div class="card-footer">
                     <div class="row">
-                        <div class="col-sm-12" id="jumlah_3">
-                            {{$sisdaging}}
-                        </div>
                     </div>
                 </div>
             </div>
