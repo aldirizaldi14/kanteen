@@ -23,8 +23,9 @@ class DataDepartement extends Migration
             $table->string('shift2');
             $table->string('longshift2');
             $table->string('shift3');
-            $table->string('lastedit');
             $table->integer('status');
+            $table->string('lastedit');
+            
         });
     }
 

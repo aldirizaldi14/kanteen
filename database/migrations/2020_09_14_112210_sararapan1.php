@@ -20,6 +20,7 @@ class Sararapan1 extends Migration
             $table->string('shift');
             $table->string('makanan');
             $table->string('status');
+            $table->timestamps('time');
         });
     }
 

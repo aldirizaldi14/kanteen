@@ -14,19 +14,10 @@
 @push('scripts')
 <script>
 $(document).ready(function() {
-    refreshAt(06, 08, 05);
-    refreshAt(06, 12, 05);
-    refreshAt(06, 15, 05);
-    refreshAt(06, 20, 05);
-    refreshAt(06, 22, 05);
-    refreshAt(06, 23, 05);
-    refreshAt(06, 24, 05);
-    refreshAt(06, 25, 05);
-    refreshAt(11, 00, 05);
-    refreshAt(17, 00, 05);
-    refreshAt(02, 01, 05);
-    refreshAt(02, 02, 05);
-    refreshAt(02, 03, 05);
+    refreshAt(05, 30, 05);
+    refreshAt(11, 05, 05);
+    refreshAt(17, 05, 05);
+    refreshAt(02, 05, 05);
 });
 
 function refreshAt(hours, minutes, seconds) {

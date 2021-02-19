@@ -14,19 +14,19 @@ td {
         <!-- colom 1 -->
         <div class="col-sm-4">
             <div class="card" align="center">
-                <div class="card-header">
-                    <h1><b>{{$data1}}</b></h1>
+                <div class="card-header p-0">
+                    <h1 style="font-size:5vh;"><b>{{$data1}}</b></h1>
                 </div>
                 <div class="card-body">
-                <div class="row" style="height:450px">
-                <div class="col-sm-12" style="height:450px">
+                <div class="row" style="max-height:450px">
+                <div class="col-sm-12" style="max-height:450px">
                     <img src="/fimages/{{$ikang}}" class="img-fluid h-100" alt="No Image">
                 </div>
                 </div>
                 <br>
                 <div class="row">
                 <div class="col-sm-12">
-                <table id="example1" class="display" style="width:100%;height:250px">
+                <table id="example1" class="display" style="width:100%;height:200px">
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -49,19 +49,19 @@ td {
         <!-- colom 2 -->
         <div class="col-sm-4">
             <div class="card" align="center">
-                <div class="card-header">
-                    <h1><b>{{$data2}}</b></h1>
+                <div class="card-header p-0">
+                    <h1 style="font-size:5vh;"><b>{{$data2}}</b></h1>
                 </div>
                 <div class="card-body">
-                <div class="row" style="height:450px">
-                <div class="col-sm-12" style="height:450px">
+                <div class="row" style="max-height:450px">
+                <div class="col-sm-12" style="max-height:450px">
                     <img src="/fimages/{{$ayamg}}" class="img-fluid h-100" alt="No Image">
                 </div>
                 </div>
                 <br>
                 <div class="row">
                 <div class="col-sm-12">
-                <table id="example2" class="display" style="width:100%;height:250px">
+                <table id="example2" class="display" style="width:100%;height:200px">
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -84,19 +84,19 @@ td {
         <!-- colom 3 -->
         <div class="col-sm-4">
             <div class="card" align="center">
-                <div class="card-header">
-                    <h1><b>{{$data3}} </b></h1>
+                <div class="card-header p-0">
+                    <h1 style="font-size:5vh;"><b>{{$data3}} </b></h1>
                 </div>
                 <div class="card-body">
-                <div class="row" style="height:450px">
-                <div class="col-sm-12" style="height:450px">
+                <div class="row" style="max-height:450px">
+                <div class="col-sm-12" style="max-height:450px">
                     <img src="/fimages/{{$gdaging}}" class="img-fluid h-100" alt="No Image">
                 </div>
                 </div>
                 <br>
                 <div class="row">
                 <div class="col-sm-12">
-                <table id="example3" class="display" style="width:100%;height:250px">
+                <table id="example3" class="display" style="width:100%;height:200px">
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -124,10 +124,10 @@ td {
 <script>
 $(document).ready(function() {
 
-    refreshAt(07, 30, 05);
-    refreshAt(13, 20, 05);
-    refreshAt(18, 45, 05);
-    refreshAt(03, 10, 05);
+    refreshAt(08, 35, 05);
+    refreshAt(14, 20, 05);
+    refreshAt(19, 20, 05);
+    refreshAt(03, 20, 05);
 
     $('#example1').DataTable({
         scrollY: "300px",
@@ -222,17 +222,6 @@ function refreshAt(hours, minutes, seconds) {
     }, timeout);
 }
 setInterval(function() {
-    if (new Date().getHours() == 7 && new Date().getMinutes() > 30) {
-        location.reload()
-    } else if (new Date().getHours() == 13 && new Date().getMinutes() > 25) {
-        location.reload()
-    } else if (new Date().getHours() == 17 && new Date().getMinutes() > 45) {
-        location.reload()
-    } else if (new Date().getHours() == 3 && new Date().getMinutes() > 10) {
-        location.reload()
-    }
-}, 30000);
-setInterval(function() {
     $('#example1').DataTable().ajax.reload();
     $('#example2').DataTable().ajax.reload();
     $('#example3').DataTable().ajax.reload();
@@ -245,33 +234,18 @@ channel.listen('.jikan', function(data) {
     $('#example1').DataTable().ajax.reload();
     $('#example2').DataTable().ajax.reload();
     $('#example3').DataTable().ajax.reload();
-    if (data.status == 1) {
-    $("#msg1").text("OK");
-  }else {
-    $("#msg1").text("Error");
-  }
 });
 channel.listen('.jayam', function(data) {
-    $("#jumlah_2").text(data.jikan);
+    $("#jumlah_2").text(data.jayam);
     $('#example1').DataTable().ajax.reload();
     $('#example2').DataTable().ajax.reload();
     $('#example3').DataTable().ajax.reload();
-    if (data.status == 1) {
-    $("#msg2").text("OK");
-  }else {
-    $("#msg2").text("Error");
-  }
 });
 channel.listen('.jaging', function(data) {
-    $("#jumlah_3").text(data.jikan);
+    $("#jumlah_3").text(data.jaging);
     $('#example1').DataTable().ajax.reload();
     $('#example2').DataTable().ajax.reload();
     $('#example3').DataTable().ajax.reload();
-    if (data.status == 1) {
-    $("#msg3").text("OK");
-  }else {
-    $("#msg3").text("Error");
-  }
 });
 </script>
 @endpush

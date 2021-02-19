@@ -16,11 +16,12 @@ class Karyawan extends Migration
         Schema::create('karyawan', function (Blueprint $table) {
             $table->id();
             $table->string('nik')->unique();
+            $table->string('rfid')->unique();
             $table->string('name');
             $table->string('departemen');
             $table->string('remark')->nullable();
-            $table->string('shift');
             $table->string('gambar');
+            $table->integer('fungsi');
         });
     }
 

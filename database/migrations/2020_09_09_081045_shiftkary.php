@@ -14,10 +14,12 @@ class Shiftkary extends Migration
     public function up()
     {
         Schema::create('shiftkary', function (Blueprint $table) {
-            $table->string('id');
+            $table->string('id')->primary();
+            $table->String('id_data');
             $table->String('tanggal');
             $table->string('nik');
             $table->string('shift');
+            $table->integer('status');
         });
     }
 

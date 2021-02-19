@@ -48,7 +48,7 @@
                                 Departement
                             </div>
                             <div class="col-sm-8">
-                                <select id="departemen" name="departemen" class="custom-select">
+                            <select name="snack1" data-live-search="true" id="selector" class="selectpicker w-100">
                                     @foreach ($dept as $dp)
                                     <option @if ($dt->departemen == $dp->departement) selected @else @endif value="{{$dp->departement}}">{{$dp->departement}}</option>
                                     @endforeach

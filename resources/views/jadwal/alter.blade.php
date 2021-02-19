@@ -36,17 +36,17 @@
                     Snack
                 </div>
                 <div class="col-sm-3">
-                    <select name="snack1" class="custom-select">
+                    <select name="snack1" data-live-search="true" id="selector" class="selectpicker w-100">
                         @foreach ($snack as $sn)
                         <option @if ($dt->snack1 == $sn->nama) selected @else @endif value="{{$sn->nama}}">{{$sn->nama}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-sm-2">
-                <input type="number" class="form-control" name="jsnack1" value="{{$dt->jsnack1}}" required autofocus>
+                <input type="number"  class="form-control" name="jsnack1" value="{{$dt->jsnack1}}" required autofocus>
                 </div>
                 <div class="col-sm-3">
-                    <select name="snack2" class="custom-select">
+                    <select name="snack2" data-live-search="true" id="selector" class="selectpicker w-100">
                         @foreach ($snack as $sn)
                         <option @if ($dt->snack2 == $sn->nama) selected @else @endif value="{{$sn->nama}}">{{$sn->nama}}</option>
                         @endforeach
@@ -73,23 +73,32 @@
             <!-- Option Main Course -->
             <div class="row">
                 <div class="col-sm-4">
-                    <select name="makanan1" class="custom-select">
+                    <select name="makanan1" data-live-search="true" id="selector" class="selectpicker w-100">
                         @foreach ($ikan as $ik)
                         <option @if ($dt->makanan1 == $ik->nama) selected @else @endif value="{{$ik->nama}}">{{$ik->nama}}</option>
                         @endforeach
+                        @foreach ($addon as $ad)
+                            <option @if ($dt->makanan1 == $ad->nama) selected @else @endif value="{{$ad->nama}}">{{$ad->nama}}</option>
+                            @endforeach
                     </select>
                 </div>
                 <div class="col-sm-4">
-                    <select name="makanan2" class="custom-select">
+                    <select name="makanan2" data-live-search="true" id="selector" class="selectpicker w-100">
                         @foreach ($ayam as $ay)
                         <option @if ($dt->makanan2 == $ay->nama) selected @else @endif value="{{$ay->nama}}">{{$ay->nama}}</option>
                         @endforeach
+                        @foreach ($addon as $ad)
+                            <option @if ($dt->makanan2 == $ad->nama) selected @else @endif value="{{$ad->nama}}">{{$ad->nama}}</option>
+                            @endforeach
                     </select>
                 </div>
                 <div class="col-sm-4">
-                        <select name="makanan3" class="custom-select">
+                        <select name="makanan3" data-live-search="true" id="selector" class="selectpicker w-100">
                             @foreach ($daging as $dg)
                             <option @if ($dt->makanan3 == $dg->nama) selected @else @endif value="{{$dg->nama}}">{{$dg->nama}}</option>
+                            @endforeach
+                            @foreach ($addon as $ad)
+                            <option @if ($dt->makanan3 == $ad->nama) selected @else @endif value="{{$ad->nama}}">{{$ad->nama}}</option>
                             @endforeach
                         </select>
                     </div>

@@ -34,7 +34,7 @@
                     Sarapan
                 </div>
                 <div class="col-sm-3">
-                    <select name="snack1" class="custom-select">
+                <select name="snack1" data-live-search="true" id="selector" class="selectpicker w-100">
                         @foreach ($snack as $sn)
                         <option value="{{$sn->nama}}">{{$sn->nama}}</option>
                         @endforeach
@@ -44,7 +44,7 @@
                 <input type="number" class="form-control" name="jsnack1" id="jsnack1" value="{{ old('jsnack1') }}" required autofocus>
                 </div>
                 <div class="col-sm-3">
-                    <select name="snack2" class="custom-select">
+                <select name="snack1" data-live-search="true" id="selector" class="selectpicker w-100">
                         @foreach ($snack as $sn)
                         <option value="{{$sn->nama}}">{{$sn->nama}}</option>
                         @endforeach
@@ -71,21 +71,21 @@
             <!-- Option Main Course -->
             <div class="row">
                 <div class="col-sm-4">
-                    <select name="makanan1" class="custom-select">
+                <select name="snack1" data-live-search="true" id="selector" class="selectpicker w-100">
                         @foreach ($ikan as $ik)
                         <option value="{{$ik->nama}}">{{$ik->nama}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-sm-4">
-                    <select name="makanan2" class="custom-select">
+                <select name="snack1" data-live-search="true" id="selector" class="selectpicker w-100">
                         @foreach ($ayam as $ay)
                         <option value="{{$ay->nama}}">{{$ay->nama}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-sm-4">
-                        <select name="makanan3" class="custom-select">
+                <select name="snack1" data-live-search="true" id="selector" class="selectpicker w-100">
                             @foreach ($daging as $dg)
                             <option value="{{$dg->nama}}">{{$dg->nama}}</option>
                             @endforeach

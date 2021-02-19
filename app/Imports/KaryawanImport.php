@@ -21,7 +21,7 @@ class KaryawanImport implements ToModel, SkipsOnError, WithHeadingRow
     use Importable, SkipsErrors;
     public function model(array $row)
     {
-        DB::table('karyawan')->insert([
+        DB::table('karyawan')->updateOrInsert([
             'nik' => $row['emp_id'],
             'rfid' => $row['rfid'],
             'name' =>  $row['name'],

@@ -20,6 +20,7 @@ class Device2 extends Migration
             $table->string('shift');
             $table->string('makanan');
             $table->string('status');
+            $table->timestamps('time');
         });
     }
 

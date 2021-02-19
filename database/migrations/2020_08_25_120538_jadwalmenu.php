@@ -14,7 +14,7 @@ class Jadwalmenu extends Migration
     public function up()
     {
         Schema::create('jadwalmenu', function (Blueprint $table) {
-            $table->string('id')->unique();
+            $table->string('id')->primary();
             $table->date('tanggal');
             $table->string('waktu');
             $table->string('snack1');

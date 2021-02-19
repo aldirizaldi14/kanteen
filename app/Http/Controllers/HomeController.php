@@ -198,8 +198,9 @@ class HomeController extends Controller
         $data2 = DB::table('makanan')->where('jenis', 'Ikan')->get();
         $data3 = DB::table('makanan')->where('jenis', 'Ayam')->get();
         $data4 = DB::table('makanan')->where('jenis', 'Daging')->get();
+        $data5 = DB::table('makanan')->where('jenis', 'Spesial')->get();
         DB::table('jadwalmenu')->where('id', $id)->get();
-        return view('jadwal.alter', ['data' => $data, 'snack' => $data1, 'ikan' => $data2, 'ayam' => $data3, 'daging' => $data4]);
+        return view('jadwal.alter', ['data' => $data, 'snack' => $data1, 'ikan' => $data2, 'ayam' => $data3, 'daging' => $data4, 'addon' => $data5]);
     }
 
     public function jadwalminus($id)

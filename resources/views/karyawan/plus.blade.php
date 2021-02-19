@@ -47,7 +47,7 @@
                     Departement
                 </div>
                 <div class="col-sm-4">
-                    <select id="departemen" name="departemen" class="custom-select" onchange="test()">
+                <select name="snack1" data-live-search="true" id="selector" class="selectpicker w-100">
                     @foreach ($dept as $dp)
                         <option value="{{$dp->departement}}">{{$dp->departement}}</option>
                     @endforeach

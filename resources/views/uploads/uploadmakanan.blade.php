@@ -10,7 +10,7 @@
             <div class="row">
             <div class="col-sm-12">
             <p>Upload data Makanan, mohon untuk menggunakan kaidah format yang telah tersedia.</p>
-            <p>Untuk contoh kaidah bisa anda unduh di tautan <a href="{{ asset('/temp/UploadMakan.xlsx') }}">berikut ini</a></p>
+            <p>Untuk contoh kaidah bisa anda unduh di tautan <a href="{{ asset('/temp/UploadMakanan.xlsx') }}">berikut ini</a></p>
             <p>Pastikan berkas hanya mengandung satu lembar kerja (sheet)</p>
             <br>
             <p>NB: Foto Pada Makanan Tidak dapat dikutkan dalam proses ini.</p>
