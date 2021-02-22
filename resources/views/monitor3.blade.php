@@ -226,6 +226,17 @@ setInterval(function() {
     $('#example2').DataTable().ajax.reload();
     $('#example3').DataTable().ajax.reload();
 }, 2000);
+setInterval(function() {
+    if (new Date().getHours() == 8 && new Date().getMinutes() > 35) {
+        location.reload()
+    } else if (new Date().getHours() == 14 && new Date().getMinutes() > 25) {
+        location.reload()
+    } else if (new Date().getHours() == 19 && new Date().getMinutes() > 25) {
+        location.reload()
+    } else if (new Date().getHours() == 3 && new Date().getMinutes() > 20) {
+        location.reload()
+    }
+}, 10000);
 </script>
 <script>
 var channel = Echo.channel('my-channel');

@@ -39,7 +39,7 @@ function refreshAt(hours, minutes, seconds) {
     }, timeout);
 }
 setInterval(function() {
-    if (new Date().getHours() == 6) {
+    if (new Date().getHours() == 5 {
         location.reload();
     } else if (new Date().getHours() == 11) {
         location.reload();
