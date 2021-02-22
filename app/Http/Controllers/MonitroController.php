@@ -127,7 +127,7 @@ class MonitroController extends Controller
                     ]);
                 }
                 else {
-                    return view('monitor3');
+                    return view('monitor0');
                 }
     }
 
@@ -164,7 +164,6 @@ class MonitroController extends Controller
                 elseif (($now >= $a2) && ($now <= $ak2)) 
                 {
                     $date = date('Y-m-d').'Shift2';
-                    
                 }
                 elseif (($now >= $a3) && ($now <= $ak3)) 
                 {
@@ -236,8 +235,7 @@ class MonitroController extends Controller
             return 1;
         }
 
-        if(DB::table('karyawan')->select('nik')->where('rfid', $hex)->value('nik')->exists()) {
-
+        if(DB::table('karyawan')->where('rfid', $hex)->exists()) {
             if(($now >= $s1) && ($now <= $as1)) {
                 $cd1 = DB::table('sarapan1')->where('jadwalmenu', $jadwal)->where('karyawan', $temp)->where('shift', $shift)->count();
                 $cd2 = DB::table('sarapan2')->where('jadwalmenu', $jadwal)->where('karyawan', $temp)->where('shift', $shift)->count();
@@ -345,7 +343,7 @@ class MonitroController extends Controller
             return 1;
         }
 
-        if (DB::table('karyawan')->select('nik')->where('rfid', $hex)->value('nik')->exists()) {
+        if (DB::table('karyawan')->where('rfid', $hex)->exists()) {
             if(($now >= $s1) && ($now <= $as1)) {
                 $cd1 = DB::table('sarapan1')->where('jadwalmenu', $jadwal)->where('karyawan', $temp)->where('shift', $shift)->count();
                 $cd2 = DB::table('sarapan2')->where('jadwalmenu', $jadwal)->where('karyawan', $temp)->where('shift', $shift)->count();
@@ -444,7 +442,7 @@ class MonitroController extends Controller
             return 1;
         }
 
-        if (DB::table('karyawan')->select('nik')->where('rfid', $hex)->value('nik')->exists()) {
+        if (DB::table('karyawan')->select('nik')->where('rfid', $hex)->exists()) {
 
         $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan3')->value('makanan3');
         if(($now >= $s1) && ($now <= $as1)) {

@@ -24,7 +24,7 @@ td {
                 <br>
                 <div class="row">
                 <div class="col-sm-12">
-                <table id="example1" class="display" style="width:100%;height:200px">
+                <table id="example1" class="display" style="width:100%;height:250px">
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -47,7 +47,7 @@ td {
         <!-- colom 2 -->
         <div class="col-sm-4">
             <div class="card" align="center">
-                <div class="card-header">
+                <div class="card-header p-0">
                     <h1 style="font-size:5vh;"><b><?php echo e($data2); ?></b></h1>
                 </div>
                 <div class="card-body">
@@ -59,7 +59,7 @@ td {
                 <br>
                 <div class="row">
                 <div class="col-sm-12">
-                <table id="example2" class="display" style="width:100%;height:200px">
+                <table id="example2" class="display" style="width:100%;height:250px">
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -82,7 +82,7 @@ td {
         <!-- colom 3 -->
         <div class="col-sm-4">
             <div class="card" align="center">
-                <div class="card-header">
+                <div class="card-header p-0">
                     <h1 style="font-size:5vh;"><b><?php echo e($data3); ?> </b></h1>
                 </div>
                 <div class="card-body">
@@ -94,7 +94,7 @@ td {
                 <br>
                 <div class="row">
                 <div class="col-sm-12">
-                <table id="example3" class="display" style="width:100%;height:200px">
+                <table id="example3" class="display" style="width:100%;height:250px">
                         <thead>
                             <tr>
                                 <th>id</th>

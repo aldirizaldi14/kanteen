@@ -26,7 +26,7 @@ td {
                 <br>
                 <div class="row">
                 <div class="col-sm-12">
-                <table id="example1" class="display" style="width:100%;height:200px">
+                <table id="example1" class="display" style="width:100%;height:250px">
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -61,7 +61,7 @@ td {
                 <br>
                 <div class="row">
                 <div class="col-sm-12">
-                <table id="example2" class="display" style="width:100%;height:200px">
+                <table id="example2" class="display" style="width:100%;height:250px">
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -96,7 +96,7 @@ td {
                 <br>
                 <div class="row">
                 <div class="col-sm-12">
-                <table id="example3" class="display" style="width:100%;height:200px">
+                <table id="example3" class="display" style="width:100%;height:250px">
                         <thead>
                             <tr>
                                 <th>id</th>

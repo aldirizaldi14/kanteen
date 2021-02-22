@@ -48,7 +48,7 @@
                                 Departement
                             </div>
                             <div class="col-sm-8">
-                            <select name="snack1" data-live-search="true" id="selector" class="selectpicker w-100">
+                            <select name="departemen" id required data-live-search="true" id="selector" class="selectpicker w-100">
                                     @foreach ($dept as $dp)
                                     <option @if ($dt->departemen == $dp->departement) selected @else @endif value="{{$dp->departement}}">{{$dp->departement}}</option>
                                     @endforeach
@@ -62,7 +62,7 @@
                                 Limit Makan
                             </div>
                             <div class="col-sm-8">
-                                <input id="fungsi" type="number" min="0" class="form-control" name="fungsi" value="{{$dt->fungsi}}" required autofocus>
+                                <input id="fungsi" required type="number" min="0" class="form-control" name="fungsi" value="{{$dt->fungsi}}" required autofocus>
                             </div>
                         </div>
                         <br>
