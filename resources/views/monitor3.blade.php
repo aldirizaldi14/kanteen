@@ -15,7 +15,7 @@ td {
         <div class="col-sm-4">
             <div class="card" align="center">
                 <div class="card-header p-0">
-                    <h1 style="font-size:5vh;"><b>{{$data1}}</b></h1>
+                    <h1 style="font-size:2vw;"><b>{{$data1}}</b></h1>
                 </div>
                 <div class="card-body">
                 <div class="row" style="max-height:450px">
@@ -50,7 +50,7 @@ td {
         <div class="col-sm-4">
             <div class="card" align="center">
                 <div class="card-header p-0">
-                    <h1 style="font-size:5vh;"><b>{{$data2}}</b></h1>
+                    <h1 style="font-size:2vw;"><b>{{$data2}}</b></h1>
                 </div>
                 <div class="card-body">
                 <div class="row" style="max-height:450px">
@@ -85,7 +85,7 @@ td {
         <div class="col-sm-4">
             <div class="card" align="center">
                 <div class="card-header p-0">
-                    <h1 style="font-size:5vh;"><b>{{$data3}} </b></h1>
+                    <h1 style="font-size:2vw;"><b>{{$data3}} </b></h1>
                 </div>
                 <div class="card-body">
                 <div class="row" style="max-height:450px">
@@ -118,12 +118,18 @@ td {
         </div>
     </div>
 </div>
+
+<div class="container">
+<audio id="myAudio" muted="muted">
+  <source src="{{ asset('/images/bgm.mp3') }}" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+</div>
 @stop
 
 @push('scripts')
 <script>
 $(document).ready(function() {
-
     refreshAt(08, 35, 05);
     refreshAt(14, 20, 05);
     refreshAt(19, 20, 05);
@@ -201,6 +207,7 @@ $(document).ready(function() {
             }
         ]
     });
+    document.getElementById("myAudio").play();
 });
 
 function refreshAt(hours, minutes, seconds) {

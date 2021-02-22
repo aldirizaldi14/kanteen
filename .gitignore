@@ -4,6 +4,7 @@
 /public/fimages
 /public/kimages
 /public/images
+/public/music
 /storage/*.key
 /vendor
 .env
