@@ -18,15 +18,15 @@ td {
                     <h1 style="font-size:2vw;"><b>{{$data1}}</b></h1>
                 </div>
                 <div class="card-body">
-                <div class="row" style="max-height:450px">
-                <div class="col-sm-12" style="max-height:450px">
+                <div class="row" style="max-height:350px">
+                <div class="col-sm-12" style="max-height:350px">
                     <img src="/fimages/{{$ikang}}" class="img-fluid h-100" alt="No Image">
                 </div>
                 </div>
                 <br>
                 <div class="row">
                 <div class="col-sm-12">
-                <table id="example1" class="display" style="width:100%;height:250px">
+                <table id="example1" class="display" style="width:100%">
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -53,15 +53,15 @@ td {
                     <h1 style="font-size:2vw;"><b>{{$data2}}</b></h1>
                 </div>
                 <div class="card-body">
-                <div class="row" style="max-height:450px">
-                <div class="col-sm-12" style="max-height:450px">
+                <div class="row" style="max-height:350px">
+                <div class="col-sm-12" style="max-height:350px">
                     <img src="/fimages/{{$ayamg}}" class="img-fluid h-100" alt="No Image">
                 </div>
                 </div>
                 <br>
                 <div class="row">
                 <div class="col-sm-12">
-                <table id="example2" class="display" style="width:100%;height:250px">
+                <table id="example2" class="display" style="width:100%">
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -88,15 +88,15 @@ td {
                     <h1 style="font-size:2vw;"><b>{{$data3}} </b></h1>
                 </div>
                 <div class="card-body">
-                <div class="row" style="max-height:450px">
-                <div class="col-sm-12" style="max-height:450px">
+                <div class="row" style="max-height:350px">
+                <div class="col-sm-12" style="max-height:350px">
                     <img src="/fimages/{{$gdaging}}" class="img-fluid h-100" alt="No Image">
                 </div>
                 </div>
                 <br>
                 <div class="row">
                 <div class="col-sm-12">
-                <table id="example3" class="display" style="width:100%;height:250px">
+                <table id="example3" class="display" style="width:100%">
                         <thead>
                             <tr>
                                 <th>id</th>
