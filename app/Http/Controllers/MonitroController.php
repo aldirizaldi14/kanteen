@@ -234,8 +234,9 @@ class MonitroController extends Controller
         }else {
             return 1;
         }
-
-        if(DB::table('karyawan')->where('rfid', $hex)->exists()) {
+        $ymk       = DB::table($database)->where('jadwalmenu', $jadwal)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
+        $sisa       = $totalmakan - $ymk;
+        if(DB::table('karyawan')->where('rfid', $hex)->exists() && $sisa > 0) {
             if(($now >= $s1) && ($now <= $as1)) {
                 $cd1 = DB::table('sarapan1')->where('jadwalmenu', $jadwal)->where('karyawan', $temp)->where('shift', $shift)->count();
                 $cd2 = DB::table('sarapan2')->where('jadwalmenu', $jadwal)->where('karyawan', $temp)->where('shift', $shift)->count();
@@ -259,16 +260,6 @@ class MonitroController extends Controller
                 'makanan' => $makan,
                 'status' => 1,
             ]);
-
-        // Cek Subcont 03
-        if(strpos(strtolower($ceks), 'subcont')) {
-        // Do Nothing
-        } else {
-            DB::table('shiftkary')->where('nik', $temp)->where('tanggal', $date)->where('shift', $waktu)->where('status', 0)->update([
-                'status' => 1,
-            ]);
-        }
-
             $image       = DB::table('karyawan')->select('gambar')->where('nik', $temp)->value('gambar');
             $nama        = DB::table('karyawan')->select('name')->where('nik', $temp)->value('name');
             $departement = DB::table('karyawan')->select('departemen')->where('nik', $temp)->value('departemen');
@@ -343,7 +334,9 @@ class MonitroController extends Controller
             return 1;
         }
 
-        if (DB::table('karyawan')->where('rfid', $hex)->exists()) {
+        $ymk       = DB::table($database)->where('jadwalmenu', $jadwal)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
+        $sisa       = $totalmakan - $ymk;
+        if(DB::table('karyawan')->where('rfid', $hex)->exists() && $sisa > 0) {
             if(($now >= $s1) && ($now <= $as1)) {
                 $cd1 = DB::table('sarapan1')->where('jadwalmenu', $jadwal)->where('karyawan', $temp)->where('shift', $shift)->count();
                 $cd2 = DB::table('sarapan2')->where('jadwalmenu', $jadwal)->where('karyawan', $temp)->where('shift', $shift)->count();
@@ -367,14 +360,6 @@ class MonitroController extends Controller
                     'makanan' => $makan,
                     'status' => 1,
                 ]);
-            // Cek Subcont 03
-            if(strpos(strtolower($ceks), 'subcont')) {
-            // Do Nothing
-            } else {
-                DB::table('shiftkary')->where('nik', $temp)->where('tanggal', $date)->where('shift', $waktu)->where('status', 0)->update([
-                    'status' => 1,
-                ]);
-            }
                 $image       = DB::table('karyawan')->select('gambar')->where('nik', $temp)->value('gambar');
                 $nama        = DB::table('karyawan')->select('name')->where('nik', $temp)->value('name');
                 $departement = DB::table('karyawan')->select('departemen')->where('nik', $temp)->value('departemen');
@@ -442,8 +427,9 @@ class MonitroController extends Controller
             return 1;
         }
 
-        if (DB::table('karyawan')->select('nik')->where('rfid', $hex)->exists()) {
-
+        $ymk       = DB::table($database)->where('jadwalmenu', $jadwal)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
+        $sisa       = $totalmakan - $ymk;
+        if(DB::table('karyawan')->where('rfid', $hex)->exists() && $sisa > 0) {
         $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan3')->value('makanan3');
         if(($now >= $s1) && ($now <= $as1)) {
             $cd1 = DB::table('sarapan1')->where('jadwalmenu', $jadwal)->where('karyawan', $temp)->where('shift', $shift)->count();
@@ -468,14 +454,6 @@ class MonitroController extends Controller
                 'makanan' => $makan,
                 'status' => 1,
             ]);
-            // Cek Subcont 03
-            if(strpos(strtolower($ceks), 'subcont')) {
-                // Do Nothing
-            } else {
-                DB::table('shiftkary')->where('nik', $temp)->where('tanggal', $date)->where('shift', $waktu)->where('status', 0)->update([
-                    'status' => 1,
-                ]);
-            }
             $image       = DB::table('karyawan')->select('gambar')->where('nik', $temp)->value('gambar');
             $nama        = DB::table('karyawan')->select('name')->where('nik', $temp)->value('name');
             $departement = DB::table('karyawan')->select('departemen')->where('nik', $temp)->value('departemen');
