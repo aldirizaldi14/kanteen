@@ -427,7 +427,7 @@ class MonitroController extends Controller
             return 1;
         }
 
-        $ymk       = DB::table($database)->where('jadwalmenu', $jadwal)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
+        $ymk       = DB::table('device3')->where('jadwalmenu', $jadwal)->where('shift', $shift)->where('makanan', $makan)->where('status', 1)->count();
         $sisa       = $totalmakan - $ymk;
         if(DB::table('karyawan')->where('rfid', $hex)->exists() && $sisa > 0) {
         $makan  = DB::table('jadwalmenu')->where('id', $jadwal)->select('makanan3')->value('makanan3');

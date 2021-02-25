@@ -18,7 +18,7 @@ td {
                     <h1 style="font-size:2vw;"><b>{{$data1}}</b></h1>
                 </div>
                 <div class="card-body">
-                <div class="row" style="max-height:350px">
+                <div class="row" style="min-height:350px">
                 <div class="col-sm-12" style="max-height:350px">
                     <img src="/fimages/{{$ikang}}" class="img-fluid h-100" alt="No Image">
                 </div>
@@ -53,7 +53,7 @@ td {
                     <h1 style="font-size:2vw;"><b>{{$data2}}</b></h1>
                 </div>
                 <div class="card-body">
-                <div class="row" style="max-height:350px">
+                <div class="row" style="min-height:350px">
                 <div class="col-sm-12" style="max-height:350px">
                     <img src="/fimages/{{$ayamg}}" class="img-fluid h-100" alt="No Image">
                 </div>
@@ -88,7 +88,7 @@ td {
                     <h1 style="font-size:2vw;"><b>{{$data3}} </b></h1>
                 </div>
                 <div class="card-body">
-                <div class="row" style="max-height:350px">
+                <div class="row" style="min-height:350px">
                 <div class="col-sm-12" style="max-height:350px">
                     <img src="/fimages/{{$gdaging}}" class="img-fluid h-100" alt="No Image">
                 </div>
