@@ -24,18 +24,18 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($data as $dt)
+        @for ($i = 0; $i < count($union); $i++)
             <tr>
-                <td>{{$dt->nama}}</td>
-                <td>{{$dt->jenis}}</td>
-                <td>{{$dt->harga}}</td>
-                <td>{{$dt->aa + $dt->bb + $dt->cc + $dt->dd + $dt->ee}}</td>
+                    <td align="center">{{$union[$i][1]}}</td>
+                    <td align="center">{{$union[$i][2]}}</td>
+                    <td align="center">{{$union[$i][3]}}</td>
+                    <td align="center">{{$union[$i][4]}}</td>
                 <td>
-                <a class="btn btn-sm btn-outline-primary" href="/makanan/alter/{{$dt->idm}}" role="button">Edit</a> 
-                <a class="btn btn-sm btn-outline-danger" href="/makanan/minus/{{$dt->idm}}" role="button">Hapus</a>
+                <a class="btn btn-sm btn-outline-primary" href="/makanan/alter/{{$union[$i][1]}}" role="button">Edit</a> 
+                <a class="btn btn-sm btn-outline-danger" href="/makanan/minus/{{$union[$i][1]}}" role="button">Hapus</a>
                 </td>
             </tr>
-            @endforeach
+        @endfor
         </tbody>
     </table>
                 </div>

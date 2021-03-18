@@ -60,13 +60,13 @@
             <!-- Main Course -->
             <div class="row">
                 <div class="col-sm-4" align="center">
-                    Ikan
+                    Loket A
                 </div>
                 <div class="col-sm-4" align="center">
-                    Ayam
+                    Loket B
                 </div>
                 <div class="col-sm-4" align="center">
-                    Daging
+                    Loket C
                 </div>
             </div>
             <br>

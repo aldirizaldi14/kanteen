@@ -296,20 +296,40 @@ class HomeController extends Controller
     // ======================================================
     public function makanan()
     {
-        $data = DB::table('makanan')
-        ->leftJoin('sarapan1', 'makanan.nama' , '=', 'sarapan1.makanan')
-        ->leftJoin('sarapan2', 'makanan.nama' , '=', 'sarapan2.makanan')
-        ->leftJoin('device1', 'makanan.nama' , '=', 'device1.makanan')
-        ->leftJoin('device2', 'makanan.nama' , '=', 'device2.makanan')
-        ->leftJoin('device3', 'makanan.nama' , '=', 'device3.makanan')
-        ->select( 'idm', 'nama', 'jenis', 'harga', 'gambar',
-            DB::raw("count(sarapan1.makanan) as aa"),
-            DB::raw("count(sarapan2.makanan) as bb"),
-            DB::raw('count(device1.makanan) as cc'),
-            DB::raw('count(device2.makanan) as dd'),
-            DB::raw('count(device3.makanan) as ee'),
-        )->groupBy('makanan.idm', 'makanan.nama', 'makanan.jenis', 'makanan.harga', 'makanan.gambar')->get();
-        return view('makanan', ['data' => $data]);
+        $array0 = array();
+        $array1 = array();
+        $array2 = array();
+        $array3 = array();
+        $array4 = array();
+        $makanan = DB::table('makanan')->get();
+        foreach ($makanan as $mkn) {
+            $count1 = DB::table('sarapan1')->where('makanan', $mkn->nama)->count();
+            $count2 = DB::table('sarapan2')->where('makanan', $mkn->nama)->count();
+            $count3 = DB::table('device1')->where('makanan', $mkn->nama)->count();
+            $count4 = DB::table('device2')->where('makanan', $mkn->nama)->count();
+            $count5 = DB::table('device3')->where('makanan', $mkn->nama)->count();
+            $total = $count1 + $count2 + $count3 + $count4 + $count5;
+            array_push($array0, $mkn->idm);
+            array_push($array1, $mkn->nama);
+            array_push($array2, $mkn->jenis);
+            array_push($array3, $mkn->harga);
+            array_push($array4, $total);
+            }
+        $data = collect([$array0, $array1, $array2, $array3, $array4])->transpose()->toArray();
+        // $data = DB::table('makanan')
+        // ->leftJoin('sarapan1', 'makanan.nama' , '=', 'sarapan1.makanan')
+        // ->leftJoin('sarapan2', 'makanan.nama' , '=', 'sarapan2.makanan')
+        // ->leftJoin('device1', 'makanan.nama' , '=', 'device1.makanan')
+        // ->leftJoin('device2', 'makanan.nama' , '=', 'device2.makanan')
+        // ->leftJoin('device3', 'makanan.nama' , '=', 'device3.makanan')
+        // ->select( 'idm', 'nama', 'jenis', 'harga', 'gambar',
+        //     DB::raw("count(sarapan1.makanan) as aa"),
+        //     DB::raw("count(sarapan2.makanan) as bb"),
+        //     DB::raw('count(device1.makanan) as cc'),
+        //     DB::raw('count(device2.makanan) as dd'),
+        //     DB::raw('count(device3.makanan) as ee'),
+        // )->groupBy('makanan.idm', 'makanan.nama', 'makanan.jenis', 'makanan.harga', 'makanan.gambar')->get();
+        return view('makanan', ['union' => $data]);
         // return $data;
     }
 
