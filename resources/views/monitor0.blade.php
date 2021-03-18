@@ -8,20 +8,11 @@
         </div>
     </div>
 </div>
-
-<div class="container">
-<audio id="myAudio" autoplay>
-  <source src="{{ asset('/images/bgm.mp3') }}" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-</div>
-
 @stop
 
 @push('scripts')
 <script>
 $(document).ready(function() {
-    document.getElementById("myAudio").play();
     refreshAt(05, 30, 05);
     refreshAt(11, 05, 05);
     refreshAt(17, 05, 05);

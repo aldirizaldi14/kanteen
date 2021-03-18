@@ -164,10 +164,14 @@ class HomeController extends Controller
         $bag1  = substr($request->nik,2,-6);
         $bag2  = substr($request->nik,6);
         $rfid  = $bag1.$bag2;
-        $file = $request->file('file');
-        $nama_file = $file->getClientOriginalName();
-        $tujuan_upload = 'kimages';
-        $file->move($tujuan_upload, $nama_file);
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $nama_file = $file->getClientOriginalName();
+            $tujuan_upload = 'kimages';
+            $file->move($tujuan_upload, $nama_file);
+        }else {
+            $nama_file = "Dummy.jpg";
+        }
         DB::table('karyawan')->insert([
             'nik' => $request->nik,
             'rfid' => $request->rfid,
@@ -329,25 +333,26 @@ class HomeController extends Controller
         $this->validate($request, [
             'nama'  => 'required|unique:makanan',
         ], $messages);
-        $file = $request->file('file');
-        $nama_file = $file->getClientOriginalName();
-        $tujuan_upload = 'fimages';
-        $file->move($tujuan_upload, $nama_file);
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $nama_file = $file->getClientOriginalName();
+            $tujuan_upload = 'fimages';
+            $file->move($tujuan_upload, $nama_file);
+        }else {
+            $nama_file = "Dummy.jpg";
+        }
         DB::table('makanan')->insert([
             'nama' => strtoupper($request->nama),
             'jenis' => $request->jenis,
             'harga' => $request->harga,
             'gambar' => $nama_file,
         ]);
-
         return redirect('/makanan');
     }
-
     public function makananminus($id)
     {
         $iname = DB::table('makanan')->select('gambar')->where('idm', $id)->value('gambar');
         if(strtolower($iname) == "dummy.png" || strtolower($iname) == "dummy.jpg") {
-
         }else {
             File::delete('fimages/' . $iname);
         }
@@ -360,7 +365,6 @@ class HomeController extends Controller
         $iname = DB::table('makanan')->select('gambar')->where('idm', $request->id)->value('gambar');
         if ($request->hasFile('file')) {
             if(strtolower($iname) == "dummy.png" || strtolower($iname) == "dummy.jpg") {
-
             }else {
                 File::delete('fimages/' . $iname);
             }
@@ -368,7 +372,6 @@ class HomeController extends Controller
             $nama_file = $file->getClientOriginalName();
             $tujuan_upload = 'fimages';
             $file->move($tujuan_upload, $nama_file);
-
             DB::table('makanan')->where('idm', $request->id)->update([
                 'nama' => strtoupper($request->nama),
                 'jenis' => $request->jenis,

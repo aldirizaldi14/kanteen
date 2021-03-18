@@ -21,7 +21,7 @@ class MakananImport implements ToModel, SkipsOnError, WithHeadingRow
     public function model(array $row)
     {
         DB::table('makanan')->updateOrInsert([
-            'nama' => $row['nama'],
+            'nama' => $row['nama']],[
             'jenis' => $row['jenis'],
             'harga' =>  $row['harga'],
             'gambar' => 'Dummy.jpg',

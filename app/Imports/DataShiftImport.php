@@ -34,16 +34,16 @@ class DataShiftImport implements ToModel, SkipsOnError
 
         while ($h<5) {
             if ($row[8] == 'Non Shift' || $row[8] == 'Shift 1') {
-                DB::table('shiftkary')->insert([
-                    'id' => 'U0'.date('Ymd', strtotime($row[9])).$row[1].$i,
+                DB::table('shiftkary')->updateOrInsert([
+                    'id' => 'U0'.date('Ymd', strtotime($row[9])).$row[1].$i],[
                     'id_data' => $row[3],
                     'tanggal' => date('Y-m-d', strtotime($row[9].'+'.$h.'days')),
                     'nik' =>  $row[1],
                     'shift' => 'shift0',
                     'status' => 0,
                 ]);
-                DB::table('shiftkary')->insert([
-                    'id' => 'U1'.date('Ymd', strtotime($row[9])).$row[1].$i,
+                DB::table('shiftkary')->updateOrInsert([
+                    'id' => 'U1'.date('Ymd', strtotime($row[9])).$row[1].$i],[
                     'id_data' => $row[3],
                     'tanggal' => date('Y-m-d', strtotime($row[9].'+'.$h.'days')),
                     'nik' =>  $row[1],
@@ -52,24 +52,24 @@ class DataShiftImport implements ToModel, SkipsOnError
                 ]);
             }
             if ($row[8] == 'Long Shift 1') {
-                DB::table('shiftkary')->insert([
-                    'id' => 'U0'.date('Ymd', strtotime($row[9])).$row[1].$i,
+                DB::table('shiftkary')->updateOrInsert([
+                    'id' => 'U0'.date('Ymd', strtotime($row[9])).$row[1].$i],[
                     'id_data' => $row[3],
                     'tanggal' => date('Y-m-d', strtotime($row[9].'+'.$h.'days')),
                     'nik' =>  $row[1],
                     'shift' => 'shift0',
                     'status' => 0,
                 ]);
-                DB::table('shiftkary')->insert([
-                    'id' => 'U1'.date('Ymd', strtotime($row[9])).$row[1].$i,
+                DB::table('shiftkary')->updateOrInsert([
+                    'id' => 'U1'.date('Ymd', strtotime($row[9])).$row[1].$i],[
                     'id_data' => $row[3],
                     'tanggal' => date('Y-m-d', strtotime($row[9].'+'.$h.'days')),
                     'nik' =>  $row[1],
                     'shift' => 'shift1',
                     'status' => 0,
                 ]);
-                DB::table('shiftkary')->insert([
-                    'id' => 'U2'.date('Ymd', strtotime($row[9])).$row[1].$i,
+                DB::table('shiftkary')->updateOrInsert([
+                    'id' => 'U2'.date('Ymd', strtotime($row[9])).$row[1].$i],[
                     'id_data' => $row[3],
                     'tanggal' => date('Y-m-d', strtotime($row[9].'+'.$h.'days')),
                     'nik' =>  $row[1],
@@ -78,16 +78,16 @@ class DataShiftImport implements ToModel, SkipsOnError
                 ]);
             }
             if ($row[8] == 'Long Shift 2') {
-                DB::table('shiftkary')->insert([
-                    'id' => 'U2'.date('Ymd', strtotime($row[9])).$row[1].$i,
+                DB::table('shiftkary')->updateOrInsert([
+                    'id' => 'U2'.date('Ymd', strtotime($row[9])).$row[1].$i],[
                     'id_data' => $row[3],
                     'tanggal' => date('Y-m-d', strtotime($row[9].'+'.$h.'days')),
                     'nik' =>  $row[1],
                     'shift' => 'shift2',
                     'status' => 0,
                 ]);
-                DB::table('shiftkary')->insert([
-                    'id' => 'U3'.date('Ymd', strtotime($row[9])).$row[1].$i,
+                DB::table('shiftkary')->updateOrInsert([
+                    'id' => 'U3'.date('Ymd', strtotime($row[9])).$row[1].$i],[
                     'id_data' => $row[3],
                     'tanggal' => date('Y-m-d', strtotime($row[9].'+'.$h.'days')),
                     'nik' =>  $row[1],
@@ -96,8 +96,8 @@ class DataShiftImport implements ToModel, SkipsOnError
                 ]);
             }
             if ($row[8] == 'Shift 2') {
-                DB::table('shiftkary')->insert([
-                    'id' => 'U2'.date('Ymd', strtotime($row[9])).$row[1].$i,
+                DB::table('shiftkary')->updateOrInsert([
+                    'id' => 'U2'.date('Ymd', strtotime($row[9])).$row[1].$i],[
                     'id_data' => $row[3],
                     'tanggal' => date('Y-m-d', strtotime($row[9].'+'.$h.'days')),
                     'nik' =>  $row[1],
@@ -106,8 +106,8 @@ class DataShiftImport implements ToModel, SkipsOnError
                 ]);
             }
             if ($row[8] == 'Shift 3') {
-                DB::table('shiftkary')->insert([
-                    'id' => 'U3'.date('Ymd', strtotime($row[9])).$row[1].$i,
+                DB::table('shiftkary')->updateOrInsert([
+                    'id' => 'U3'.date('Ymd', strtotime($row[9])).$row[1].$i],[
                     'id_data' => $row[3],
                     'tanggal' => date('Y-m-d', strtotime($row[9].'+'.$h.'days')),
                     'nik' =>  $row[1],
@@ -117,7 +117,6 @@ class DataShiftImport implements ToModel, SkipsOnError
             }
             $i++;
             $h++;
-        }
-    
+        }    
         }
         }

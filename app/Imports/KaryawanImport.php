@@ -22,7 +22,7 @@ class KaryawanImport implements ToModel, SkipsOnError, WithHeadingRow
     public function model(array $row)
     {
         DB::table('karyawan')->updateOrInsert([
-            'nik' => $row['emp_id'],
+            'nik' => $row['emp_id']],[
             'rfid' => $row['rfid'],
             'name' =>  $row['name'],
             'departemen' => $row['dept'],

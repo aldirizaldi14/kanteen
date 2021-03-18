@@ -21,8 +21,8 @@ class MenuMakanImport implements ToModel, SkipsOnError, WithHeadingRow
     public function model(array $row)
     {
         if ($row['shift'] == 'Shift1') {
-            DB::table('jadwalmenu')->insert([
-                'id' => date('Y-m-d', strtotime($row['tanggal'])).$row['shift'],
+            DB::table('jadwalmenu')->updateOrInsert([
+                'id' => date('Y-m-d', strtotime($row['tanggal'])).$row['shift']],[
                 'tanggal' => $row['tanggal'],
                 'waktu' =>  $row['shift'],
                 'snack1' => $row['snack_1'],
@@ -38,8 +38,8 @@ class MenuMakanImport implements ToModel, SkipsOnError, WithHeadingRow
             ]);
         }
         elseif ($row['shift'] == 'Shift2') {
-            DB::table('jadwalmenu')->insert([
-                'id' => date('Y-m-d', strtotime($row['tanggal'])).$row['shift'],
+            DB::table('jadwalmenu')->updateOrInsert([
+                'id' => date('Y-m-d', strtotime($row['tanggal'])).$row['shift']],[
                 'tanggal' => $row['tanggal'],
                 'waktu' =>  $row['shift'],
                 'snack1' => '-',
@@ -55,8 +55,8 @@ class MenuMakanImport implements ToModel, SkipsOnError, WithHeadingRow
             ]);
         }
         elseif ($row['shift'] == 'Shift3') {
-            DB::table('jadwalmenu')->insert([
-                'id' => date('Y-m-d', strtotime($row['tanggal'])).$row['shift'],
+            DB::table('jadwalmenu')->updateOrInsert([
+                'id' => date('Y-m-d', strtotime($row['tanggal'])).$row['shift']],[
                 'tanggal' => $row['tanggal'],
                 'waktu' =>  $row['shift'],
                 'snack1' => '-',

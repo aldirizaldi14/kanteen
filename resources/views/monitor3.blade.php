@@ -118,13 +118,6 @@ td {
         </div>
     </div>
 </div>
-
-<div class="container">
-<audio id="myAudio" muted="muted">
-  <source src="{{ asset('/images/bgm.mp3') }}" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-</div>
 @stop
 
 @push('scripts')
@@ -134,7 +127,6 @@ $(document).ready(function() {
     refreshAt(14, 20, 05);
     refreshAt(19, 20, 05);
     refreshAt(03, 20, 05);
-
     $('#example1').DataTable({
         scrollY: "300px",
         searching: false,
@@ -207,7 +199,7 @@ $(document).ready(function() {
             }
         ]
     });
-    document.getElementById("myAudio").play();
+    $.fn.dataTable.ext.errMode = 'throw';
 });
 
 function refreshAt(hours, minutes, seconds) {

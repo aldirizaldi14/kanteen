@@ -74,7 +74,7 @@
                     Gambar
                 </div>
                 <div class="col-sm-4">
-                <input type="file" required class="form-control" accept="image/*" id="file" name="file">
+                <input type="file" class="form-control" accept="image/*" id="file" name="file">
                 </div>
             </div>
         </form>

@@ -44,7 +44,7 @@
                 <input type="number" class="form-control" name="jsnack1" id="jsnack1" value="{{ old('jsnack1') }}" required autofocus>
                 </div>
                 <div class="col-sm-3">
-                <select name="snack1" data-live-search="true" id="selector" class="selectpicker w-100">
+                <select name="snack2" data-live-search="true" id="selector" class="selectpicker w-100">
                         @foreach ($snack as $sn)
                         <option value="{{$sn->nama}}">{{$sn->nama}}</option>
                         @endforeach
