@@ -123,7 +123,7 @@
 <script>
 function test() {
     var x = document.getElementById("waktu").value;
- if (x == "Shift1"){
+ if (x == "Shift1" || x == "Shift3"){
     document.getElementById("sarapan").removeAttribute("hidden");
     document.getElementById("jsnack1").setAttribute("required", true); 
     document.getElementById("jsnack2").setAttribute("required", true); 

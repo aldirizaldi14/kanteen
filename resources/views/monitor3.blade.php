@@ -118,6 +118,10 @@ td {
         </div>
     </div>
 </div>
+
+<div>
+{{$pukul}}
+</div>
 @stop
 
 @push('scripts')
@@ -125,8 +129,9 @@ td {
 $(document).ready(function() {
     refreshAt(08, 35, 05);
     refreshAt(14, 20, 05);
-    refreshAt(19, 20, 05);
-    refreshAt(03, 20, 05);
+    refreshAt(20, 20, 05);
+    refreshAt(01, 20, 05);
+	refreshAt(04, 20, 05);
     $('#example1').DataTable({
         scrollY: "300px",
         searching: false,
@@ -230,9 +235,11 @@ setInterval(function() {
         location.reload()
     } else if (new Date().getHours() == 14 && new Date().getMinutes() > 25) {
         location.reload()
-    } else if (new Date().getHours() == 19 && new Date().getMinutes() > 25) {
+    } else if (new Date().getHours() == 20 && new Date().getMinutes() > 25) {
         location.reload()
-    } else if (new Date().getHours() == 3 && new Date().getMinutes() > 20) {
+    } else if (new Date().getHours() == 1 && new Date().getMinutes() > 25) {
+        location.reload()
+    } else if (new Date().getHours() == 4 && new Date().getMinutes() > 25) {
         location.reload()
     }
 }, 10000);

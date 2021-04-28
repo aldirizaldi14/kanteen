@@ -8,6 +8,9 @@
         </div>
     </div>
 </div>
+<div>
+{{$pukul}}
+</div>
 @stop
 
 @push('scripts')
@@ -16,7 +19,8 @@ $(document).ready(function() {
     refreshAt(05, 30, 05);
     refreshAt(11, 05, 05);
     refreshAt(17, 05, 05);
-    refreshAt(02, 05, 05);
+    refreshAt(23, 05, 05);
+	refreshAt(02, 05, 05);
 });
 
 function refreshAt(hours, minutes, seconds) {
@@ -43,6 +47,8 @@ setInterval(function() {
     } else if (new Date().getHours() == 11) {
         location.reload();
     } else if (new Date().getHours() == 17) {
+        location.reload();
+    } else if (new Date().getHours() == 23) {
         location.reload();
     } else if (new Date().getHours() == 2) {
         location.reload();

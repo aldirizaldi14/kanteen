@@ -225,7 +225,7 @@ class HomeController extends Controller
 
     public function jadwalalters(Request $request)
     {
-        if($request->waktu == 'Shift1') {
+        if($request->waktu == 'Shift1' || $request->waktu == 'Shift3' ) {
             $jsnack1 = $request->jsnack1;
             $jsnack2 = $request->jsnack2;
             $snack1 = $request->snack1;
@@ -258,7 +258,7 @@ class HomeController extends Controller
 
     public function jadwalsimpan(Request $request)
     {
-        if($request->waktu == 'Shift1') {
+        if($request->waktu == 'Shift1' || $request->waktu == 'Shift3' ) {
             $jsnack1 = $request->jsnack1;
             $jsnack2 = $request->jsnack2;
             $snack1 = $request->snack1;

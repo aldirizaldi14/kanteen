@@ -35,8 +35,8 @@
             <tr>
                 <td>{{date('Y-m-d', strtotime($dt->tanggal))}}</td>
                 <td>{{$dt->waktu}}</td>
-                <td>{{$dt->snack1}} @if ($dt->waktu == 'Shift1') <b>{{$dt->jsnack1}}</b> @else @endif</td>
-                <td>{{$dt->snack2}} @if ($dt->waktu == 'Shift1') <b>{{$dt->jsnack2}}</b> @else @endif</td>
+                <td>{{$dt->snack1}} @if ($dt->waktu == 'Shift1' || $dt->waktu == 'Shift3' ) <b>{{$dt->jsnack1}}</b> @else @endif</td>
+                <td>{{$dt->snack2}} @if ($dt->waktu == 'Shift1' || $dt->waktu == 'Shift3' ) <b>{{$dt->jsnack2}}</b> @else @endif</td>
                 <td>{{$dt->makanan1}} <b>{{$dt->banyaknya1}}</b></td>
                 <td>{{$dt->makanan2}} <b>{{$dt->banyaknya2}}</b></td>
                 <td>{{$dt->makanan3}} <b>{{$dt->banyaknya3}}</b></td>
